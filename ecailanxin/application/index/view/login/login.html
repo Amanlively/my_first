@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		
+		<header class="login-herder bgfff">
+			<a class="reg-top-icon" href="{:url('/index/index/startpage')}"><返回</a>
+		</header>
+		<div class="mui-content login-body ta-left">
+			<form action="" method="post" id="denglu">
+				{include file="layout/storeinfoMap"}
+				<input type="hidden" id="dwcity" name="GPScity" />
+				<h1>用户登录</h1>
+				<div class="login-herder"></div>
+				<div class="mui-input-row login-section">
+					<label  for="iptPhone">手机号</label>
+					<input id="iptPhone" name="phone" type="text" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<div class="mui-input-row login-section mt20">
+					<label>密码</label>
+					<input id='password' name="password" type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+				</div>
+				<div class="mui-input-row login-section mt20 mb50">
+					<a href="loginverify.html">切换到验证码登录<img src=""/></a>
+				</div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-section">
+					<button id='login' type="button" class="mui-btn mui-btn-block mui-btn-primary" onclick="dl()">登录</button>
+				</div>
+				<div class="login-herder"></div>
+			
+			</form>
+			 
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript">
+			(function(window){
+ 				function $(id){
+  				return document.getElementById(id);
+ 			};
+ 			var iptPhone = $("iptPhone");
+ 			var rxPhone = /^(13[0-9]|15[012356789]|18[0-9]|17[678]|14[57])[0-9]{8}$/;
+ 			cation(iptPhone,rxPhone);
+ 			function cation(element,regExp){
+ 			element.onblur = function(){
+  		    var txt = this.value;
+  		    if( regExp.test( txt ) ){
+   			this.nextElementSibling.innerHTML = ""
+   			this.nextElementSibling.style.color = "green";
+  			}else{
+   			this.nextElementSibling.innerHTML = ""
+  		 	this.nextElementSibling.style.color = "red";
+  			}
+  			}
+ 		    }
+ 			 })(window)
+		</script>
+		<script>
+		function dl(){
+	      $.ajax({
+					type: "post",
+					url: "{:url('index/login/logingin')}",
+					data: $('#denglu').serialize(),
+//					console.log(data);
+					success: function(data) {
+						if(data['code']) {
+							layer.msg(data['msg'], {
+								time: 2000
+							});
+							window.location.href = data['url'];
+						} else {
+							layer.msg(data['msg'], {
+								time: 2000
+							});
+						}
+					},
+					error: function(request) {
+						alert("其他错误,请联系客服");
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

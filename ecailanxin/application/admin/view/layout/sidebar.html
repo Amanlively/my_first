@@ -1,0 +1,113 @@
+﻿<div class="nav-navicon admin-main admin-sidebar">    
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员:{:session('username')}</div>
+    <div class="sideMenu">
+    	<h3 class="am-icon-users"><em></em> <a href="#">市场端管理</a></h3>
+      <ul>
+        <!--<li><a href="{:url('/admin/tail/addtail')}">添加尾货区</a></li>-->
+        <!--<li><a href="{:url('/admin/tail/tail')}">尾货区列表</a></li>-->
+        <li><a href="{:url('/admin/bazaar/addcity')}">添加所属市场存城市</a>
+      	<li><a href="{:url('/admin/bazaar/citylist')}">所属市场城市列表</a></li>
+        <li><a href="{:url('/admin/bazaar/addbazaar')}">添加市场</a>
+      	<li><a href="{:url('/admin/bazaar/bazaar')}">市场列表</a></li>
+        <li><a href="{:url('/admin/goodstj/tjboom')}">手动推荐畅销榜</li></a>
+        <li><a href="{:url('/admin/goodstj/meat')}">手动推荐肉禽最低价</li></a>
+        <li><a href="{:url('/admin/goodstj/cargo')}">手动推荐冻货专场</li></a>
+        <li><a href="{:url('/admin/goodstj/muddle')}">手动推荐调料专场</li></a>
+        <li><a href="{:url('/admin/goodstj/drink')}">手动推荐粮油酒饮</li></a>
+        <li><a href="{:url('/admin/goodstj/process')}">手动推荐预加工品</li></a>
+      	<li><a href="{:url('/admin/bazaar/first1')}">手动推荐首页市场列表</a></li>
+      </ul>
+      <h3 class="am-icon-flag"><em></em> <a href="#">餐企管理</a></h3>
+      <ul>
+        <!--<li><a href="{:url('/admin/user/user')}">用户列表</a></li>-->
+         <li><a href="{:url('/admin/cqshop/cqshlist')}">用户列表</a></li>
+<!--         <li><a href="{:url('/admin/distribution/dining')}">餐厅列表</a></li>-->
+      </ul>
+       <h3 class="am-icon-gears">><em></em> <a href="#">商家管理</a></h3>
+      <ul>
+        	<li><a href="{:url('/admin/shop/shop')}">添加商家</a></li>
+      		<!--<li><a href="{:url('/admin/shop/show')}">商家列表</a></li>-->
+      		<li><a href="{:url('/admin/cqshop/ghslist')}">商家列表</a></li>
+      </ul>
+       <h3 class="am-icon-gears">><em></em> <a href="#">騎手管理</a></h3>
+      <ul>
+      		<li><a href="{:url('/admin/cqshop/qislist')}">配送员列表</a></li>
+      </ul>
+       <h3 class="am-icon-gears">><em></em> <a href="#">分类管理</a></h3>
+      <ul>
+  		<li><a href="{:url('/admin/categoryone/addonetype')}">添加一级商品类型</li>
+        <li><a href="{:url('/admin/categoryone/categoryone')}">一级商品类型列表</li>
+        <li><a href="{:url('/admin/categorytwo/addtwotype')}">添加二级商品类型</li>
+        <li><a href="{:url('/admin/categorytwo/categorytwo')}">二级商品类型列表</li>
+        <li><a href="{:url('/admin/categorythree/addthreetype')}">添加三级商品类型</li>
+        <li><a href="{:url('/admin/categorythree/categorythree')}">三级商品类型列表</li>
+      </ul>
+      
+      <h3 class="am-icon-volume-up"><em></em> <a href="#">商品管理</a></h3>
+      <ul>
+      	<li><a href="{:url('/admin/goods/addgoods')}">添加商品</a></li>
+      	<li><a href="{:url('/admin/goods/goods')}">商品列表</a></li>
+      </ul>
+      <h3 class="am-icon-volume-up"><em></em> <a href="#">订单管理</a></h3>
+      <ul>
+      	<li><a href="{:url('/admin/order/order')}">添加订单</a></li>
+      	<li><a href="{:url('/admin/order/orderlist')}">用户订单列表</a></li>
+      	<li><a href="{:url('/admin/order/shoplist')}">商家订单列表</a></li>
+      </ul>
+      <h3 class="am-icon-volume-up"><em></em> <a href="#">其他管理</a></h3>
+      <ul>
+        <li><a href="{:url('/admin/freight/freight')}">运费设置</a>
+          <li><a href="{:url('/admin/freight/widthdrawday')}">设置配送员提现天数</a>
+          <li><a href="{:url('/admin/freight/daylist')}">设置配送员提现列表</a>
+          <li><a href="{:url('/admin/freight/yunlist')}">运费列表</a>
+      	<li><a href="{:url('/admin/brand/addbrand')}">添加品牌</a>
+      	<li><a href="{:url('/admin/brand/brand')}">品牌列表</a>
+      	<li><a href="{:url('/admin/add/add')}">添加规格</a></li>
+      	<li><a href="{:url('/admin/add/table')}">规格列表</a></li>
+      	<li><a href="{:url('/admin/user/slide')}">幻灯片</a></li>
+        <li><a href="{:url('/admin/user/image')}">幻灯片图像</a></li>   
+      </ul>
+       <!--<h3 class="am-icon-gears">><em></em> <a href="#">财务中心</a></h3>
+      <ul>
+      	<li><a href="{:url('/admin/user/wallet')}">我的钱包</a></li>
+      	<li><a href="{:url('/admin/user/bill')}">账单列表</a></li>
+      	<li><a href="{:url('/admin/user/user')}">用户列表</a></li>
+      </ul>-->
+        <!--<li><a href="{:url('/admin/user/collect')}">收藏列表</a></li>-->
+      	<!--<li><a href="{:url('/admin/article/article')}">发布文章</a></li>
+      	<li><a href="{:url('/admin/article/table')}">发布列表</a></li>
+      	<li><a href="{:url('/admin/check/addcheck')}">添加审核</a></li>
+      	<li><a href="{:url('/admin/check/check')}">审核列表</a></li>
+      	<li><a href="{:url('/admin/user/user')}">用户列表</a></li>-->
+       <h3 class="am-icon-users"><em></em> <a href="#">审核管理</a></h3>
+      <ul>
+        <li><a href="{:url('/admin/cqshop/cqsh')}">餐企审核</a></li>
+        <!--<li><a href="{:url('/admin/cqshop/cqshlist')}">餐企审核列表</a></li>-->
+        <li><a href="{:url('/admin/cqshop/ghs')}">供货商审核</a></li>
+        <!--<li><a href="{:url('/admin/cqshop/ghslist')}">供货商列表</a></li>-->
+        <li><a href="{:url('/admin/cqshop/qis')}">配送员审核</a></li>
+        <!--<li><a href="{:url('/admin/cqshop/qis')}">配送员列表</a></li>-->
+        <li><a href="{:url('/admin/withdraw/txsq')}">提现申请</a></li>
+        <li><a href="{:url('/admin/withdraw/txsqlist')}">提现申请列表</a></li>
+      </ul>
+
+       <h3 class="am-icon-gears">><em></em> <a href="#">管理员设置</a></h3>
+      <ul>
+        <li><a href="{:url('/admin/admin/show')}">管理员信息</li></a>
+       <li><a href="{:url('/admin/admin/admin')}">添加管理员</a></li>
+       <li><a href="{:url('/admin/admin/cqset')}">餐企审核设置</li></a>
+      </ul>
+    </div>
+    <!-- sideMenu End --> 
+    <script type="text/javascript">
+			jQuery(".sideMenu").slide({
+				titCell:"h3", //鼠标触发对象
+				targetCell:"ul", //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+				effect:"slideDown", //targetCell下拉效果
+				delayTime:300 , //效果时间
+				triggerTime:150, //鼠标延迟触发时间（默认150）
+				defaultPlay:true,//默认是否执行效果（默认true）
+				returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+				});
+		</script> 
+</div>

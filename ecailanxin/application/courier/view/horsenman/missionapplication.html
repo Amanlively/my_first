@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>配送员申请</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-07-07
+        	描述：账号密码登录页面
+        -->
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<a href="{:url('index/login/login')}" class="right active pt10">首页&emsp;</a>
+		</header>
+		<div class="mui-content login-body ta-left">
+			<form id='aaaaa' class="bgfff" method="post" action="{:url('/courier/horsenman/save/type/' .$type)}" enctype="multipart/form-data">
+				<h1>配送员申请</h1>
+				<div class="supapply-nav">
+					<li>
+						<label>姓&emsp;&emsp;名</label>
+						<input type="text" name="true_name" id="true_name"/>
+					</li>
+					<li>
+						<label>身份证号</label>
+						<input type="text" name="number" id="number"/>
+					</li>
+					<li>
+						<label>电&emsp;&emsp;话</label>
+						<input type="text" name="phone" id="phone"/>
+					</li>
+					<li>
+						<label>居住地址</label>
+						<input type="text" name="dwell" id="dwell"/>
+					</li>
+					<li>
+						<label>上班地点</label>
+						<input type="text" name="site" id="site"/>
+					</li>
+					<li>
+						<label>车辆类型</label>
+						<input type="text" name="cartype" id="cartype"/>
+					</li>
+					<li>
+						<label>行驶证号</label>
+						<input type="text" name="driving" id="driving"/>
+					</li>
+					<div class="supapply-nav-document left">
+						<p>身份证件
+							<input type="file" name="file" id="file1" class="inputfile" onchange="sf()">
+						</p>
+						<label for="file1"><img src="" id="sfz" width="80px"/>点击上传</label>
+					</div>
+					<div class="supapply-nav-document left">
+						<p>驾驶证件
+							<input type="file" name="file1" id="file2" class="inputfile" onchange="js()">	
+						</p>
+						<label for="file2"><img src="" id="jsz" width="80px"/>点击上传</label>
+					</div>
+					<div class="supapply-nav-document left">
+						<p>健康证件
+							<input type="file" name="file2" id="file3" class="inputfile" onchange="jk()">
+						</p>
+						<label for="file3"><img src="" id="jkz" width="80px"/>点击上传</label>
+					</div>
+				</div>	
+				
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<!--<div class="login-section">
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">提交申请</button>
+				</div>-->
+				<div class="login-herder"></div>
+			<div class="qrCode-body-footer">
+					<input type="submit" id="send" value="提交申请" style="color: white;" />
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<!--<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>-->
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+	<script type="text/javascript">
+				$('#send').click(function () {
+
+			    var true_name = $('#true_name').val().trim();
+			    var number1   = $('#number').val().trim();
+			    var phone     = $('#phone').val().trim();
+			    var dwell     = $('#dwell').val().trim();
+			    var site      = $('#site').val().trim();
+			    var cartype   = $('#cartype').val().trim();
+			    var driving   = $('#driving').val().trim();
+			    var file1    = $('#file1').val().trim();
+			    var file2    = $('#file2').val().trim();
+			    var file3    = $('#file3').val().trim();
+                  if(true_name == ''){
+                      alert("请输入姓名!");
+                      return false;
+                  }else if(number1 == ''){
+                  	alert('请输入身份证号!');
+                  	return false;
+                  }else if(phone == ''){
+                  	alert('请输入手机号!');
+                  	return false;
+                  }else if(dwell == ''){
+                  	alert('居住地址不能为空!');
+                  	return false;
+                  }else if(site == ''){
+                  	alert('上班地点不能为空!');
+                  	return false;
+                  }else if(cartype == ''){
+                  	alert('请输入车辆类型!');
+                  	return false;
+                  }else if(driving == ''){
+                  	alert('驾驶证号不能为空!');
+                  	return false;
+                  }else if(file1 == ''){
+                  	alert('请选择身份证照片!');
+                  	return false;
+                  }else if(file2 == ''){
+                  	alert('请选择驾驶证照片!');
+                  	return false;
+                  }else if(file3 == ''){
+                  	alert('请选择健康证!');
+                  	return false;
+                  }
+              }); 
+	</script>
+<!--<script type="text/javascript">
+			function qis() {
+				var a =  $('#aaaaa').serialize();
+					console.log(a);
+//				$.ajax({
+//					type: "post",
+//					url: "{:url('/courier/horsenman/save/type/' .$type)}",
+//					data: $('#aaaaa').serialize(),
+//					console.log(data);
+//					success: function(data) {
+//						if(data['code']) {
+//							layer.msg(data['msg'], {
+//								time: 2000
+//							});
+//							window.location.href = data['url'];
+//						} else {
+//							layer.msg(data['msg'], {
+//								time: 2000
+//							});
+//						}
+//					},
+//					error: function(request) {
+//						alert("其他错误,请联系客服");
+//					}
+//				});
+			}
+		</script>-->
+		<script type="text/javascript">
+			function sf(){
+				var r = new FileReader();
+				f = document.getElementById('file1').files[0];
+//								alert(f);
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('sfz').src=this.result;
+//					alert(aa);
+				}
+			}
+			function js(){
+				var r = new FileReader();
+				f = document.getElementById('file2').files[0];
+//								alert(f);
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('jsz').src=this.result;
+//					alert(aa);
+				}
+			}
+			function jk(){
+				var r = new FileReader();
+				f = document.getElementById('file3').files[0];
+//								alert(f);
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('jkz').src=this.result;
+//					alert(aa);
+				}
+			}
+		</script>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.h120{height: 120px;}
+			.swiper-slide1{overflow: hidden;display: block!important;}
+			.swiper-slide1 img{width: 100%;height: 120px;}
+			.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{bottom: 0!important;}
+			.swiper-container1 { width: 100%;height: 100%;}
+		    .swiper-slide2{text-align: center;font-size: 18px;background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">商品详情</h1>
+		</header>
+		<!--banner开始-->
+		<div class="swiper-container swiper-container2">
+		  <div class="swiper-wrapper h120">
+		    <div class="swiper-slide swiper-slide1">
+		    	<img src="__STATIC__/uploads/goodspic/{$rowset.goodspic}" />
+		    </div>
+		  </div>
+		  <!--<div class="swiper-pagination"></div>-->
+		</div>
+		<!--banner结束-->
+		<!--<div class="banner_bottom_title bgfff oh">
+			<div class="right">
+				<div class="add left">
+					<img src="__STATIC__/assets/mobile/img/add.png" />
+				</div>
+				<div class="hide imshow left">
+					<!--<input class="left" type="text" name="num" value="1" readonly="readonly" />-->
+					<!--<div class="reduce left">
+						<img src="__STATIC__/assets/mobile/img/reduce.png" />
+					</div>
+				</div>
+			</div>-->
+		<!--</div>-->
+		
+		<div class="mt10 bgfff">
+			<ul class="describe">
+				<li>
+					<h4>别名</h4>
+					<p>{$rowset.alias}</p>
+				</li>
+				<li>
+					<h4>产地</h4>
+					<p>{$rowset.goodsarea}</p>
+				</li>
+				<li>
+					<h4>品牌</h4>
+					<p>{$pin[$rowset.brand_id]}</p>
+				</li>
+				<li>
+					<h4>描述</h4>
+					<p>{$rowset.introduce}</p>
+				</li>
+				<li>
+					<h4>服务</h4>
+					<input type="text" disabled="disabled" value="预约达" />
+					<input type="text" disabled="disabled" value="及时送" />
+					<input type="text" disabled="disabled" value="24h退换" />
+				</li>
+			</ul>
+		</div>
+		 <div class="service bgfff mt10 mb50">
+		 	<p class="service_title">服务保障</p>
+		 	<ul>
+		 		<li>
+		 			<img src="__STATIC__/assets/mobile/img/fw1.png" />
+		 			<div class="left pl10">
+			 			<h5>配送服务</h5>
+			 			<p>该商品支持预约达、次日达，由物流配送</p>
+		 			</div>
+		 		</li>
+		 		<li>
+		 			<img src="__STATIC__/assets/mobile/img/fw2.png" />
+		 			<div class="left pl10">
+			 			<h5>售后服务</h5>
+			 			<p>该商品支持签收起24小时内有质量问题可退</p>
+		 			</div>
+		 		</li>
+		 		<li>
+		 			<img src="__STATIC__/assets/mobile/img/fw3.png" />
+		 			<div class="left pl10">
+			 			<h5>支付方式</h5>
+			 			<p>在线支付：支付宝、微信</p>
+		 			</div>
+		 		</li>
+		 	</ul>
+		 </div>  
+		
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script>
+			var mySwiper = new Swiper('.swiper-container2', {
+				autoplay: true,//可选选项，自动滑动
+				width: window.innerWidth,
+				pagination: {
+				    el: '.swiper-pagination',
+				  },
+				})
+			
+			
+			var swiper = new Swiper('.swiper-container1', {
+		      slidesPerView: 2.5,
+		      pagination: {
+		        el: '.swiper-pagination',
+		        clickable: true,
+		      },
+		    });
+            mui.init({
+                swipeBack: true //启用右滑关闭功能
+            });
+            (function($) {
+                $('#scroll').scroll({
+                    indicators: true //是否显示滚动条
+                });
+                var segmentedControl = document.getElementById('segmentedControl');
+                $('.mui-input-group').on('change', 'input', function() {
+                    if (this.checked) {
+                        var styleEl = document.querySelector('input[name="style"]:checked');
+                        var colorEl = document.querySelector('input[name="color"]:checked');
+                        if (styleEl && colorEl) {
+                            var style = styleEl.value;
+                            var color = colorEl.value;
+                            segmentedControl.className = 'mui-segmented-control' + (style ? (' mui-segmented-' + style) : '') + ' mui-segmented-' + color;
+                        }
+                    }
+                });
+            })(mui);
+			
+		</script>
+
+	</body>
+</html>

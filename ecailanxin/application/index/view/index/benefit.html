@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>巨实惠</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">巨实惠</h1>
+		</header>
+		<section class="bestselling">
+			<ul>
+				{foreach ($rowset as $row)}
+				<li class="bgfff oh mt10">
+					<div class="left cx_list_img" >
+				    	<img src="__STATIC__/uploads/goodspic/{$row.goodspic}" />
+					</div>
+					<a href="{:url('/index/index/details/id/' . $row.id)}"><div class="right cx_list_right">
+						<h5>{$row.goodsname}</h5>
+						<div class="cx_list_style mt10">
+							<div class="left">
+								<img src="__STATIC__/assets/mobile/img/cxsj.png" />
+								<span class="col_61bc67">{$shopname[$row.shopid]}</span>
+							</div>
+							<del class="right">月销{$row.sales}</del>
+						</div>
+						<div class="cx_list_style mt5">
+							<div class="left">
+								<img src="__STATIC__/assets/mobile/img/cx-xx.png" />
+								<span>{$row.introduce}，{$row.goodsarea}</span>
+							</div>
+							<p class="right col_ff5452">￥{$row.discount}/{$spcename[$row.goodsgg]}</p>
+						</div>
+					</div></a>
+				</li>
+				{/foreach}
+			</ul>
+		</section>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	</body>
+</html>

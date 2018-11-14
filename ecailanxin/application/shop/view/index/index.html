@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单处理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.header{padding: 0!important;}
+			.header .left,.header .right{margin-top: 5px;}
+			.vagetable_tab ul li{width: 20%!important;}
+			.vagetable_tab ul li .circular{width: 10px!important;height: 10px!important;line-height: 10px!important;top: 0!important;right: 2px!important;font-size: 8px;}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh header">
+			<div class="left scan">
+				<a href="javascript:;">
+					<img src="__STATIC__/assets/mobile/img/sys.jpg">
+					<p>扫一扫</p>
+				</a>
+			</div>
+			<h1 class="mui-title">小明蔬菜店</h1>
+			<div class="right news">
+				<a href="javascript:;">
+					<img src="__STATIC__/assets/mobile/img/xiaoxi.jpg" />
+					<p>消息</p>
+				</a>
+			</div>
+		</header>
+        <div class="bgfff store_index_data oh">
+        	<ul>
+        		<li>
+        			<a href="javascript:;">
+	        			<h4>1285.58</h4>
+	        			<p class="f12">单位：（元）</p>
+	        			<p class="col-333">今日收入</p>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="javascript:;">
+	        			<h4>1285.58</h4>
+	        			<p class="f12">单位：（笔）</p>
+	        			<p class="col-333">今日订单</p>
+        			</a>
+        		</li>
+        		<li>
+        			<a href="javascript:;">
+	        			<h4>1285.58</h4>
+	        			<p class="f12">单位：（数量）</p>
+	        			<p class="col-333">今日商品销售</p>
+        			</a>
+        		</li>
+        	</ul>
+        </div>
+        
+		<div class="bgfff vagetable_tab oh">
+			<ul class="oh">
+				<li class="stactive">
+					<a href="javascript:;">
+						<p>全部</p>
+						<div class="circular">
+							1
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<p>待接单</p>
+						<div class="circular">
+							1
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<p>待出货</p>
+						<div class="circular">
+							1
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<p>配送中</p>
+						<div class="circular">
+							1
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<p>今日完成</p>
+						<div class="circular">
+							1
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="mt10 store_index_list">
+			<ul>
+				<li>
+					<img class="left" src="__STATIC__/assets/mobile/img/store_index1.png" />
+					<div class="left leftdiv">
+						<p class="col-333">邓丽君餐厅</p>
+						<p>订单价：￥255.20</p>
+					</div>
+					<div class="right">
+						<p class="col-333">待接单(8:15)</p>
+						<p>商品数量：12件
+						</p>
+					</div>
+				</li>
+				<li>
+					<img class="left" src="__STATIC__/assets/mobile/img/store_index2.png" />
+					<div class="left leftdiv">
+						<p class="col-333">邓丽君餐厅</p>
+						<p>订单价：￥255.20</p>
+					</div>
+					<div class="right">
+						<p class="col-333">待出货</p>
+						<p>商品数量：12件
+						</p>
+					</div>
+				</li>
+				<li>
+					<img class="left" src="__STATIC__/assets/mobile/img/store_index3.png" />
+					<div class="left leftdiv">
+						<p class="col-333">邓丽君餐厅</p>
+						<p>订单价：￥255.20</p>
+					</div>
+					<div class="right">
+						<p class="col-333">待取货</p>
+						<p>商品数量：12件
+						</p>
+					</div>
+				</li>
+				<li>
+					<img class="left" src="__STATIC__/assets/mobile/img/store_index4.png" />
+					<div class="left leftdiv">
+						<p class="col-333">邓丽君餐厅</p>
+						<p>订单价：￥255.20</p>
+					</div>
+					<div class="right">
+						<p class="col-333">配送中</p>
+						<p>商品数量：12件
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+			$('.vagetable_tab ul li').click(function(){
+				$(this).addClass('stactive').siblings().removeClass('stactive');
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>易菜篮</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="__STATIC__/assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/admin.css">
+<script src="__STATIC__/assets/js/jquery.min.js"></script>
+<script src="__STATIC__/assets/js/app.js"></script>
+</head>
+<body>
+{include file="layout/top-nav"}
+
+<div class="am-cf admin-main"> 
+
+{include file="layout/sidebar"}
+
+
+<div class=" admin-content">
+	
+		<div class="daohang">
+			<ul>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"><a href="{:url('/admin/index/index')}">首页</a></li>
+			</ul>
+		</div>
+	
+	
+
+
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 商品列表</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品列表</a></dl>
+      
+      <dl>
+        <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 商品列表</button>
+      </dl>
+      
+      
+    </div>
+	
+	
+
+    <form class="am-form am-g">
+          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <thead>
+              <tr class="am-success">
+                <th class="table-title">商品名字</th>
+                <th class="table-type">商品一级分类</th>
+                <th class="table-type">商品二级分类</th>
+                <th class="table-type">商品三级分类</th>
+                <th class="table-author am-hide-sm-only">上架/下架 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
+                <th class="table-img">商品图片</th>
+                <th class="table-img">商品轮播图一</th>
+                <th class="table-img">商品轮播图二</th>
+                <th class="table-img">商品轮播图三</th>
+                <th class="table-img">商品轮播图四</th>
+                <th class="table-title">商品价格</th>
+                <th class="table-title">商品产地</th>
+                <th class="table-title">商品别名</th>
+                <th class="table-title">商品介绍</th>
+                <th class="table-title">商品品牌</th>
+                <th class="table-title">商品规格</th>
+                <th width="163px" class="table-set">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{foreach $rowset as $row}
+                <tr>
+                <td>{$row.goodsname}</td>
+                <td>{$row.catoneid}</td>
+                <td>{$row.cattwoid}</td>
+                <td>{$row.catthreeid}</td>
+                <td>
+                	{if condition="$row.is_up==0"}
+						下架		
+					{elseif condition="$row.is_up==1"}
+						上架
+					{/if}
+                </td>
+                <td><img src="__STATIC__/uploads/goodspic/{$row.goodspic}"height="50px" width="50px"/></td>
+                <td><img src="__STATIC__/uploads/lbt/{$row.oneimg}"height="50px" width="50px"/></td>
+                <td><img src="__STATIC__/uploads/lbt/{$row.twoimg}"height="50px" width="50px"/></td>
+                <td><img src="__STATIC__/uploads/lbt/{$row.threeimg}"height="50px" width="50px"/></td>
+                <td><img src="__STATIC__/uploads/lbt/{$row.fourimg}"height="50px" width="50px"/></td>
+                <td>{$row.goodsprice}</td>
+                <td>{$row.goodsarea}</td>
+                <td>{$row.alias}</td>
+                <td>{$row.introduce}</td>
+                <td>{$row.brand_id}</td>
+                <td>{$row.goodsgg}</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                      <!--<a href="{:url('/admin/goods/edit/id/' . $row.id)}" ><button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"  ><span class="am-icon-pencil-square-o"></span> </button></a>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"  ><span class="am-icon-trash-o" ></span><a href="{:url('/admin/goods/del/id/' . $row.id)}"></a> </button>-->
+                      
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}"><span class="am-icon-pencil-square-o"></span><a href="{:url('/admin/tail/etail/id/' . $row.id)}">修改</button></a>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o" ></span><a href="{:url('/admin/tail/del/id/' . $row.id)}">删除</button></a>
+                      
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {/foreach}
+            </tbody>
+          </table>
+
+        </form>
+ 
+ 
+ 
+ 
+ <div class="foods">
+  <ul>
+    版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+  </ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]--> 
+
+<!--[if (gte IE 9)|!(IE)]><!--> 
+<script src="assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+
+
+
+</body>
+</html>

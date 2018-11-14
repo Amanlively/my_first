@@ -1,0 +1,56 @@
+	<link href="__STATIC__/assets/mobile/css/footer.css" rel="stylesheet" />
+	<style type="text/css">
+		.footer_bottom a{width: 33.3%;}
+		.footer_bottom a p{margin-bottom: 0;}
+		.active p{color: #62c168}
+	</style>
+	<footer>
+		<nav class="footer_bottom">
+		    <a href="{:url('/courier/missionlist/missionlist')}">
+		    	<img src="__STATIC__/assets/mobile/img/ps_footer.png" />
+		        <p>任务单</p>
+		    </a>
+		    <a href="{:url('/courier/order/orderprocessing')}">
+		    	<img src="__STATIC__/assets/mobile/img/footer2.png " />
+		        <p>订单处理</p>
+		    </a>
+		    
+		    <a href="{:url('/courier/mycenter/mycenter')}">
+		    	<img src="__STATIC__/assets/mobile/img/footer1_active.png " />
+		        <p>个人中心</p>
+		    </a>
+		</nav>
+	</footer>
+    <script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+    <script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js "></script> 
+    <script type="text/javascript">
+//  	mui('body').on('tap','a',function(){
+//		    window.top.location.href=this.href;
+//		});
+    	$(".footer_bottom a").click(function(){
+			var picTabNum = $(this).index();
+//			alert("当前图片标题下标是：" + picTabNum);
+			sessionStorage.setItem("picTabNum",picTabNum);
+		});
+		$(function(){
+			var getPicTabNum = sessionStorage.getItem("picTabNum");
+			var thisNode=$(".footer_bottom a").eq(getPicTabNum);
+//			alert(getPicTabNum);
+			var thisSrc=thisNode.children('img').attr('src');
+			var lastNodeSrc = $(".footer_bottom a:last").children('img').attr('src');
+			if(getPicTabNum != 2){
+				var addSrc=thisSrc.replace('.png','').trim()+'_active.png';
+				thisNode.children('img').attr('src',addSrc);
+				thisNode.addClass("active").siblings().removeClass("active");
+				//以下为清除最后一个节点的加载
+				lastNodeSrc = lastNodeSrc.replace('_active','').trim();
+				$(".footer_bottom a:last").children('img').attr('src',lastNodeSrc);
+			}else{
+				thisNode.addClass("active").siblings().removeClass("active");
+				if(lastNodeSrc.indexOf('_active')==-1){
+					var addSrc=thisSrc.replace('.png','').trim()+'_active.png';
+					thisNode.children('img').attr('src',addSrc);
+				}
+			}
+		})
+    </script> 

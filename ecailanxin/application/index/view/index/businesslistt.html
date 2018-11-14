@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商家</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.business_list ul li .index_list_right .index_list_fw .index_list_star {
+				width: 100%!important;
+			}
+			.this-topping{position: fixed; bottom: 60px; right: 10px;width: 40px;height: 40px;line-height: 40px;border-radius: 50%;
+				background-image: url('__STATIC__/assets/mobile/img/go-top.png');
+				background-repeat: no-repeat;
+				background-position: center top;
+				background-size: cover;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="reg-top-icon" href="{:url('/index/index/index/city/'.session('city'))}"><<返回首页</a>
+			<h1 class="mui-title">商家</h1>
+		</header>
+		<div class="soft oh">
+			<ul>
+				<li class="active">
+					<a href="{:url('/index/index/businesslistt/sx/6')}">综合排序</a>
+				</li>
+				<li>
+					<a href="{:url('/index/index/businesslistt/sx/1')}">销量最高</a>
+				</li>
+				<li>
+					<a href="{:url('/index/index/businesslistt/sx/2')}">距离最近</a>
+				</li>
+				<li>
+					<a href="{:url('/index/index/businesslistt/sx/3')}">好评优先</a>
+				</li>
+			</ul>
+		</div>
+		<div class="bgfff">
+			<!--商家专区开始-->
+			<div class="bgfff business oh">
+				<div class="business_list oh">
+					{foreach ($bazaar_shop as $row)}
+					<ul>
+						<li>
+							<a href="{:url('/index/companydata/businessdetail/id/' .$row.id)}">
+								<div class="index_list_img">
+									<img src="__STATIC__/uploads/shop/{$row.shop_img}" />
+								</div>
+								<div class="index_list_right">
+									<p class="list_title">{$row.shop_name}</p>
+									<div class="index_list_fw oh">
+										<div class="index_list_star">
+											<p>距您<span class="col_61bc67">{$row.distance}km</span>，{$row.delivery}元起送</p>
+										</div>
+									</div>
+									<div class="distance oh">
+										<img src="__STATIC__/assets/mobile/img/distance.png" />
+										<span>{$row.address}</span>
+									</div>
+									<div class="discount oh">
+										<div class="discount_left">
+											<input type="button" value="折扣" />
+											<p>{$row.goodsname}</p>
+										</div>
+										<div class="discount_right">
+											<del>￥{$row.goodsprice}</del>
+											<p>￥{$row.discount}</p>
+										</div>
+									</div>
+								</div>
+							</a>
+						</li>
+
+					</ul>
+					{/foreach}
+				</div>
+				<button class="this-topping" style="display: none;" href="#"></button>
+			</div>
+			<!--商家专区结束-->
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/sessionshow.js"></script>
+		<script>
+
+			$(document).ready(function($){
+				
+				$(window).scroll(function(event) {
+					/* Act on the event */
+					if($(this).scrollTop()==0){
+						$(".this-topping").hide();
+					}
+					if($(this).scrollTop()!=0){
+						$(".this-topping").show();
+					}
+				});	
+				$(".this-topping").click(function(event) {
+					/* Act on the event */
+					$("html,body").animate({
+						scrollTop:"0px"},
+						666
+					)
+				});
+				
+			})
+		</script>
+	</body>
+
+</html>

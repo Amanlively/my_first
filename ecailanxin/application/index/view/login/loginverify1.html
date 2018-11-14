@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="login-herder bgfff"></header>
+		<div class="mui-content login-body ta-left">
+			<form action="" method="post" id="tel">
+				<h1>用户登录</h1>
+				<div class="login-herder"></div>
+				<div class="mui-input-row login-section">
+					<label>手机号</label>
+					<input id="account" type="text" name="tel" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<div class="mui-input-row login-section mt20">
+					<label>验证码</label>
+					<input id='verify' type="text" class="mui-input-clear mui-input verify" placeholder="请输入验证码">
+					<a class="verify-a">点击获取验证码</a>
+				</div>
+				<div class="mui-input-row login-section mt20 mb50">
+					<a href="login.html">切换到密码登录<img src=""/></a>
+				</div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-section">
+					<button type="button" class="mui-btn mui-btn-block mui-btn-primary" onclick="dlu()">登录</button>
+				</div>
+				<div class="login-herder"></div>
+			</div>
+			</form>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script>
+		function dlu(){
+			
+				$.ajax({
+				type: "POST",
+				url: "{:url('index/login/logintel')}",
+				data: $('#tel').serialize(), // 序列化表单值  
+				async: false,
+				error: function(request) {
+					alert("其他错误,请联系客服");
+				},
+				success: function(data) {
+					var data = JSON.parse(data);
+					console.log(data);
+					if(data['status'] == 1) {
+						layer.msg('登录成功', {
+							time: 2000
+						});
+						window.location.href = "/index/index/index";
+					} else if(data['status'] == -1) {
+						layer.msg('手机号不能为空', {
+							time: 2000
+						});
+						//window.location.href = "/Mobile/Index/center";
+					}else if(data['status'] == -2) {
+						layer.msg('没有该用户名', {
+							time: 2000
+						});
+					}
+					}
+			});
+		}
+		</script>
+	</body>
+
+</html>

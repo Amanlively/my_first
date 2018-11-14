@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tzRMGsRbNXUyPhOc0eHLDVmt2cOqyDUP"></script>
+		<style type="text/css"></style>
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">门店管理</h1>
+		</header>
+		<div id="allmap"></div>
+		<div class="mui-content login-body ta-left">
+			<form action="" method="post" id="mdcont">
+			    <div class="mui-input-row">
+			        <label>门店名称</label>
+			    <input type="text" name="mdname" class="mui-input-clear" placeholder="请输入您的门店名称">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>详细地址</label>
+			        <input type="text" name="address" class="mui-input-clear" placeholder="请输入您的详细地址">
+			        <input type="hidden" id="ycy" name="zuobiao" />
+			    </div>
+			    <div class="mui-input-row">
+			        <label>负责人</label>
+			        <input type="text" name="managername" class="mui-input-clear" placeholder="请输入门店负责人真实姓名">
+			    </div>
+			    <div class="mui-input-row">
+			        <label>负责人电话</label>
+			        <input type="text" name="managerphone" class="mui-input-clear" placeholder="请输入门店负责人电话">
+			    </div>
+			    <div class="login-herder mb50"></div>
+			    <div class="login-herder mb50"></div>
+			    <div class="login-herder mb50"></div>
+			    <div class="login-herder mb50"></div>
+				<div class="login-section">
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary" type="button" onclick="log()">提交申请</button>
+				</div>
+				<div class="login-herder"></div>
+			</form>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript">
+			
+			$('input[name=address]').on("change",function(){
+				var address=$(this).val();
+			})
+			
+			// 百度地图API功能
+			var map = new BMap.Map("allmap");
+			var point = new BMap.Point();
+			//map.centerAndZoom(point,16);
+			// 创建地址解析器实例
+			var myGeo = new BMap.Geocoder();
+			// 将地址解析结果显示在地图上,并调整地图视野
+			myGeo.getPoint("山东省济南市高新区新泺大街2008号银河大厦", function(point){
+				if (point) {
+					map.centerAndZoom(point, 16);
+					map.addOverlay(new BMap.Marker(point));
+					alert(point.lng + "," + point.lat);
+				}else{
+					alert("您选择地址没有解析到结果!");
+				}
+			}, "北京市");
+			
+		</script>
+		<script>
+			function log() {
+            $.ajax({  
+	            type: "POST",  
+	            url:"{:url('/index/register/save/type/' . $type)}",  
+	            data:$('#mdcont').serialize(),// 序列化表单值  
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	             success: function(data) {  
+	                    var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('提交成功!',{time:2000});
+	                    	window.location.href = "/index/login/login";
+	                    }else if(data['status'] == -1){
+	                    	layer.msg('门店名称不能为空!',{time:2000});
+	                    	
+	                    } else if(data['status'] == -2){
+	                    	layer.msg('门店地址不能为空!',{time:2000});
+	                    	
+	                    } else if(data['status'] == -3){
+	                    	layer.msg('门店负责人不能为空!',{time:2000});
+	                    	
+	                    }  else if(data['status'] == -6){
+	                    	layer.msg('门店负责人电话不能为空!',{time:2000});
+	                    } 
+		            }  
+		        });  
+		    }
+		</script>
+	</body>
+
+</html>

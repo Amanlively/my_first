@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>智能秤-订单模式</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="orderweight-header bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orderweight-top-icon"><span>返回</span></a>
+			<div class="mui-title ordertitlebox">
+				<img class="left orderweight-header-img" src="__STATIC__/assets/mobile/img/u843_03.png" />
+				<span class="left">订单称重</span>
+			</div>
+			<a href="{:url('/shop/center/orderweighing1')}" class="orderweight-header-a active">切换到零售模式 ></a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row orderweighing-body-nav oh bgfff">
+				<table>
+					<tr>
+						<th width="6.6%">
+							<input type="checkbox" />
+						</th>
+						<th width="20.6%">品名</th>
+						<th width="18.6%">单价￥</th>
+						<th width="16.6%">数量</th>
+						<th width="16.6%">小计￥</th>
+						<th width="22.6%">实称重量</th>
+					</tr>
+					{foreach $order_id as $row}
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td>{$row.goods_id}</td>
+						<td>{$row.good_pirce}/{$row.goodsgg}</td>
+						<td>{$row.good_num}</td>
+						<td>{$row.total}</td>
+						<td>{$row.weight}</td>
+					</tr>
+
+					{/foreach}
+					
+				</table>
+				<div class="orderweighing-foot">
+					<div class="orderweighing-foot-left">共<span>{$count}</span>项</div>
+					<div class="orderweighing-foot-right">总计：<span class="active">￥<b>{$money}</b></span>
+					</div>
+				</div>
+			</div>
+			<div class="mui-row orderweighing-body-nav1 oh bgfff">
+				<div class="orderweighing-body-nav-top">
+					<div class="orbnt-left left">
+						<img src="__STATIC__/assets/mobile/img/index_1.jpg" />
+					</div>
+					<div class="orbnt-right left">
+						<h1>特级大菠菜</h1>
+						<p>1件 丨 ￥2.4/kg</p>
+						<p>小计：<span class="active">￥<b>2.4</b></span></p>
+					</div>
+				</div>
+				<div class="orderweighing-body-nav-bot">
+					<form class="mui-input-group">
+					    <div class="mui-input-row">
+					        <label>品名：</label>
+					    	<input type="text" class="" value="特级大菠菜">
+					    	<span></span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>单价：</label>
+					        <input type="text" class="" value="2.4">
+					       	<span>元/kg</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>重量：</label>
+					        <input type="text" class="weight" value="0.00">
+					       	<span>kg</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>总量：</label>
+					        <input type="text" class="" value="0.00">
+					       	<span>kg</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>合计：</label>
+					        <input type="text" class="" value="0.00">
+					       	<span>kg</span>
+					    </div>
+					    
+					</form>
+				</div>
+				<div class="orderweighing-foot">
+					<button>加入成件商品计算</button>
+				</div>
+			</div>
+			<div class="mui-row orderweighing-body-nav2 oh bgfff">
+				<div class="orderweighing-body-nav-top">
+					<img src="__STATIC__/assets/mobile/img/u843_04.png" />
+				</div>
+				<table>
+					<tr>
+						<td>7</td>
+						<td>8</td>
+						<td>9</td>
+						<td class="last-td">置零</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td class="last-td">去皮</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td class="last-td">累计</td>
+					</tr>
+					<tr>
+						<td colspan="2">0</td>
+						<td>.</td>
+						<td class="last-td">退格</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="active">结账</td>
+						<td class="last-td">确定</td>
+					</tr>
+				</table>
+				<input id="sn" type="hidden" name="sn" value="{$chengno}" />
+			</div>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript">
+
+		    //前端Ajax持续调用服务端，称为Ajax轮询技术
+			var chengno = $("#sn").val();
+		//	alert(chengno);
+		    var getting = {
+		    	
+		    	type:'post',
+		        url:'/shop/center/ajaxget',
+		        data: {sn:chengno},
+		        success:function(res) {
+		        	console.log(res);
+		        	var data=JSON.parse(res);
+		//		alert(data);
+		        	$(".weight").val(data);
+		        	//$.ajax(getting); //关键在这里，回调函数内再次请求Ajax
+		        	
+				}
+		        
+			};
+			window.setInterval(function(){$.ajax(getting)},50);
+		
+		</script>
+	</body>
+
+</html>

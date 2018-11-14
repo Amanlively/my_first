@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">添加尾货</h1>
+		</header>
+		<div class="mui-content login-body ta-left">
+			<form id='login-form' class="bgfff" action="{:url('/shop/shop/tailsave/id/'. $goodsid)}" method="post">
+				<div class="login-herder"></div>
+				<div class="mui-input-row login-section">
+					<label>商品</label>
+					<input type="text" class="mui-input-clear mui-input" name="goods" placeholder="" value="{$row.goodsname}" readonly="readonly">
+				</div>
+				<div class="mui-input-row login-section">
+					<label>数量 kg</label>
+					<input type="text" class="mui-input-clear mui-input" name="number" placeholder=""  value="{$row.stock}">
+				</div>
+				<div class="mui-input-row login-section">
+					<label>价格 ￥</label>
+					<input type="text" class="mui-input-clear mui-input" name="price" placeholder="" value="{$row.goodsprice}">
+				</div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-section">
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">确定</button>
+				</div>
+				<div class="login-herder"></div>
+				
+			</div>
+			</form>
+		</div>
+		
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

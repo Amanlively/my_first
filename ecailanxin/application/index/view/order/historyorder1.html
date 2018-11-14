@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>历史订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<style>
+			.noradius{border-radius: 0!important;}
+			.chattext{width: 52%!important;}
+			.chattext p{line-height: 30px!important;}
+			.chat_img{width: 32%!important;}
+			.chat_img p{line-height: 30px!important;font-size: 12px;text-align: right;}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">历史订单</h1>
+		</header>
+		<div class="order_list">
+			<ul>
+				{foreach ($order as $order)}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/order/distribution3/order_id/' .$order.order_id)}" id="openPopover5">
+						<div class="left chatphoto">
+					    	<img class="noradius" src="__STATIC__/uploads/goodspic/{$userimg.image}" />
+						</div>
+						<div class="left chattext">
+							<p class="f16 col-333">{$order.buy_id}的订单（ID{$order.order_id}）</p>
+							<p><span>{$order.shu}件商品</p>
+						</div>
+						<div class="right chat_img">
+							<p>已完成 ></p>
+							<p class="col-999">{$order.complate_time|date="Y-m-d H:i"}</p>
+						</div>
+					</a>
+				</li>
+				{/foreach}
+			</ul>
+			<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：下面ID去掉1，即可单击调用
+            -->
+			<div id="popover1" class="mui-popover">
+			    <ul class="mui-table-view">
+				  	<li class="mui-table-view-cell input_text oh">
+				  		<a href="javascript:;">发送到工作群</a>
+				  	</li>
+				  	<li class="mui-table-view-cell input_text oh">
+				  		<a href="javascript:;">删除</a>
+				  	</li>
+				</ul>
+			</div>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+			mui.init({
+			  gestureConfig:{
+			    longtap: true, //默认为false
+			    release:true
+			   }
+			});
+			mui(".order_list").on('longtap','li',function(){
+			   var num = $(this).index()+1;
+			   mui('.mui-popover').popover('toggle',document.getElementById("openPopover"+num));
+			})
+		</script>
+	</body>
+</html>

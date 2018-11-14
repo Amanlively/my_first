@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>菜品选择</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+	</head>
+	<body>
+		
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+
+			<h1 class="mui-title">选择商家</h1>
+		</header>
+		<section class="bestselling">
+			<ul>
+                {foreach ($jy as $row)}
+				<li class="bgfff oh mt10">
+
+					
+					<div class="left cx_list_img" >
+				    	<img src="__STATIC__/assets/mobile/img/cx-1.png" />
+					</div>
+					<div class="right cx_list_right">
+                        <h5 class="col-000">{$row.shop_name}</h5>
+                        <div class="cx_list_style mt10">
+                            <div class="left">
+                                <img src="__STATIC__/assets/mobile/img/distance.png" />
+                                <span class="col-666">{$row.address}</span>
+                            </div>
+
+							<a href="{:url('/index/purchase/neworder/sc/'.$row.goodsname.'/shopname/' . $row.shop_name . '/shopid/' . $row.shopid . '/status/1')}"  class="mybtn" id="xz">选择</a>
+
+                        </div>
+                        <div class="cx_list_style mt10">
+							<div class="left">
+								<span class="col-333 f16">{$row.goodsname}</span>
+							</div>
+							<p class="right col_ff5452">￥{$row.goodsprice}/{$row.name}</p>
+						</div>
+					</div>
+
+				</li>
+                {/foreach}
+			</ul>
+		</section>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+			$('#xz').click(function(){
+				history.go(-1);
+        })
+		</script>
+	</body>
+</html>

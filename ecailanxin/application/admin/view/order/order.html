@@ -1,0 +1,86 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>添加订单</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+</head>
+<body>
+{include file="layout/top-nav"}
+
+<div class="am-cf admin-main"> 
+	{include file="layout/sidebar"}
+	<div class="admin">
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 添加订单</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="{:url('/admin/order/orderlist')}">订单列表</a></dl>
+
+      
+      
+    </div>
+	
+    <div class="fbneirong">
+      <form class="am-form" action="{:url('/admin/order/save')}" method="post">
+        <div class="am-form-group am-cf">
+          <div class="you">
+            订单类型:<input type="text" class="am-input-sm" id="doc-ipt-email-1" name="ordertype" placeholder="请输入订单类型">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+          <select name="status">
+          	<option value="0">已付款</option>
+          	<option value="1">未付款</option>
+          	<option value="2">待发货</option>
+          	<option value="3">已签收</option>
+          	<option value="4">未签收</option>
+          </select>
+          </div>
+        </div>
+         <div class="am-form-group am-cf">
+          <div class="you">
+          	商品的数量:  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" name="goodnum" placeholder="请输入订单数量">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+          	商品的价格:  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" name="good" placeholder="请输入商品价格">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+         	 订单创建时间:  <input type="date" class="am-input-sm" id="doc-ipt-pwd-1" name="add" placeholder="请输入创建时间">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+          	订单完成时间:  <input type="date" class="am-input-sm" id="doc-ipt-pwd-1" name="complate" placeholder="请输入完成时间">
+          </div>
+        </div>
+        <button type="submit" class="am-btn am-btn-success am-radius">提交</button>
+      </form>
+    </div>
+
+  
+ 
+ <div class="foods">
+ <ul>版权所有@2018 . 易菜篮</ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+</div>
+     </div>
+</div>
+
+<script src="__STATIC__/assets/js/amazeui.min.js"></script>
+</body>
+</html>

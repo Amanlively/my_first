@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>待验货</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left reg-top-icon f12" href="/index/purchase/vegetableBasket">返回采购单</a>
+			<h1 class="mui-title">处理中的订单</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row classifidetail-body-top oh bgfff">
+				<ul>
+					<li class="classifidetail-top-li active">
+						<a href="{:url('index/purchase/order')}"><p>全部</p></a>
+						<div class="circular">
+							{$num}
+						</div>
+					</li>
+					<li>
+					<a href="{:url('/index/purchase/processingOrder')}"><p>待验货</p></a>
+					<div class="circular">
+						{$yan}
+					</div>
+				</li>
+				<li>
+					<a href="{:url('/index/purchase/pendingPayment')}"><p>待付款</p></a>
+					<div class="circular">
+					{$fu}
+					
+					</div>
+				</li>
+				<li>
+					<a href="{:url('/index/purchase/pendingVerification')}"><p>待验证</p></a>
+					<div class="circular">
+					{$zheng}
+					</div>
+				</li>
+				
+			</ul>
+			</div>
+			<div class="proOrder-body">
+				<p class="firstp bgfff">共{$num}个，待验货{$yan} 待付款{$fu} 待验证{$zheng}</p>
+				{foreach $order as $row}
+				<a href="{:url('/index/purchase/tail/ddh/' .$row.order_id)}">
+				<div class="proOrder-nav bgfff">
+					<p>订单编号：{$row.order_id}<span class="right">
+						{if condition = "$row.order_status == 0"}
+						代付款
+						{elseif condition = "$row.order_status == 1"}
+						待验货
+						{elseif condition = "$row.order_status == 2"}
+						待验证
+						{/if}
+					</span></p>
+					<p class="active">{$row.shopid}</p>
+					<p>
+						{if condition = "$row.order_status == 9"}
+						等待商家接单
+						{/if}
+						<span class="rightspan">
+						{if condition = "$row.order_status == 0"}
+						<a href="{:url('/index/examine/payDetailsl/ddh/'.$row.order_id)}" style="color: white;">付款</a>
+						{elseif condition = "$row.order_status == 1"}
+						<a href="{:url('/index/examine/Inspection/ddh/' .$row.order_id)}" style="color: white;">验货</a>
+						{elseif condition = "$row.order_status == 2"}
+						<a href="{:url('/index/purchase/code/id/'. $row.id)}" style="color: white;">验证</a>
+						{/if}
+					</span></p>
+				</div>
+				</a>
+				{/foreach}
+			</div>
+			
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript">
+			$(".clickdiv").click(function(){
+				
+				if($(this).next().is(':hidden')){
+					$(this).next().show(500);
+				}else{
+					$(this).next().hide(500);
+				}
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,48 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数据</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">数据展示</h1>
+		</header>
+		<div class="indexzslist bgfff oh">
+			<ul>
+				
+				<li>
+					<p>今日收入</p>
+					<span>￥{$sum}</span>
+				</li>
+				<li>
+					<p>今日订单</p>
+					<span>{$count}笔</span>
+				</li>
+				<li>
+					<p>收入总额</p>
+					<span>￥{$num}</span>
+				</li>
+				<li>
+					<p>订单总量</p>
+					<span>{$count1}笔</span>
+				</li>
+				<li>
+					<p>单品销售</p>
+					<span>
+						<a href="{:url('/shop/data/indexZslist/shop/' . $shop)}">点击查看列表</a>
+					</span>
+				</li>
+			</ul>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>易菜篮</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="__STATIC__/assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="__STATIC__/assets/css/admin.css">
+<script src="__STATIC__/assets/js/jquery.min.js"></script>
+<script src="__STATIC__/assets/js/app.js"></script>
+</head>
+<body>
+{include file="layout/top-nav"}
+
+<div class="am-cf admin-main"> 
+
+{include file="layout/sidebar"}
+
+
+<div class=" admin-content">
+	
+		<div class="daohang">
+			<ul>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"><a href="{:url('/admin/index/index')}">首页</a></li>
+			</ul>
+		</div>
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 品牌列表</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">品牌列表</a></dl>
+      
+      <dl>
+        <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"><a href="{:url('/admin/goods/addgoods')}"> 商品列表</a></button>
+      </dl>
+     
+    </div>
+
+          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <thead>
+              <tr class="am-success">
+                <th class="table-title">品牌名称</th>
+                <th width="163px" class="table-set">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{foreach $rowset1 as $row}
+              <tr>
+                <td>{$row.brand_name}</td>
+                <td>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}"><span class="am-icon-pencil-square-o"></span><a href="{:url('/admin/brand/edit/id/' . $row.id)}">修改</button></a>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o" ></span><a href="{:url('/admin/brand/del/id/' . $row.id)}">删除</button></a>
+                      </td>
+              </tr>
+              {/foreach}
+            </tbody>
+         </table>
+ 
+ <div class="foods">
+  <ul>
+    版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+  </ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="assets/js/amazeui.min.js"></script>
+			-->
+<script>
+	$('#control_checkbox').click(function(){
+		$(':checkbox[name=news_checkbox\\[\\]]').prop('checked',$(this).prop('checked'));
+	});
+	$('#sj').click(function(){
+		$('#zt').val('1');
+		$('#form').submit();
+	});
+	$('#xj').click(function(){
+		$('#zt').val('2');
+		$('#form').submit();
+	});
+	$('#sc').click(function(){
+		$('#zt').val('3');
+		$('#form').submit();
+	});
+</script>
+
+
+</body>
+</html>

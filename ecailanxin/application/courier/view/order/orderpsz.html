@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单处理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<style>
+			.orderbox li{float: left;width: 50%;text-align: center;margin-top: 10px;height: 30px;}
+			.orderbox li a{color: #fff;background-color: #999;padding: 0 40px;border-radius: 4px;line-height: 30px;height: 30px;display: inline-block;}
+			.orderbox li a.active{color: #fff;background-color: #62c168;}
+		</style>
+	</head>
+
+	<body>
+		<header class="storemanage-herder bgfff">
+			<a class="pro-sh-a" href="/index/Purchase/scan"><img class="orderpro-header-img" src="__STATIC__/assets/mobile/img/sys.jpg" /></a>
+			<h1 class="mui-title">订单处理</h1>
+		</header>
+		<div class="mui-content mb50 oh">
+			<div class="orderbox oh">
+				<ul>
+					<li><a class="active">配送中</a></li>
+					<li><a href="{:url('/courier/order/orderprocessing')}">待取货</a></li>
+				</ul>
+			</div>
+			<div class="oh">
+			{foreach $jy as $row}
+			<a href="{:url('/courier/order/distribution1/ddh/' . $row.order_id)}">
+			<div class="mui-row orderpro-nav bgfff oh">
+				<p>要求送达时间：{$row.predict_time||date="Y-m-d H:i:s"}<span class="right c-red">{if condition="$row.shop_status == 5"}配送中{/if}</span></p>
+				<div class="orderpro-nav-body">
+					<div class="orderpro-nav-body-left left">
+						<div class="address-img left">
+							<img src="__STATIC__/assets/mobile/img/u925_03.png" />
+						</div>
+						<div class="article-sec right">
+							<div class="article-nav">
+								<div class="article-nav-left left">
+									取货地址
+								</div>
+								<div class="article-nav-right right">
+									<p>{$row.shop_name}<span class="right">{$row.phone}</span></p>
+									<p>{$row.address}</p>
+								</div>
+							</div>
+							<p class="c-red">0.5km</p>
+							<div class="article-nav">
+								<div class="article-nav-left left">
+									送货地址
+									
+								</div>
+								<div class="article-nav-right right">
+									<p>{$row.cqname}<span class="right">{$row.cqphone}</span></p>
+									<p>{$row.cqaddress}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="orderpro-nav-body-right right">
+						<a><img src="__STATIC__/assets/mobile/img/u925_04.png" /></a>
+						<a><img src="__STATIC__/assets/mobile/img/u925_04.png" /></a>
+					</div>
+				</div>
+				<p class="orderpro-nav-pr">运费{$row.freight}元</p>
+			</div>
+			</a>
+			{/foreach}
+			</div>
+		</div>
+		
+		{include file="layout/footer"}
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.min.js"></script>
+		<script type="text/javascript">
+        	$('.footer_bg a').click(function(event) {
+                var nodes = $('.footer_bg a img');
+                for(var i=0; i<nodes.length; i++){
+                    nodes[i].src = nodes[i].src.replace(/.png|_active.png/,'.png');
+                }
+                var ylj = '__STATIC__/assets/mobile/img/footer';
+                var afterimg = ylj + Number($(this).index()+1) +'_active.png';
+                $(this).find('img').attr('src',afterimg) ;
+                $(this).addClass('active_nav').siblings().removeClass('active_nav');
+                
+           })
+        </script>
+	</body>
+</html>

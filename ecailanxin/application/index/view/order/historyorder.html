@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>历史订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.picker.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<form action="{:url('/index/order/historyorder')}" method="post">
+			
+		<div class="historyorder-header bgfff">
+			<input type="text" name="shou" placeholder="搜索订单号" />
+			<input type="submit" value="搜索" />
+		</div>
+		</form>
+		<div class="historyorder-top bgfff">
+			<li><a href="{:url('/index/order/historyorder')}">全部</a></li>
+			<li><a href="{:url('/index/order/historyorder/cx/1')}">一星期</a></li>
+			<li><a href="{:url('/index/order/historyorder/cx/2')}">一个月</a></li>
+			<li id="dateselect">日期查询</li>
+			<input type="hidden" id="ycy1" name="" value="" />
+		</div>
+		<div class="mui-content">
+			{foreach ($row as $row)}
+			<a href="{:url('/index/order/distribution3/order_id/' .$row.order_id)}">
+			<div class="mui-row missionhisorder oh bgfff">
+				<p class="col-000">{$row.rec_time|date='Y-m-d H:i'}</p>
+				<p>任务单号：{$row.order_id}</p>
+				<p>本单收入：<span class="col-000 f16">￥{$row.inmong}</span></p>
+				<p>配送时间：4.4小时</p>
+				<p>订单数量：{$row.good_num}</p>
+				<p>商品约重：{$row.weight}</p>
+			</div>
+			</a>
+			{/foreach}
+		</div>
+		{include file="layout/footer"}
+
+		<script src="__STATIC__/assets/mobile/js/mui.picker.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			mui.init();
+			var btns = mui('#dateselect');
+			btns.each(function(i,btn){
+				btn.addEventListener('tap',function(){
+					var dtPicker = new mui.DtPicker({
+					"type":"date"
+					});
+				dtPicker.show(function(items){
+					$("#ycy1").val(items.value);
+					window.location.href='/index/order/historyorder/date/'+items.value;
+				});
+				},false);
+			});
+			
+		</script>
+	</body>
+
+</html>

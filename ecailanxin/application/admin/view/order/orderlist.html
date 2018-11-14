@@ -1,0 +1,129 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>订单列表</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/assets/css/bootstrap.min.css"/>
+</head>
+<body>
+{include file="layout/top-nav"}
+
+<div class="am-cf admin-main"> 
+	{include file="layout/sidebar"}
+	<div class="admin">
+
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 订单列表</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">订单列表</a></dl>
+      
+      <dl>
+        <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> <a href="{:url('/admin/order/order')}" style="color: white;">添加订单</a></button>
+      </dl>
+      
+      
+    </div>
+	
+		<form action="{:url('/admin/order/orderlist')}" method="post">
+	<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
+		
+  <!--<ul>
+    <li style="margin-right: 0;">
+      开始日期:<input type="date" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" name="shous1" placeholder="开始日期" />
+    </li>
+       <li style="margin-left: -4px;">
+      &nbsp;&nbsp;&nbsp;截止日期:<input type="date" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" name="shous2" placeholder="截止日期"/>
+    </li>
+    <li><input type="text" class="am-form-field am-input-sm am-input-xm" name="shous" placeholder="订单类型搜索" /></li>
+    <li><button type="submit" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;">搜索</button></li>
+  </ul>-->
+</div>
+  </form>
+
+    <form class="am-form am-g">
+          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <thead>
+              <tr class="am-success">
+               
+                <th class="table-title">订单类型</th>
+                <th class="table-title">订单状态</th>
+                <th class="table-type">订单数量</th>
+                <th class="table-type">订单价格</th>
+               <th class="table-type">订单开始时间</th> 
+                <th class="table-type">订单完成时间</th> 
+                <th width="163px" class="table-set">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{foreach ($wxlist as $row)}
+              <tr>
+               
+                <td>{$row.buy_id}</td>
+                <td>
+                {if condition="$row.order_status==0"}
+                	已付款
+                {elseif condition="$row.order_status==1"}
+                	代验货
+                 {elseif condition="$row.order_status==2"}
+                	待验证
+                {elseif condition="$row.order_status==8"}
+                	已完成
+                {elseif condition="$row.order_status==9"}
+                	等待商家接单
+                {/if}
+                </td>
+                <td>{$row.good_num}</td>
+                <td class="am-hide-sm-only">{$row.good_pirce}</td>
+                <td>{$row.add_time|date="Y-m-d H:i"}</td>
+                <td>{$row.complate_time|date="Y-m-d H:i"}</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                      <!--<button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round" data-am-modal="{target: '#my-popups'}"><span class="am-icon-pencil-square-o"></span></button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o" ></span></button>-->
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span><a href="{:url('/admin/order/orderedit/id/' . $row.id)}">修改</a></button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o"></span><a href="{:url('/admin/order/delete/id/' . $row.id)}">删除</a></button>
+                    </div>
+                  </div></td>
+              </tr>
+              {/foreach}
+            </tbody>
+          </table>
+        </form>
+        {$rowset|raw}
+ 
+ <div class="foods">
+  <ul>版权所有@2018 . 易菜篮</ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+</div>
+
+</div>
+
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]--> 
+
+<!--[if (gte IE 9)|!(IE)]><!--> 
+<script src="__STATIC__/assets/js/amazeui.min.js">
+	
+</script>
+<!--<![endif]-->
+</body>
+</html>

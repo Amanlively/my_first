@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>待验货</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">处理中的订单</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row classifidetail-body-top oh bgfff">
+				<ul>
+					<li class="classifidetail-top-li active">
+						<a href="{:url('index/index/order')}">全部</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+					<li class="classifidetail-top-li">
+						<a href="{:url('/index/index/payment')}">待付款</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+					<li class="classifidetail-top-li">
+						<a href="{:url('/index/index/inspection')}">待验货</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+					<li class="classifidetail-top-li">
+						<a href="{:url('/index/index/verification')}">待验证</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="proOrder-body">
+				<p class="firstp bgfff">共4个，已取货2 未取货1 未配货1</p>
+				{foreach $rowset as $row}
+				<div class="proOrder-nav bgfff">
+					<p>订单编号：{$row.waybill}<span class="right">
+						{if condition = "$row.order_status == 0"}
+						代付款
+						{elseif condition = "$row.order_status == 1"}
+						待验货
+						{elseif condition = "$row.order_status == 2"}
+						待验证
+						{/if}
+					</span></p>
+					<p class="active">{$row.shopid}</p>
+					<p>配送员小A已取货，正在送货<span class="rightspan">
+						{if condition = "$row.order_status == 0"}
+						付款
+						{elseif condition = "$row.order_status == 1"}
+						验货
+						{elseif condition = "$row.order_status == 2"}
+						验证
+						{/if}
+					</span></p>
+				</div>
+				{/foreach}
+			</div>
+			
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript">
+			$(".clickdiv").click(function(){
+				
+				if($(this).next().is(':hidden')){
+					$(this).next().show(500);
+				}else{
+					$(this).next().hide(500);
+				}
+			});
+		</script>
+	</body>
+
+</html>

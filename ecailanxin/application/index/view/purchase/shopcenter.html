@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商品详情页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<style type="text/css">
+			.mybtn {
+			    border: none!important;
+			    line-height: 20px;
+			    background-color: #61bc67!important;
+			    color: white !important;
+			    font-size: 12px;
+			    float: right;
+			    padding: 1px 10px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">菜品</h1>
+		</header>
+		<div class="mui-content">
+			
+			{foreach ($row as $row)}
+			<div class="choiceveg">
+				<a href="#">
+					<div class="choiceveg-left">
+						<img src="__STATIC__/uploads/goodspic/{$row.goodspic}" />
+					</div>
+					<div class="choiceveg-right">
+						<h1>{$row.goodsname}<a href="{:url('/index/purchase/shopname/gid/' .$row.id. '/id/'.$id. '/cgdh/' .$cgdh.'/shopid/' .$shopid)}"  class="right mybtn">选择</a></h1>
+						<p><img src="__STATIC__/assets/mobile/img/u39_01.png" />{$aa[$row.shopid]}</p>
+						<p><img src="__STATIC__/assets/mobile/img/u39_02.png" />{$row.goodsarea}
+						<span class="price-right">￥<b>{$row.goodsprice}</b>/{$gg[$row.goodsgg]}</span>
+						</p>
+					</div>
+				</a>
+		
+
+			</div>
+			{/foreach}
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript">
+		
+			$(".classifidetail-top-li a").click(function(){
+				$(this).css({
+					"color": "#ff5000"
+				});
+				$(this).parent().siblings().children('a').css({
+					"color": "black"
+				});
+			
+			});
+			
+		</script>
+	</body>
+
+</html>

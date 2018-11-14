@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>消息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">消息</h1>
+		</header>
+		<div id="slider" class="message-body">
+			<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="segmented">
+				
+				<a class="mui-control-item message-body-top mui-active" href="#item1mobile">
+					最近
+				</a>
+				<a class="mui-control-item message-body-top" href="#item2mobile">
+					系统
+				</a>
+			</div>
+		</div>
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content message-body-nav mui-active">
+			</div>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script src="__STATIC__/qqFace/js/jquery.min.js"></script>
+		<script type="text/javascript">
+			var fromid = {$fromid};
+            $('#item1mobile').empty();
+            jiazai();
+
+            // 假设服务端ip为127.0.0.1
+            ws = new WebSocket("ws://127.0.0.1:8282");
+            ws.onmessage = function (e) {
+                var message = eval("("+e.data+")");
+//                console.log(message);
+
+                switch (message.type){
+					case 'init':
+                        var bild = '{"type":"bind","fromid":"'+fromid+'"}';
+                        ws.send(bild);
+//                        jiazai();
+						return;
+                    case 'read':
+                        console.log(message);
+						//改变未读状态
+						is_read(message.fromid,message.toid);
+                        return;
+                    case "text":
+                        console.log(message);
+                        $('#item1mobile').empty();
+                        jiazai();
+                        return;
+				}
+
+            }
+
+			/**
+			* 获取聊天列表
+			* @constructor
+			*/
+			function jiazai() {
+				$(function()
+				{
+					$.ajax({
+						type: "POST",
+						url: "{:url('index/customer/Chat_list')}",
+						data: {fromid:fromid},
+						async: false,
+						success: function(data) {
+							console.log(data);
+
+							$.each(data,function (data_k , data_v) {
+
+								if (data_v['head_img'] == null){
+									var head = "uploads/zanwutouxiang.jpg";
+								}else{
+									var head = "uploads/goodspic/"+data_v['head_img']+"";
+								}
+
+								$('#item1mobile').append(
+									'<nav  class="mui-table-view">' +
+									'<div onclick=redi("'+data_v['chat_path']+'","'+data_v['last_message']['fromid']+'","'+data_v['last_message']['toid']+'") class="mui-table-view-cell"> ' +
+									'<div class="message-nav-left left"> ' +
+									'<img src="__STATIC__/'+head+'" /> ' +
+									'</div> ' +
+									'<div class="message-nav-right right"> ' +
+									'<h2>'+data_v['username']+'<span class="right">'+timestampToTime(data_v["last_message"]["addtime"])+'</span></h2> ' +
+									'<p>'+data_v["last_message"]["content"]+unread(data_v['countNoread'])+'</p> ' +  //
+									'</div> </div> </nav>'
+								);
+
+							})
+						}
+					});
+				});
+            }
+		//js  时间戳转日期
+            function timestampToTime(timestamp) {
+                var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                Y = date.getFullYear() + '-';
+                M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                D = date.getDate() + ' ';
+                h = date.getHours() + ':';
+                m = date.getMinutes() + ':';
+                s = date.getSeconds();
+                return Y+M+D+h+m+s;
+            }
+
+         //跳转链接
+			function redi(url,fromids,toid) {
+                var message = '{"type":"read","fromid":"'+fromids+'","toid":"'+toid+'","userid":"'+fromid+'"}';
+                ws.send(message);
+
+                window.location.href=url;
+            }
+            
+            //改变未读状态
+			function is_read(fromid,toid) {
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('index/customer/is_read')}",
+                    data: {fromid:fromid,toid:toid},
+                    async: false,
+                    success: function(data) {
+						console.log(data);
+                    }
+                })
+            }
+
+            /**
+			 * 是否显示未读个数
+             * @param count
+             */
+            function unread(count) {
+
+                if(count != 0){
+                    return '<span class="right">'+count+'</span>';
+				}else {
+                    return '';
+				}
+            }
+		</script>
+	</body>
+
+</html>

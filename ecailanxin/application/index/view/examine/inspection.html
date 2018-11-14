@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>验货</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">验货</h1>
+		</header>
+		<div class="bgfff vagetable_tab oh inspection_header">
+			<p>验货一个商品，点亮一个对勾 已点亮：<span class="col_61bc67">2</span>/6</p>
+			<input class="mybtnwfl allcheck" type="button" value="全选" />
+		</div>
+		<form action="javascript:;" a="" method="post">
+		<div class="order_list inspection_list">
+			<ul>
+				<?php  $i=1;  ?>
+				{foreach $rowset as $row}
+				<li class="bgfff mt10 oh">
+					<a href="javascript:;" id="openPopover{$i}">
+						<input type="hidden" name="" id="coun" value="{$count}" />
+						<input type="hidden" name="xgid" class="openPopover{$i}" value="{$row.id}" />
+						<div class="oh">
+							<h5 class="left w50">{$row.goods_id}</h5>
+							<span class="left f12 w168">单价：￥{$row.good_pirce}/{$row.goodsgg} 小计：￥{$row.total}</span>
+							<span class="left col_61bc67 f16">{$row.good_num}</span>
+							<img class="right inspection_img" name="false" src="__STATIC__/assets/mobile/img/duigou.png" />	
+							<input type="hidden" name="ddh"  id="ddh"      value="{$row.order_id}" />
+							<input type="hidden" name="xgid1" class="" value="{$row.id}" />
+						</div>
+						<p></p>
+					</a>
+				</li>
+				<?php  $i++;  ?>
+				{/foreach}
+				
+			</ul>
+		</div>
+			<button class="bottom_nav bg_ccc" type="submit" onclick="gou()">确认验收</button>
+			</form>
+			
+			
+			<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：下面ID去掉1，即可单击调用
+            -->
+			<div id="popover1" class="mui-popover">
+			    <ul class="mui-table-view">
+				  	<li id = "refunds" class="mui-table-view-cell input_text oh">
+				  		<a href="javascript:;">全部退货</a>
+				  	
+				  	</li>
+				  	<li id="none" class="mui-table-view-cell input_text oh">
+				  		<a href="javascript:;">退货该商品</a>
+				  	</li>
+				  	<li id="partial" class="mui-table-view-cell input_text oh">
+				  		<a href="javascript:;">修改商品数量</a>
+				  	</li>
+				  	<input type="hidden" class='goodsid' value="" />
+				</ul>
+			</div>
+			
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+			mui.init({
+			  gestureConfig:{
+			    longtap: true //默认为false
+//			    release:true,
+//			    tap:false
+			   }
+			});
+			
+			var th = '';
+			var mythis = '';
+			var num = '';
+			mui(".order_list").on('longtap','li',function(){
+			   num = $(this).index()+1;
+			   mythis = $(this);
+			   mui('.mui-popover').popover('toggle',document.getElementById("openPopover"+num));
+
+			  var goods_id = $(".openPopover"+num).val();
+			   $('.goodsid').val('');
+			   	$('.goodsid').val(goods_id);
+			})
+			 
+			$('#popover1 ul li').click(function(){
+			 	th = $(this).find('a').text();
+//			 	alert(th);
+			    mui('.mui-popover').popover('hide',document.getElementById("openPopover"+num));
+				$(mythis).find('p').text(th);
+				th = '';
+			})
+			 
+			 
+			$('.inspection_list li').click(function(){
+				var imgsrc = $(this).find('img').attr('src');
+				if(imgsrc == '__STATIC__/assets/mobile/img/duigou.png'){
+					$(this).find('img').attr('src','__STATIC__/assets/mobile/img/duigou_active.png');
+//					 purid = $(this).find("#xgid").val();
+					var ddh = $(this).find("#ddh").val(); 
+//					
+//      			alert(purid);
+				}else{
+					$(this).find('img').attr('src','__STATIC__/assets/mobile/img/duigou.png');
+				}
+			})
+			
+			
+		     $('.allcheck').click(function(){
+		     	if($(this).hasClass('my')){
+		     		$(this).removeClass('my');
+		        	$('.inspection_list li').find('img').attr('src','__STATIC__/assets/mobile/img/duigou.png');
+		        	$('.bottom_nav').addClass('bg_ccc');
+		     	}else{
+		     		
+		     		$(this).addClass('my');
+		     		$('.inspection_list li').find('img').attr('src','__STATIC__/assets/mobile/img/duigou_active.png');
+		     		$('.bottom_nav').removeClass('bg_ccc');
+		     		
+		     	}
+				})
+		     
+		     
+		     
+		     $('#refunds').click(function(){
+		     	var goodsid = $('.goodsid').val();
+		     	var ddh     = $('#ddh').val();
+//		     	console.log(goodsid);
+				$.ajax({
+					type:"post",
+					url:"{:url('/index/examine/refund')}",
+					async:true,
+					data:{
+						refund:"全部退货",
+						purid:goodsid,
+						ddh:ddh
+					},
+						success: function(data) {
+//					 console.log(data);
+							if(data['code']) {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+								window.location.href = data['url'];
+							} else {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+							}
+						},
+						error: function(request) {
+							alert("其他错误,请联系客服");
+						}
+				})
+			})
+		      $('#none').click(function(){
+				var goodsid = $('.goodsid').val();
+				var ddh     = $('#ddh').val();
+//				console.log(goodsid);
+				$.ajax({
+					type:"post",
+					url:"{:url('/index/examine/none')}",
+					async:true,
+					data:{
+						none:"退货该商品",
+						purid:goodsid,
+						ddh:ddh
+					},
+						success: function(data) {
+					 console.log(data);
+							if(data['code']) {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+								window.location.href = data['url'];
+							} else {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+							}
+						},
+						error: function(request) {
+							alert("其他错误,请联系客服");
+						}
+				})
+			})
+		       $('#partial').click(function(){
+				var goodsid = $('.goodsid').val();
+				var ddh     = $('#ddh').val();
+				$.ajax({
+					type:"post",
+					url:"{:url('/index/examine/partial')}",
+					async:true,
+					data:{
+					partial:"修改商品数量",
+					purid:goodsid,
+					ddh:ddh
+					},
+						success: function(data) {
+//					 console.log(data);
+							if(data['code']) {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+								window.location.href = data['url'];
+							} else {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+							}
+						},
+						error: function(request) {
+							alert("其他错误,请联系客服");
+						}
+				})
+			})
+		     
+		</script>
+		<script type="text/javascript">
+			function gou(){
+				var coun  = $('#coun').val();
+//				alert(coun);
+				var $data = [];
+				var obj_all = $('.inspection_img[src="__STATIC__/assets/mobile/img/duigou_active.png"]');
+				for (var i=0;i < obj_all.length;i++) {
+					$f16 = $(obj_all[i]).parent('.oh').find('.f16').html();
+					$w168 = $(obj_all[i]).parent('.oh').find('.w168').html();
+					$ddid = $(obj_all[i]).parent('.oh').find('input[name="xgid1"]').val() 
+					$data[i] = {
+//						f16:$f16,
+//						w168:$w168,
+						ddid:$ddid
+					};
+				}
+//				alert(data);
+//				console.log($data);
+				
+				$.ajax({
+					type:"post",
+					url:"{:url('/index/examine/xgexamine')}",
+					async:true,
+				data:{
+					ddid:$data,
+					coun:coun
+				},
+				success: function(data) {
+					 console.log(data);
+							if(data['code']) {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+								window.location.href = data['url'];
+							} else {
+								layer.msg(data['msg'], {
+									time: 2000
+								});
+							}
+						},
+						error: function(request) {
+							alert("其他错误,请联系客服");
+						}
+				});
+
+//				alert(data);
+			}
+		</script>
+	</body>
+</html>

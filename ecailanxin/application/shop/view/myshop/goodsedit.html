@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>修改商品信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">修改商品</h1>
+		</header>
+		<div class="mui-content login-body ta-left">
+			<form id='login-form' class="bgfff" method="post" action="{:url('/shop/myshop/goodsupdate/shopid/' .$shopid. '/id/' .$row.id)}" enctype="multipart/form-data">
+				<div class="modifypro-nav">
+					<label for="file" class="btn btn-success">
+						<p>添加图片</p>
+					</label>
+					<div class="modifypro-nav-img left">
+						<img src="__STATIC__/uploads/goodspic/{$row.goodspic}" id="show"/>
+						<div class="modifypro-nav-img-del">左边更换图片</div>
+					</div>
+					<input type="file" name="goodspic"  onchange="c()"  id="file" class="inputfile">
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>商品名</label>
+					<select class="choice-select" name="name">
+						<option>{$row.goodsname}</option>
+					
+					</select>
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>价格</label>
+					<input id="" class="sec-input" name="goodsprice" value="{$row.goodsprice}" type="text" class="" placeholder="商品价格">
+					<select class="choice-sec" name="gg">
+						{foreach ($gg as $gg)}
+						<option value="{$gg.id}">/{$gg.name}</option>
+						{/foreach}
+					</select>
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>分类</label>
+					<select class="choice-selectb right" name="two">
+
+						<option value="">{$two}</option>
+
+					</select>
+					<select class="choice-selecta left" name="one">
+
+						<option value="">{$one}</option>
+
+					</select>
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>描述</label>
+					<textarea name="introduce" rows=""  value="" cols="" placeholder="最新采摘日期，绝对新鲜" >{$row.introduce}</textarea>
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>库存</label>
+					<input id="" class="full-input" name="stock" type="text" class="" value="{$row.stock}" placeholder="商品库存">
+	
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>别名</label>
+					<input id="" name="alias" class="full-input" type="text" class=""  value="{$row.alias}" placeholder="商品别名">
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>产地</label>
+					<select class="choice-select" name="goodsarea">
+						<option>台湾</option>
+						<option>新加坡</option>
+						<option>泰国</option>
+						<option>马来西亚</option>
+					</select>
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>品牌</label>
+						<select class="choice-select" name="brand">
+					{foreach ($brand as $brand)}
+					<!--<input id="" class="full-input" type="text" class="" value="{$brand.brand_name}" placeholder="国产">-->
+						<option value="{$brand.id}">{$brand.brand_name}</option>
+
+					{/foreach}
+					</select>
+				</div>
+				<div class="mui-input-row login-section modifypro-section">
+					<label>折扣</label>
+					<input id="" class="full-input" type="text" class="" value="{$row.discount}" name="discount" placeholder="请输入折扣价">
+					<span class="posi-right">折</span>
+				</div>
+				<div class="login-herder"></div>
+				<div class="login-section">
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">保存</button>
+					<!--<button id='login' class="mui-btn mui-btn-block mui-btn-primary">删除</button>-->
+					<button class="mui-btn mui-btn-block mui-btn-primary" style="background-color: red;"><a href="{:url('/shop/myshop/del/id/'.$row.id .'/shopid/' .$shopid)}">删除</a></button>
+				</div>
+			</form>
+		</div>
+		
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+<script type="text/javascript">
+	function c () {
+		  var r= new FileReader();
+		  f=document.getElementById('file').files[0];
+		  
+		  r.readAsDataURL(f);
+//		  alert(r);
+		  r.onload=function (e) {
+		    document.getElementById('show').src=this.result;
+		  };
+}
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商家中心-底部footer</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/footer.css" rel="stylesheet" />
+		<style type="text/css">
+			.active p{color: #62c168}
+		</style>
+	</head>
+
+	<body>
+		
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-07-04
+        	描述：底部footer
+        -->
+    	<footer>
+			<nav class="footer_bottom">
+			    <a class="" href="{:url('/shop/order/index')}">
+			    	<img src="__STATIC__/assets/mobile/img/su_footer.png" />
+			        <p class="">订单处理</p>
+			    </a>
+			    <a class="" href="{:url('/shop/order/historyorder')}">
+			    	<img src="__STATIC__/assets/mobile/img/footer2.png " />
+			        <p>订单查询</p>
+			    </a>
+			    
+			    <a class="" href="{:url('/shop/myshop/myshop')}">
+			    	<img src="__STATIC__/assets/mobile/img/footer1.png " />
+			        <p>我的店铺</p>
+			    </a>
+			    <a href="{:url('/shop/center/merchantcenter')}">
+			    	<img src="__STATIC__/assets/mobile/img/footer4.png " />
+			        <p>商家中心</p>
+			    </a>
+			</nav>
+		</footer>
+        <script src="__STATIC__/assets/mobile/js/mui.min.js"></script>  
+        <script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js "></script> 
+        <script type="text/javascript">
+
+        	$(".footer_bottom a").click(function(){
+				var picTabNum = $(this).index();
+//				alert("当前图片标题下标是：" + picTabNum);
+				sessionStorage.setItem("picTabNum",picTabNum);
+			});
+			$(function(){
+				var getPicTabNum = sessionStorage.getItem("picTabNum");
+				var thisNode=$(".footer_bottom a").eq(getPicTabNum);
+//				alert(getPicTabNum);
+				var thisSrc=thisNode.children('img').attr('src');
+				var addSrc=thisSrc.replace('.png','').trim()+'_active.png';
+				thisNode.children('img').attr('src',addSrc);
+				thisNode.addClass("active").siblings().removeClass("active");
+			})
+        </script> 
+	</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>人员详情页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">添加人员</h1>
+		</header>
+				<form action="" method="post" id="rycont">
+		<div class="mui-content">
+			<div class="mui-row persondetail bgfff oh">
+				    <div class="mui-input-row persondetail-top">
+				        <label>账&emsp;&emsp;号：</label>
+				    <input type="text" value="{$query.phone}" readonly>
+				    </div>
+				    <div class="mui-input-row persondetail-top">
+				        <label>备&emsp;&emsp;注：</label>
+				        <input class="persondetail-inp" type="text" name="content" value="{$rowset.content}">
+				    </div>
+				     <div class="mui-input-row personmanage2-top">
+				        <label>职能标签</label>
+				    	<select name="js">
+				    		<option>厨师</option>
+				    		<option>采购</option>
+				    		<option>验收</option>
+				    		<option>起草订单</option>
+				    		<option>管理员</option>
+				    	</select>
+				    </div>
+				<div class="persondetail-nav">
+					<button type="button" onclick="ryxg()">保存修改</button>
+					<a href="#"><button id="del">删除该用户</button></a>
+				</div>
+			</div>
+		</div>
+				</form>
+		
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layer/layer.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.min.js"></script>
+		<script>
+			function ryxg() {
+            $.ajax({  
+	            type: "POST",  
+	            url:"{:url('/index/shop/ryupdate/id/' . $rowset.id)}",  
+	            data:$('#rycont').serialize(),// 序列化表单值  
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	             success: function(data) {  
+	                    var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('修改成功!',{time:2000});
+	                    	window.location.href = "{:url('/index/shop/personmanagement1/cqid/' . $cqid)}";
+	                    } else if(data['status'] == -1){
+	                    	layer.msg('修改失败,请检查!',{time:2000});
+	                    }
+            }  
+        });  
+    }
+		</script>
+		<script>
+			$('#del').click(function(){
+				$.ajax({  
+	            type: "POST",  
+	            url:"{:url('/index/shop/rydel/id/' . $rowset.id)}",  
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	             success: function(data) {  
+	                    var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('删除成功!',{time:2000});
+	                    	window.location.href = "{:url('/index/shop/personmanagement1/cqid/' . $cqid)}";
+	                    } else if(data['status'] == -1){
+	                    	layer.msg('删除失败!',{time:2000});
+	                    } else if (data['status'] == 5){
+                            layer.msg('您不能删除自己!',{time:2000});
+						}
+          		  }
+        		});  
+			})
+		</script>
+	</body>
+</html>

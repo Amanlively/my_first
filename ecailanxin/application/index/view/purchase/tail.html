@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">详情</h1>
+		</header>
+		<div class="order_list inspection_list">
+			<ul>
+				{foreach $rowset as $row}
+				<li class="bgfff mt10 oh">
+						<div class="oh">
+							<h5 class="left w50">{$row.goods_id}</h5>
+							<span class="left f12 w168">单价：￥{$row.good_pirce}/{$row.goodsgg} 小计：￥{$row.total}</span>
+							<span class="left col_61bc67 f16">{$row.good_num}个</span>
+						</div>
+						<p></p>
+				</li>
+				{/foreach}
+				
+			</ul>
+		</div>
+
+			
+			
+			<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：下面ID去掉1，即可单击调用
+            -->
+			
+			
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		
+	</body>
+</html>

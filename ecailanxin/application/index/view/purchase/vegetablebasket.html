@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的菜篮子</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<style>
+			.vege-header-a{position: absolute;z-index: 9999;line-height: 42px;right: 10px;color: black;}
+			.mui-popover .mui-table-view,.mui-popover .mui-popover-arrow:after{background-color: #000;}
+			#popover1{width: 60%;background-color: #000;}
+			#popover1 ul li{height: 30px;line-height: 30px;background-color: #000;padding: 0!important;float: left;width: 50%;}
+			#popover1 ul li a{color: #fff;width: 100%;overflow: hidden;padding: 0!important;margin: 0!important;}
+			#popover1 ul li:first-child{border-right:1px solid #f5f5f5;border-top-right-radius: 0;border-bottom-right-radius: 0;}
+		</style>
+	</head>
+
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">我的菜篮子</h1>
+			<a class="vege-header-a" href="{:url('/index/order/historyorder')}">历史订单</a>
+		</header>
+		<div class="bgfff order_title oh">
+			<ul>
+				<li class="active"><a href="{:url('/index/purchase/vegetableBasket')}">采购单</a></li>
+				<li><a href="{:url('/index/purchase/order')}">订单</a></li>
+			</ul>
+		</div>
+
+		<div class="order_list" style="margin-bottom: 85px;" >
+			<ul>
+				{if condition="$order !== null"}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/purchase/confirmorder/cgdh/' . $order.cgdh)}">
+						<div class="left chatphoto">
+					    	<img src="__STATIC__/uploads/goodspic/{$query.image}" />
+						</div>
+						<div class="left chattext">
+							<p class="f16 col-333">我淘的菜（{$order.cgdh}）</p>
+							{if condition="$order.status != 0"}
+							<p><span class="col_61bc67">{$yipron}个</span>已接单 <span class="col_ff5452">{$daipron}个</span>正在等待</p>
+							{else}
+							<p><span class="col_61bc67">{$wo}个</span>商品</p>
+							{/if}
+							<p class="col-999">{$order.add_time||date="Y-m-d H:i"}</p>
+						</div>
+						<div class="right chat_img">
+							{if condition="$order.status == 0"}
+							<img src="__STATIC__/assets/mobile/img/quxiadan.png" />
+							{elseif condition="$order.status == 1"}
+							<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $order.cgdh)}"><img src="__STATIC__/assets/mobile/img/daijiedan.png" /></a>
+							{elseif condition="$order.status == 2"}
+							<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $order.cgdh)}"><img src="__STATIC__/assets/mobile/img/yijiedan.png" /></a>
+							{elseif condition="$order.status == 3"}
+							<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $order.cgdh)}"><img src="__STATIC__/assets/mobile/img/yiwancheng.png" /></a>
+							{elseif condition="$order.status == 4"}
+							<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $order.cgdh)}"><img src="__STATIC__/assets/mobile/img/quchuli.png" /></a>
+							{/if}
+				
+						</div>
+					</a>
+				</li>
+				{/if}
+				<?php
+					$i=2;
+				?>
+				{foreach ($rowset as $row)}
+				{if condition="$row.status == 0"}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/purchase/orderPurchase/cgdh/' . $row.cgdh)}">
+						<input type="hidden" class="openPopover{$i}" value="{$row.cgdh}">
+						<div class="left chatphoto">
+					    	<img src="__STATIC__/uploads/goodspic/{$row.image}" />
+						</div>
+						<div class="left chattext">
+							<p class="f16 col-333">{$row.uid}的采购单（{$row.cgdh}）</p>
+							<p><span class="col_ff5452">{$row.dai}</span>待下单</p>
+							<p class="col-999">{$row.add_time||date="Y-m-d H:i"}</p>
+						</div>
+						<div class="right chat_img">
+							<img src="__STATIC__/assets/mobile/img/quxiadan.png" />
+						</div>
+					</a>
+				</li>
+				{elseif condition="$row.status == 1"}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $row.cgdh)}">
+						<input type="hidden" class="openPopover{$i}" value="{$row.cgdh}">
+						<div class="left chatphoto">
+					    	<img src="__STATIC__/uploads/goodspic/{$row.image}" />
+						</div>
+						<div class="left chattext">
+							
+							<p class="f16 col-333">{$row.uid}的采购单（{$row.cgdh}）</p>
+							<p><span class="col_61bc67">{$row.yjd}</span>已接单<span class="col_ff5452">{$row.wjd}</span>个正在等待</p>
+							<p class="col-999">{$row.add_time||date="Y-m-d H:i:s"}</p>
+						</div>
+						<div class="right chat_img">
+							<img src="__STATIC__/assets/mobile/img/daijiedan.png" />
+						</div>
+					</a>
+				</li>
+				{elseif condition="$row.status == 2"}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $row.cgdh)}">
+						<input type="hidden" class="openPopover{$i}" value="{$row.cgdh}">
+						<div class="left chatphoto">
+					    	<img src="__STATIC__/uploads/goodspic/{$row.image}" />
+						</div>
+						<div class="left chattext">
+							<p class="f16 col-333">{$row.uid}的采购单（{$row.cgdh}）</p>
+							<p><span class="col_61bc67">{$row.yjd}</span>已接单<span class="col_ff5452">{$row.wjd}</span>个在等待</p>
+							<p class="col-999">{$row.add_time||date="Y-m-d H:i:s"}</p>
+						</div>
+						<div class="right chat_img">
+							
+							<img src="__STATIC__/assets/mobile/img/yijiedan.png" />
+							
+						</div>
+					</a>
+				</li>
+				{elseif condition="$row.status == 3"}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $row.cgdh)}">
+						<input type="hidden" class="openPopover{$i}" value="{$row.cgdh}">
+						<div class="left chatphoto">
+					    	<img src="__STATIC__/uploads/goodspic/{$row.image}" />
+						</div>
+						<div class="left chattext">
+							<p class="f16 col-333">{$row.uid}的采购单（{$row.cgdh}）</p>
+							<p><span class="col_61bc67"></span> <span class="col_ff5452"></span></p>
+							<p class="col-999">{$row.add_time||date="Y-m-d H:i:s"}</p>
+						</div>
+						<div class="right chat_img">
+							<img src="__STATIC__/assets/mobile/img/yiwancheng.png" />
+						</div>
+					</a>
+				</li>
+				{elseif condition="$row.status == 4"}
+				<li class="bgfff mt10 oh">
+					<a href="{:url('/index/purchase/purchaseOrderDetail/cgdh/' . $row.cgdh)}">
+						<div class="left chatphoto">
+					    	<img src="__STATIC__/uploads/goodspic/{$row.image}" />
+						</div>
+						<div class="left chattext">
+							<p class="f16 col-333">{$row.uid}的采购单（{$row.cgdh}）</p>
+							<p><span class="col_61bc67">{$row.ju}</span>已巨单<span class="col_ff5452">{$row.wjd}</span>个在等待</p>
+							<p class="col-999">{$row.add_time||date="Y-m-d H:i:s"}</p>
+						</div>
+						<div class="right chat_img">
+							<img src="__STATIC__/assets/mobile/img/quchuli.png" />
+						</div>
+					</a>
+				</li>
+				{/if}
+				<?php $i++; ?>
+				{/foreach}
+			</ul>
+		<div id="popover1" class="mui-popover">
+				<ul class="mui-table-view">
+					<li id="send" class="mui-table-view-cell input_text oh">
+						<a href="javascript:;">发送到工作群</a>
+						</li>
+					<li id="delete" class="mui-table-view-cell input_text oh">
+						<a href="javascript:;">删除</a>
+					</li>
+				</ul>
+				<input type="hidden" id="motai" value="">
+			</div>
+		</div>
+		<div class="neworder">
+			<a href="{:url('/index/purchase/neworder')}">
+		    	<img src="__STATIC__/assets/mobile/img/neworder.png" />
+			</a>
+		</div>
+		{include file="layout/footer"}
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js">
+		</script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+	</body>
+	<script>
+    mui.init({
+        gestureConfig:{
+            longtap: true, //默认为false
+            release:true,
+//            tap:false
+        }
+    });
+
+
+    var th = '';
+    var mythis = '';
+    var num = '';
+    mui(".order_list").on('longtap','li',function(){
+        num = $(this).index()+1;
+//        mythis = $(this);
+
+//      alert(num);
+        mui('.mui-popover').popover('toggle',document.getElementById("openPopover"+num));
+        var cgdh = $('.openPopover'+num).val();
+			$('#motai').val("");
+			$('#motai').val(cgdh);
+
+    })
+
+
+	$('#delete').click(function () {
+	    var deleteid = $('#motai').val();
+//	    alert(deleteid);
+        $.ajax({
+            type: "POST",
+            url:"{:url('/index/purchase/delete_cgd')}",
+            data:{cgdh:deleteid},
+            async: false,
+            error: function(request) {
+                alert("其他错误,请联系客服");
+            },
+            success: function(data) {
+				alert(data);
+                window.location.reload();
+            }
+        })
+	});
+
+
+	$('#send').click(function () {
+
+        var deleteid = $('#motai').val();
+        $.ajax({
+            type: "POST",
+            url:"{:url('/index/purchase/send_cgd')}",
+            data:{cgdh:deleteid},
+            async: false,
+            error: function(request) {
+                alert("其他错误,请联系客服");
+            },
+            success: function(data) {
+                alert(
+                    data);
+                window.location.reload();
+            }
+        })
+    })
+
+
+</script>
+
+</html>

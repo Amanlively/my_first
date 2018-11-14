@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的菜篮子</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.layui-layer{width: 90%;left: 5%!important;}
+			#apopover{max-height: 400px;dis play: none;overflow: scroll;}
+			.input_search input,button{border: 1px solid #EAEBF1;height: 34px !important;}
+			.gettext li{height: 35px;line-height: 35px;border-bottom: 1px solid #EAEBF1;}
+			.gettext li a{color: black;}
+			.choiceUnit{padding: 0;width: 100%;height: 25px;text-align: center;text-align-last: center;}
+			.choiceUnit option{}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="reg-top-icon" href="{:url('/index/purchase/vegetableBasket')}">
+				<< 返回采购单
+			</a>
+			<h1 class="mui-title">新建采购单</h1>
+		</header>
+        <div class="bgfff">
+        	<p class="neworder_title_text col_61bc67" id="cgid">{:session('phone')}的采购单 </p>
+        	<div class="neworder_title oh">
+        		<ul>
+        			<li>品名</li>
+        			<li>说明</li>
+        			<li>数量</li>
+        			<li>单位</li>
+        			<!--<li>小计￥</li>-->
+        			<!--<li>选购商家</li>-->
+        		</ul>
+        	</div>
+        	<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：添加的那一个空栏目(一直保持不变在最上面)
+            -->
+        	<div class="neworder_title oh">
+        		<ul>
+        			<li><a id="openPopover">{$sc}</a></li>
+        			<li><input placeholder="添加" id="sm"/></li>
+        			<li><input id="mynum" placeholder="0" /></li>
+        			<li>
+        				<select class="choiceUnit" id="danwei">
+							<option>请选择单位</option>
+	        				<option>克</option>
+	        				<option>千克</option>
+	        				<option>箱</option>
+	        				<option>件</option>
+	        				<option>个</option>
+	        			</select>
+        			</li>
+        		</ul>
+        		<button id="suarbtn" class="mybtnwfl mb10 mt10">保存</button>
+        	</div>
+        	<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：下面这里是添加完成的三项
+            -->
+        	<div class="neworder_title1 oh">
+        		{if condition="$arr !== null"}
+            	{foreach $arr as $row}
+
+	        		<ul>
+	        			<li id="goods">{$row['goodsname']}</li>
+	        			
+	        			<li><input value="{$row['number']}" id="number" /></li>
+	        			<li>{$row['danwei']}</li>
+	        			<li id="content">{$row['content']}</li>
+						<li>
+							{if condition="$row.goodsname != null"}
+							<a href="{:url('/index/purchase/cpdel/suoy/' . $row['suoy'])}"><button class="mybtnwf2">删除</button></a>
+							{/if}
+						</li>
+	        			<input type="hidden" name="souy" value="{$row['suoy']}" />
+					</ul>
+
+        		{/foreach}
+        	{/if}
+        	</div>
+        	<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：下面这里是添加的弹出层
+            -->
+            <!--<form action="{:url('/index/purchase/neworder')}" method="post" id="mhcont">-->
+        	<div id="apopover" class="" style="">
+        		<div class=""></div>
+        		<div class="input_search">
+						<input type="text" placeholder="请输入菜品" class="val" name="shous"/>
+						<button type="submit" class="submit" onclick="">搜索</button>
+				  	</div>
+			    <ul class="gettext">
+
+				  	{foreach $rowset1 as $ros}
+						<li class=""><a href="#" onclick="addGoods(this)">{$ros.goodsname}</a></li>
+				    {/foreach}
+				</ul>
+			</div>
+			<!--</form>-->
+        </div>
+        <button class="bottom_nav" type="button" id="save">保存到菜篮</button>
+
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+			var mytest = $('#openPopover').text();
+			var myshop = $('.myshop').text();
+			if(mytest == ''){
+				$('#openPopover').text('添加品名');
+			}
+			if(myshop == ''){
+				$('.myshop').text('选择商家');
+			}
+			// $('.gettext li a').click(function(){
+			// 	var thistext = $(this).text();
+			// 	//mui('.mui-popover').popover('hide',document.getElementById("openPopover"));
+			// 	layer.closeAll();
+			// 	$('#openPopover').text(thistext);
+			// })
+            function addGoods(obj){
+                var tmp = obj;
+                layer.closeAll();
+               $('#openPopover').text($(tmp).text());
+            }
+
+			$('#suarbtn').click(function(){
+				var name = $('#openPopover').text();
+				var num = $('#mynum').val();
+				var sm = $('#sm').val();
+				var dw = $('#danwei').val();
+				var dj = $('#dj').val();
+				var shopid = $('#shopid').val();
+				var xj = $('#xj').val();
+				var shop = $('#shop').text();
+				if(name == "添加品名" || name == ""){
+					alert('您的品名有误');
+				}else if(num == "" || num == "0"){
+					alert('您的数量有误');
+				}else{
+				 $.ajax({
+		            type: "POST",
+		            url:"{:url('/index/purchase/cgdsave')}",
+		            data:{
+		            	"name1":name,
+//		            	"shopid":shopid,
+		            	"num1":num,
+		            	"dw":dw,
+		            	"sm1":sm
+//		            	"dj1":dj,
+//		            	"xj1":xj,
+//		            	"shop1":shop
+		            },
+		            async: false,  
+		            error: function(request) {  
+		                alert("其他错误,请联系客服");  
+		            },
+		             success: function(data) {
+		             	var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('保存成功!',{time:2000});
+	                    	window.location.href = "{:url('/index/purchase/neworder/status/1/' .'shopid/' .$shopid)}";
+	                    }else if(data['status'] == -1){
+                            layer.msg('请输入数字!',{time:2000});
+						}
+	                }
+	        	});  
+	        }
+        })
+		$('#shop').click(function(){
+			var name = $('#openPopover').text();
+			if(name == "添加品名" || name == ""){
+				alert('您的品名有误');
+			}else{
+			 $.ajax({  
+	            type: "POST",  
+	            url:"{:url('/index/purchase/neworder')}",  
+	            data:{
+	            	"name1":name
+	            },
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	            success: function(data) {
+	             	var data = JSON.parse(data);
+                    console.log(data);
+                    if(data['status'] == 1){
+                    	layer.msg('请选择!',{time:2000});
+                    	window.location.href = "/index/purchase/dishes";
+                    }
+                }
+		        });  
+		    }
+        })
+			
+			$('#save').click(function(){
+				
+				 $.ajax({  
+		            type: "POST",  
+		            url:"{:url('/index/purchase/cgdsave1/shopid/' .$shopid)}",  
+		            async: false,  
+		            error: function(request) {  
+		                alert("其他错误,请联系客服");  
+		            },  
+		            success: function(data) {
+		             	var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('保存成功!',{time:2000});
+                      	window.location.href = "/index/purchase/vegetableBasket";
+	                    } else if(data['status'] == -2){
+	                    	layer.msg('没有数据!',{time:2000});
+	                    }
+	                }
+	        });  
+        })
+
+			
+			$("#mynum").change(function(){
+				
+				var reg = /[`~!@#$%^&*()_+<>?:"{},\/;'[\]]/im;
+			    if(this.value < 0){
+			    	alert("输入值不能为负");
+			    }else if(reg.test(this.value)){
+			    	alert("您输入的数据含有非法字符,请重新输入！");  
+			    }else{
+			    	var count = $("#mynum").val().trim();
+					var price = $("#dj").val();
+					var total = count*price;
+					$("#xj").val(total);
+			    }
+			});
+			$("#openPopover").click(function(){
+				layer.open({
+			    	type: 1,
+				    content: $('#apopover') //这里content是一个DOM，这个元素要放在body根节点下
+				});
+			})
+
+            $('.submit').click(function(){
+                $obj='';
+                $val = $('.val').val();
+
+                $.ajax({
+                    url  : "{:url('/index/purchase/neworder2')}",
+                    data : {'val':$val},
+                    type : "post",
+                    dataType : "json",
+                    success : function(data) {
+                        // alert(data);
+                        console.log(JSON.parse(data));
+                        var datas = JSON.parse(data);
+                        var list = '';
+                        for(var i=0;i<datas.length;i++){
+                            list+='<li class="ww"><a href="#" onclick="addGoods(this)">'+datas[i].goodsname+'</a></li>';
+                        }
+                        $(".gettext").find("li").remove();
+                        $('.gettext').append(list);
+                       // alert(list);
+                    }
+                });
+            })
+
+        </script>
+	</body>
+</html>

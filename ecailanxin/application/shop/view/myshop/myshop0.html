@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的店铺</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/js/layui/css/layui.css" rel="stylesheet" />
+		<style type="text/css">
+			ul li{overflow: hidden;white-space: nowrap;text-overflow: ellipsis}
+			.layui-tab-title li{width: 31%;}
+			.layui-tab-bar{width: 8.5%;}
+			.layui-tab-title .layui-this { color:white !important;}
+			.layui-tab-card>.layui-tab-more .layui-this {color: white !important;}
+		</style>
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="classifidetail-herder">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>-->
+			<h1 class="mui-title">{$rowset.shop_name}</h1>
+			<span class="yyStatus">
+				{$rowset.status}>
+			</span>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content busidetail-header">	
+			<div class="busidetail-header-on">
+				{if condition="$rowset.shop_img == null"}
+				<div class="busidetail-header-on-left">
+				<img class="right" src="__STATIC__/assets/mobile/img/chatphoto.png" />
+				</div>
+				{else}
+				<div class="busidetail-header-on-left">
+					<img src="__STATIC__/uploads/shop/{$rowset.shop_img}" />
+				</div>
+				{/if}
+				<div class="busidetail-header-on-right">
+					<p>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="bhor-span0">即时送</span>
+						<span class="bhor-span0">预约达</span>
+					</p>
+					<p>距您{$rowset.distance}km,{$rowset.delivery}元起送
+						<span class="bhor-span1"></span>
+						<span class="bhor-span1"></span>
+					</p>
+					<p><span class="mui-icon mui-icon-map icona"></span>
+						{$rowset.address}</p>
+						<a href="{:url('/shop/Shopstore/shopsetting')}">
+							<p style="color: #ffa508;" style="color: orange;">
+							<img src="__STATIC__/assets/mobile/img/u41_02.png" />修改店铺信息 >
+						</p>
+						</a>
+				</div>
+			</div>
+			<div class="busidetail-header-under">
+				<li><a href="{:url('/shop/myshop/myshop/id/' .$shop)}">商品</a></li>
+				<li><a href="{:url('/shop/myshop/businessLocation/id/' .$shop)}">评价</a></li>
+				<li><a href="{:url('/shop/myshop/businessEvaluation/id/' .$shop)}">商家</a></li>
+			</div>
+		</div>
+		<div class="mui-content">
+			<div class="layui-tab layui-tab-card oh bgfff">
+				<ul class="layui-tab-title">
+					{foreach ($one as $one)}
+					<li onclick="window.location='{:url('/shop/myshop/myshop/id/'.$shop.'/one/' .$one.id)}'">{$one.catonename}</li>
+					{/foreach}
+					
+				</ul>
+			</div>
+			
+			<div class="mui-row container oh">
+				<div id="" class="classification-left">
+					<ul>
+						<!--<li class="classification-left-li"><a>全部</a></li>-->
+					{foreach ($two as $two)}
+					<li class="classification-left-li"><a href="{:url('/shop/myshop/myshop/id/'.$shop.'/one/'.$one1.'/two/' .$two.id)}">{$two.cattwoname}</a></li>
+					{/foreach}
+					</ul>
+				</div>
+				<div class="mui-row busidetail-right">
+					<p class="top-p">{$rowset.shop_name}菜店只做更好</p>
+					{foreach ($cai as $cai)}
+					<div class="busidetail-body">
+						<a href="{:url('/shop/myshop/details/goodsid/' .$cai.id)}">
+						<div class="busidetail-body-left">
+							<img src="__STATIC__/uploads/goodspic/{$cai.goodspic}" />
+						</div>
+						</a>
+						<div class="busidetail-body-right">
+							<h4>{$cai.goodsname}</h4>
+							<p>{$cai.introduce}</p>
+							<p>月售{$cai.sales}份 好评率100%</p>
+							<p>
+								<!--<span id="" class="bbr-spanxxf">-->
+									<!--限一份-->
+								<!--</span>-->
+								<a class="right bbr-axxf" href="{:url('/shop/myshop/addinggoods/shop/'.$shop . '/goodsid/' .$cai.id)}">
+									<img src="__STATIC__/assets/mobile/img/u41_06.png"/>
+									加入尾货
+								</a>
+							</p>
+							<h5>
+								<b>￥<span>{$cai.discount}</span></b>
+								<del>￥{$cai.goodsprice}</del>
+								<div class="right">
+									<a href="{:url('/shop/myshop/goodsedit/shopid/'.$shop  .'/id/' .$cai.id)}">
+									<img class="rightimg" src="__STATIC__/assets/mobile/img/u41_01.png" />
+									</a>
+								</div>
+							</h5>
+						</div>
+					</div>
+					{/foreach}
+				</div>
+			</div>
+		</div>
+		<div class="myshop">
+			<div class="myshop-add left">
+				<a href="{:url('/shop/myshop/modifyproduct/shopid/' .$shop)}">添加<br/>商品</a>
+			</div>
+			<div class="myshop-s left"></div>
+			<div class="myshop-add right">
+				<a href="{:url('/shop/myshop/tailGoodsArea')}">我的<br/>尾货区</a>
+			</div>
+		</div>
+		
+		{include file="layout/storefooter"}
+	
+		<!--<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>-->
+		<!--<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-1.10.1.min.js"></script>-->
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layui/layui.all.js" ></script>
+		
+		<script type="text/javascript">
+            $(".layui-tab-title li").click(function(){
+                var picTabNum = $(this).index();
+                //console.log("当前图片标题下标是："+picTabNum);
+                sessionStorage.setItem("picTabNum",picTabNum);
+            });
+            $(function(){
+                var getPicTabNum = sessionStorage.getItem("picTabNum");
+                $(".layui-tab-title li").eq(getPicTabNum).addClass("layui-this").siblings().removeClass("layui-this");
+                $(".layui-tab-content>div").eq(getPicTabNum).addClass("layui-show").siblings().removeClass("layui-show");
+
+            })
+		</script>
+	</body>
+</html>
+ 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>门店管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">门店管理</h1>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content mb50">
+			<div class="mui-row storeinfomation oh">
+				<div class="storemanage-top bgfff">
+					<li class="active">门店信息</li>
+					<li>认证信息</li>
+					<li>收货信息</li>
+				</div>
+				<form class="mui-input-group" id="addmdcont" method="post">
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>门牌号</label>
+				    <input type="text" class="mui-input-clear" name="houseid" placeholder="">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>门店名称</label>
+				        <input type="text" class="mui-input-clear" name="name" placeholder="请输入您的门店名称">
+				    </div>
+				    <!--<div class="mui-input-row storeinfomation-nav">
+				        <label>定位地址</label>
+				    <input type="text" class="mui-input-clear" name="address" placeholder="山东省济南市">
+				    </div>-->
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>详细地址</label>
+				    <input type="text" class="mui-input-clear" name="address" placeholder="请输入您的详细地址">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>负责人</label>
+				    <input type="text" class="mui-input-clear" name="manager_name" placeholder="请输入门店负责人真实姓名">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>负责人电话</label>
+				    <input type="text" class="mui-input-clear" name="manager_phone" placeholder="请输入门店负责人电话">
+				    </div>
+			</div>
+			
+		</div>
+		<div class="qrCode-body-footer">
+			<input type="button" value="保存"  onclick="bcmd()"/>
+		</div>
+		</form>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layer/layer.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+		<script>
+			function bcmd() {
+            $.ajax({  
+	            type: "POST",
+	            url:"{:url('/index/shop/mdsave/cqid/' . $cqid)}",  
+	            data:$('#addmdcont').serialize(),// 序列化表单值  
+//	            alert(data);
+	   
+	             success: function(data) {  
+	             	if(data['code']){
+//	             		alert(data);
+	             		layer.msg(data['msg'],{time:2000});
+	             		window.location.href = data['url'];
+	             	}else{
+	             		layer.msg(data['msg'],{time:2000});
+	             	}
+            } , 
+              error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            }
+        });  
+    }
+		</script>
+	</body>
+</html>
+
+<!--
+	
+		
+-->
+ 

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>启动页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<style type="text/css">
+			body{
+				width: 100%;
+				height: 100%; 
+				background-image: url(__STATIC__/assets/mobile/img/bg.jpg);
+			    background-repeat: no-repeat;
+			    background-size: 100%; 
+			    background-position: center top;
+			}
+		</style>
+	</head>
+	<body class="stpage-body">
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-08-24
+        	描述：启动页
+     -->
+			<img src="__STATIC__/assets/mobile/img/logo.png" />
+			<p>易菜篮</p>
+			<a href="{:url('/index/login/login')}">
+			<button class="sbut1">登录</button>
+			</a>
+			<a href="{:url('/index/register/choiceregister')}">
+			<button class="sbut2">注册</button>
+				</a>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

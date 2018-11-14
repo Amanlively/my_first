@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>门店管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">添加新地址</h1>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content mb50">
+			<div class="mui-row storeinfomation oh">
+				<form class="mui-input-group" id="address" method="post">
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>收&ensp;货&ensp;人：</label>
+				    <input type="text" class="mui-input-clear" name="consignee" placeholder="请输入收货人">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>联系电话：</label>
+				        <input type="text" class="mui-input-clear" name="phone" placeholder="请输入联系电话">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>所在地区：</label>
+				    <input type="text" class="mui-input-clear" name="region" placeholder="请输入所在地区">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>街&emsp;&emsp;道：</label>
+				    <input type="text" class="mui-input-clear" name="street" street placeholder="请输入街道">
+				    </div>
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>详细地址：</label>
+				    	<input type="text" class="mui-input-clear" name="details" placeholder="请输入详细地址">
+				    </div>
+				    <!--<div class="mui-input-row storeinfomation-nav">
+
+				    	<input type="text" class="mui-input-clear" placeholder="">
+				    </div>-->
+				    <div class="mui-input-row storeinfomation-nav">
+				        <label>设为默认：</label>
+				    	<div class="mui-switch mui-switch-mini right">
+							  <div class="mui-switch-handle"></div>
+						</div>
+				    </div>
+				    
+			</div>
+			
+		</div>
+		<div class="qrCode-body-footer">
+			<input type="button" name="" id="" value="保存" onclick="add()"/>
+		</div>
+		</form>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layer/layer.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+		<script>
+			function add() {
+				$.ajax({  
+	            type: "POST",  
+	            url:"{:url('/index/shop/addressbc/mdid/' . $mdid)}",  
+	            data:$('#address').serialize(),// 序列化表单值  
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	             success: function(data) {  
+	                    var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('地址添加成功!',{time:2000});
+	                    	window.location.href = "{:url('/index/shop/deliveryInformation/mdid/' . $mdid)}";
+	                    } else if(data['status'] == -1){
+	                    	layer.msg('收货人不能为空!',{time:2000});
+	                    } else if(data['status'] == -2){
+	                    	layer.msg('联系电话不能为空!',{time:2000});
+	                    } else if(data['status'] == -3){
+	                    	layer.msg('地区不能为空!',{time:2000});
+	                    } else if(data['status'] == -5){
+	                    	layer.msg('街道不能为空!',{time:2000});
+	                    } else if(data['status'] == -6){
+	                    	layer.msg('详细地址不能为空!',{time:2000});
+	                    } else if(data['status'] == -7){
+	                    	layer.msg('地址添加失败,请检查!',{time:2000});
+	                    } else if(data['status'] == -9){
+	                    	layer.msg('手机号,格式不正确!',{time:2000});
+	                    } 
+            		}  
+        		});  
+			}
+		</script>
+	</body>
+</html>
+
+<!--
+	
+		
+-->
+ 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>采购单详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.mui-popover{width: 200px;}
+			.mui-popover .mui-table-view{max-height: 210px;}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">采购单-1</h1>
+		</header>
+        <div>
+        	<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：第一个
+            -->
+            {foreach ($rowset as $row_k => $row_v)}
+         
+        	<div class="purchase_title oh mt10 bgfff">
+        		<div class="left purchase_title_left">
+	        		<span></span>
+	            	<p class="col-333">{$row_k}</p>
+            	</div>
+            	<div class="right purchase_title_right">
+            		<p class="col_61bc67">
+            		
+        				
+        			{switch $row_v.status}
+					    {case 1}待接单{/case}
+					    break;
+					    {case 2}已接单{/case}
+					    break;
+					    {case 3}已完成{/case}
+					    break;
+					    {case 4}已拒单{/case}
+					    break;
+    				
+					    {/switch}
+            		</p>
+            	</div>
+        	</div>
+        	<div class="purchase_list oh bgfff">
+        		<ul class="purchase_list_title">
+        			<li>品名</li>
+        			<li>单价￥</li>
+        			<li>购买数量</li>
+        			<li>小计￥</li>
+        		</ul>
+        		<?php
+        			unset($row_v['status']);
+        			?>
+        		{foreach ($row_v as $row_k1 => $row_v1)}
+        			{foreach ($row_v1 as  $row_v2)}
+        		<ul>
+        			<li>{$row_v2.goodsname}</li>
+        			<li>{$row_v2.goodsmoney}</li>
+        			<li>{$row_v2.number}</li>
+        			<li>{$row_v2.money}</li>
+        		</ul>
+        		{/foreach}
+        		{/foreach}
+        	    <!--<p class="right col_61bc67 lh30 pr10">共计支付￥</p>-->
+        	</div>
+        	{/foreach}
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	</body>
+</html>

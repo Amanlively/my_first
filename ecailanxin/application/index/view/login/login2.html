@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<header class="login-herder bgfff"></header>
+		<div class="mui-content login-body ta-left">
+			<form action="" method="post" id="denglu"> 
+				<h1>用户登录</h1>
+				<div class="login-herder"></div>
+				<div class="mui-input-row login-section">
+					<label  for="iptPhone">手机号</label>
+					<input id="iptPhone" name="phone" type="text" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<div class="mui-input-row login-section mt20">
+					<label>密码</label>
+					<input id='password' name="password" type="password" class="mui-input-clear mui-input" placeholder="请输入密码">
+				</div>
+				<div class="mui-input-row login-section mt20 mb50">
+					<a href="loginverify.html">切换到验证码登录<img src=""/></a>
+				</div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-section">
+					<button id='login' type="button" class="mui-btn mui-btn-block mui-btn-primary" onclick="dl()">登录</button>
+				</div>
+				<div class="login-herder"></div>
+			</div>
+			</form>
+			 
+		</div>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript">
+			(function(window){
+ 				function $(id){
+  				return document.getElementById(id);
+ 			};
+ 			var iptPhone = $("iptPhone");
+ 			var rxPhone = /^(13[0-9]|15[012356789]|18[0-9]|17[678]|14[57])[0-9]{8}$/;
+ 			cation(iptPhone,rxPhone);
+ 			function cation(element,regExp){
+ 			element.onblur = function(){
+  		    var txt = this.value;
+  		    if( regExp.test( txt ) ){
+   			this.nextElementSibling.innerHTML = ""
+   			this.nextElementSibling.style.color = "green";
+  			}else{
+   			this.nextElementSibling.innerHTML = ""
+  		 	this.nextElementSibling.style.color = "red";
+  			}
+  			}
+ 		    }
+ 			 })(window)
+		</script>
+		<script>
+		function dl(){
+			
+				$.ajax({
+				type: "POST",
+				url: "{:url('user/login/logingin')}",
+				data: $('#denglu').serialize(), // 序列化表单值  
+				async: false,
+				error: function(request) {
+					alert("其他错误,请联系客服");
+				},
+				success: function(data) {
+					var data = JSON.parse(data);
+//					console.log(data);
+					if(data['status'] == 1) {
+						layer.msg('登录成功', {
+							time: 2000
+						});
+//											alert(data);
+						window.location.href = "/index/index/index";
+					} else if(data['status'] == -1) {
+						layer.msg('手机号不能为空', {
+							time: 2000
+						});
+						//window.location.href = "/Mobile/Index/center";
+					} else if(data['status'] == -2) {
+						layer.msg('密码不能为空', {
+							time: 2000
+						});
+
+					} else if(data['status'] == -3) {
+						layer.msg('手机号或密码错误!', {
+							time: 2000
+						});
+//						window.location.href = "/index/login/login";
+					} else if(data['status'] == -4) {
+						layer.msg('没有该用户', {
+							time: 2000
+						});
+					}else if(data['status'] == -5) {
+						layer.msg('手机格式不正确', {
+							time: 2000
+						});
+					}else if(data['status'] == 7) {
+						layer.msg('登陆成功', {
+							time: 2000
+						});
+						window.location.href = "/shop/myshop/myshop";
+					}else if(data['status'] == 8) {
+						layer.msg('登陆成功', {
+							time: 2000
+						});
+						window.location.href = "/courier/mycenter/mycenter";
+					}
+					}
+			});
+		}
+			
+		</script>
+	</body>
+
+</html>

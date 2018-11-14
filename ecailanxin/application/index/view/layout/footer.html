@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>底部footer</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<style>
+			
+			.footer_bg .footer_bg_img{    
+				position: absolute;
+			    left: calc(50% - 27px);
+			    bottom: 27.5px;
+			    width: 54px;
+			    height: 54px;
+			    border-radius: 50%;
+
+			}
+			.footer_bg .footer_bg_div{
+				position: absolute;
+			    left: calc(50% - 30px);
+			    bottom: 52px;
+			    width: 60px;
+			    height: 30px;
+			    border: 1px solid #C7C7CC;
+			    border-radius: 30px 30px 0 0;
+			    border-width: 1px 1px 0 1px;
+			}
+			.classfication-active{
+				background-color: white;
+				color:#c6c6c6
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-07-04
+        	描述：底部footer
+        -->
+    	<footer>
+			<nav class="mui-bar mui-bar-tab footer_bg">
+				    <a class="mui-tab-item " href="{:url('/index/index/index/city/' .session('city'))}">
+				    	<img class="sy" src="__STATIC__/assets/mobile/img/footer1.png" />
+				        <p class="mui-tab-label">首页</p>
+				    </a>
+				    <a class="mui-tab-item" href="{:url('/index/index/classification')}">
+				    	<img src="__STATIC__/assets/mobile/img/footer2.png " />
+				        <p class="mui-tab-label ">分类</p>
+				    </a>
+				    <a class="mui-tab-item active_nav" href="{:url('/index/purchase/vegetableBasket')}">
+				    	<img class="footer_bg_img" src="__STATIC__/assets/mobile/img/footer3_active.png " />
+				    	<div class="footer_bg_div"></div>
+				    	<br/>
+				        <p class="mui-tab-label">菜篮子</p>
+				    </a>
+				    <a class="mui-tab-item" href="{:url('/index/purchase/group')}">
+				    	<img src="__STATIC__/assets/mobile/img/footer4.png " />
+				        <p class="mui-tab-label">工作群</p>
+				    </a>
+				    <a class="mui-tab-item" href="{:url('/index/center/center')}">
+				    	<img src="__STATIC__/assets/mobile/img/footer5.png " />
+				        <p class="mui-tab-label">我的</p>
+				    </a>
+				</nav>
+		</footer>
+        <script src="__STATIC__/assets/mobile/js/mui.min.js "></script>  
+        <script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js "></script> 
+        <script type="text/javascript">
+        	mui('.mui-bar').on('tap','a',function(){document.location.href=this.href;});
+        	$('.footer_bg a').click(function(event) {
+                var nodes = $('.footer_bg a img');
+                for(var i=0; i<nodes.length; i++){
+                    nodes[i].src = nodes[i].src.replace(/.png|_active.png/,'.png');
+                }
+                var ylj = '__STATIC__/assets/mobile/img/footer';
+                var afterimg = ylj + Number($(this).index()+1) +'_active.png';
+                $(this).find('img').attr('src',afterimg) ;
+                $(this).addClass('active_nav').siblings().removeClass('active_nav');
+                
+        	})
+        	
+			$(document).ready(function(){
+				$(".classification-top-li:first-child").css({
+					"color":"#4CD964"
+				});
+				$(".classification-left-li:first-child").css({
+					"color":"#B6B6B6",
+					"background-color":"white"
+				});
+			});
+			$(".classification-top-li").click(function(){
+				$(this).css({
+					"color":"#4CD964"
+				}).siblings("li").css({
+					"color":"#c6c6c6"
+				});
+			});
+			$(".classification-left-li").click(function(){
+				$(this).addClass(".classfication-active");
+				$(this).siblings().remove(".classfication-active");
+			});
+	
+        </script> 
+	</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">支付</h1>
+		</header>
+        <div>
+        	<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：第一个
+           -->
+              <form action="{:url('/index/examine/payway')}" method="post">
+           <?php $i = 0;    ?> 
+           
+            {foreach $goods as $goods_k => $goods_v}
+	        	<div class="purchase_title oh mt10 bgfff">
+	        		<div class="left purchase_title_left">
+		        		<span></span>
+		            	<p class="col-333">{$goods_v.shopname}</p>
+	            </div>
+	        	</div>
+				<input type="hidden" name="ddh" id="ddh" value="{$orderid}" />
+	        	<input type="hidden" class = 'setsummoney{$i}' value="{$goods_v['summoney']}"/>
+	        	<?php 
+	        		  unset($goods_v['shopname']);
+	        		  unset($goods_v['summoney']);
+				?>
+	        	<div class="purchase_list oh bgfff">
+	        		<ul class="purchase_list_title">
+	        			<li>品名</li>
+	        			<li>单价￥</li>
+	        			<li>购买数量</li>
+	        			<li>小计￥</li>
+	        		</ul>
+	        		{foreach $goods_v as $goods_kk => $row}
+	        		<ul>
+	        			<li>{$row.goodsname}</li>
+	        			<li>{$row.good_pirce}/{$row.goodsgg}</li>
+	        			<li>{$row.sum}</li>
+	        			<li>{$row.total}</li>
+	        		</ul>
+	        		{/foreach}
+	        	    <p class="right col_61bc67 lh30 pr10">合计:<span class = 'getsummoney{$i}'></span></p>
+	        	</div>
+				<?php  $i++; ?>
+        	{/foreach}
+
+            <p class="bg_tuihuo">已退货</p>
+            <div class="purchase_list1 oh bgfff">
+        		<ul>
+        			<li>品名</li>
+        			<li>单价￥</li>
+        			<li>数量</li>
+        			<li>小计￥</li>
+        			<li>选购商家</li>
+        		</ul>
+				{foreach $sale as $row1}
+				
+				{foreach $row1 as $row1_v}
+      		<ul>
+      			<li>{$row1_v.goods_id}</li>
+     			<li>{$row1_v.good_pirce}/{$row1_v.goodsgg}</li>
+     			<li>{$row1_v.good_num}</li>
+     			<li>{$row1_v.total}￥</li>
+     			<li>{$row1_v.shopid}</li>
+      		</ul>
+      		{/foreach}
+     		{/foreach}
+        	</div>
+        </div>
+        <div class="bgfff mt10 service_list mb50">
+        	<ul>
+        		<li>
+        			<h5>商品总额：</h5>
+        			<p>￥{$zong}</p>
+        		</li>
+        		<li>
+        			<h5>预付款：</h5>
+        			<p>￥{$yu}</p>
+        		</li>
+        		<li>
+        			<h5>退款金额：</h5>
+        			<p>-￥{$tui}</p>
+        		</li>
+        		<li>
+        			<h5>尾款：</h5>
+        			<p>￥{$wei}</p>
+        		</li>
+        	</ul>
+        </div>
+        <!--<div class="bgfff mt10 service_list mb50">
+        	<ul>
+        		<li>
+        			<h5 class="col-333">物流信息</h5>
+        		</li>
+        		<li>
+        			<h5>配送员：</h5>
+        		</li>
+        		<li>
+        			<h5>运单号：</h5>
+        		</li>
+        	</ul>
+        </div>-->
+        
+     
+        	
+        <div class="bottom_nav_pay">
+        	<div class="left">
+        		<p>余额抵扣：</p>
+        		<p class="f16 col_61bc67">预付款：￥{$yu}</p>
+        		<input type="hidden" name="money" id="money" value="{$yu}" />
+        		<input type="hidden" name="orderid" id="orderid" value="" />
+        	</div>
+        	<input type="submit" class="right" value="支付" />
+        	<!--<button class="right" type="button"></button>-->
+        </div>
+        </form>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	</body>
+</html>
+<script>
+	var i = {$i};
+	$(function(){
+		for(var a=0 ;a<=i ;a++){
+			var money = $('.setsummoney'+a).val();
+			$('.getsummoney'+a).text("");
+			$('.getsummoney'+a).text(money);
+		}
+	})
+</script>

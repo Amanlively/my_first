@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/js/layui/css/layui.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<div class="header bgfff">
+			<div class="left scan">
+				<a href="javascript:;">
+					<img src="__STATIC__/assets/mobile/img/sys.jpg" />
+					<p>扫一扫</p>
+				</a>
+			</div>
+			<form action="{:url('/index/index/classification')}" method="post">
+			<div class="left search">
+				<span>北京<img src="__STATIC__/assets/mobile/img/jt_bottom.jpg" /></span>
+				<input placeholder="搜索菜品或商家" name="type" />
+			</div>
+			</form>
+			<div class="right news">
+				<a href="{:url('/index/center/message')}">
+					<img src="__STATIC__/assets/mobile/img/xiaoxi.jpg" />
+					<p>消息</p>
+				</a>
+			</div>
+		</div>
+		<!--头部结束-->
+		<div class="mui-content">
+			<div class="layui-tab layui-tab-card oh bgfff">
+				<ul class="layui-tab-title">
+					
+					{foreach ($one as $one)}
+					
+					<li><a href="{:url('/index/index/classification/one/' .$one.id)}">{$one.catonename}</a></li>
+					{/foreach}
+					
+				</ul>
+			</div>
+			<div class="container">
+				<div id="" class="classification-left">
+					<ul>
+						<!--<li class="classification-left-li"><a>全部</a></li>-->
+					<li class="classification-left-li">全部</li>
+					{foreach ($two as $two)}
+					
+					<li class="classification-left-li"><a href="{:url('/index/index/classification/one/'.$one1.'/two/' .$two.id)}">{$two.cattwoname}</a></li>
+					{/foreach}
+					</ul>
+				</div>
+				
+				<div class="mui-row classification-right">
+					{foreach ($three as $three)}
+					<div class="mui-col-sm-3 mui-col-xs-4">
+						<li class="mui-table-view-cell">
+							<a class="classifidetail" href="{:url('/index/index/classifidetail/id/' .$three.id)}">
+								<img src="__STATIC__/uploads/cai/{$three.img}" /><br/>
+								<span>{$three.catthreename}</span>
+							</a>
+						</li>
+					</div>
+					{/foreach}
+
+				</div>
+			</div>
+		</div>
+		{include file="layout/footer"}
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layui/layui.all.js" ></script>
+		
+	</body>
+</html>
+
+
+ 

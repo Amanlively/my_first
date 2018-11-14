@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的菜篮子</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="__CSS__/mui.min.css" rel="stylesheet" />
+    <link href="__CSS__/commom.css" rel="stylesheet" />
+    <link href="__CSS__/index.css" rel="stylesheet" />
+    <link href="__CSS__/swiper.min.css" rel="stylesheet" />
+    <style>
+        .qqFace { margin-top: -200px; text-align: center; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
+        .qqFace table td { padding: 0px; }
+        .qqFace table td img { cursor: pointer; border: 1px #fff solid; }
+        .qqFace table td img:hover { border: 1px #0066cc solid; }
+
+        .swiper-container1 { width: 100%;height: 100%;}
+        .swiper-slide2{text-align: center;font-size: 18px;background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+    </style>
+</head>
+<body>
+<div class="mb120 oh">
+    <header class="login-herder bgfff oh">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+        <h1 class="mui-title" id="to_chat" style="text-align: left;padding-left: 30px"></h1>
+        <h1 class="mui-title" id="online_state" style="text-align: left;padding-left: 300px">在线</h1>
+    </header>
+    <div class="swiper-container1 swiper-container swiper-container-horizontal swiper-container-wp8-horizontal bgfff">
+
+    </div>
+    <div class="chat" >
+        <ul id = "chat_id">
+            <li class="mt20">
+                <div class="headphoto left">
+                    <img src="__IMG__/chatphoto.png" />
+                </div>
+                <div class="chatlist left">
+                    <p class="col-000">张海（厨师）</p>
+                    <div class="chatbox">
+                        <div class="left textbox">
+                            <p>创建人：张海厨师</p>
+                        </div>
+                    </div>
+                    <img class="leftposi" src="__IMG__/leftjt.png" />
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="groupfooter">
+    <div class="right addmore emotion">
+        <img  src="__IMG__/groupbottom.png" />
+    </div>
+    <input type="file" id="file" style="display: none" />
+    <div class="left addmore img_up">
+        <img  src="__IMG__/groupbottom.png" />
+    </div>
+    <input type="text" id = 'chat'/>
+    <button  id = 'send'>发送</button>
+</div>
+<script src="__STATIC__/qqFace/js/jquery.min.js"></script>
+<script src="__JS__/swiper.min.js"></script>
+<script src="__JS__/mui.min.js"></script>
+<script src="__STATIC__/qqFace/js/jquery.qqFace.js"></script>
+<script>
+    var fromid = {$fromid};
+    var toid = {$toid};
+    //发送者头像
+    var fromhead = '';
+    //接受者头像
+    var tohead = '';
+
+    //发送者名称
+    var fromname = '';
+    //接受者名称
+    var toname = '';
+
+    //是否在线 2为不在线
+    var online = '';
+
+
+    // 假设服务端ip为127.0.0.1
+    ws = new WebSocket("ws://127.0.0.1:8282");
+    ws.onmessage = function (e) {
+        var message = eval("("+e.data+")");
+//                console.log(message);
+        switch (message.type){
+            //绑定两个聊天ID
+            case "init":
+//              console.log(message);
+
+                var bild = '{"type":"bind","fromid":"'+fromid+'"}';
+                ws.send(bild);
+                //获取聊天头像以及名称
+                chat_head(fromid,toid);
+                //获取聊天记录
+                chat_record(fromid,toid);
+
+                var online = '{"type":"online","fromid":"'+fromid+'","toid":"'+toid+'"}';
+                ws.send(online);
+                return;
+            //发送的内容
+            case "text":
+
+                if(toid == message.fromid){
+                    if (tohead == null){
+                        var head = "uploads/zanwutouxiang.jpg";
+                    }else{
+                        var head = "uploads/goodspic/"+tohead+"";
+                    }
+
+
+                    $('#chat_id').append('<li class="mt20">' +
+                        '<div class="headphoto left">' +
+                        '<img src="__STATIC__/'+head+'" />' +
+                        '</div>' +
+                        '<div class="chatlist left">' +
+                        '<p class="col-000">'+toname+'</p>' +
+                        '<div class="chatbox">' +
+                        '<div class="left textbox">' +
+                        '<p>'+replace_em(message.content)+'</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '<img class="leftposi" src="__IMG__/leftjt.png" />' +
+                        '</div>' +
+                        '</li>');
+
+                    $('#chat_id').scrollTop(3000);
+                }
+
+                return;
+            case "save":
+                save_message(message);
+                return;
+
+            case 'online':
+//					    console.log(message);
+                if(message.status == 1){
+                    $('#online_state').html("");
+                    $('#online_state').html('在线');
+                    online = 1;
+                }else {
+                    $('#online_state').html("");
+                    $('#online_state').html('不在线');
+                    online = 2;
+                }
+                return;
+            case 'img':
+
+                if(toid == message.fromid){
+                    if (tohead == null){
+                        var head = "uploads/zanwutouxiang.jpg";
+                    }else{
+                        var head = "uploads/goodspic/"+tohead+"";
+                    }
+
+                    $('#chat_id').append('<li class="mt20">' +
+                        '<div class="headphoto left">' +
+                        '<img src="__STATIC__/'+head+'" />' +
+                        '</div>' +
+                        '<div class="chatlist left">' +
+                        '<p class="col-000">'+toname+'</p>' +
+                        '<div class="chatbox">' +
+                        '<div class="left textbox">' +
+                        '<img width="120em" height="120em" src="__STATIC__/uploads/chat_img/'+message.content+'" />' +
+                        '</div>' +
+                        '</div>' +
+                        '<img class="leftposi" src="__IMG__/leftjt.png" />' +
+                        '</div>' +
+                        '</li>');
+
+                    $('#chat_id').scrollTop(3000);
+                }
+                return;
+        }
+
+//                console.log(e.data);
+    }
+    $('#send').click(function () {
+        var chat = $('#chat').val();
+
+        var message = '{"type":"say","data":"'+chat+'","fromid":"'+fromid+'","toid":"'+toid+'"}';
+
+        if (fromhead == null){
+            var head = "uploads/zanwutouxiang.jpg";
+        }else{
+            var head = "uploads/goodspic/"+fromhead+"";
+        }
+
+        $('#chat_id').append('<li class="mt20">' +
+            '<div class="headphoto right">' +
+            '<img src="__STATIC__/'+head+'" />' +
+            '</div>' +
+            '<div class="chatlist right chatlistright">' +
+            '<p class="col-000 chatlisttil" >'+fromname+'</p>' +
+            '<div class="chatbox chatboxright">' +
+            '<p>'+replace_em(chat)+'</p>' +
+            '</div>' +
+            '<img class="rightposi" src="__IMG__/rightjt.png" />' +
+            '</div>' +
+            '</li>');
+
+        $('#chat_id').scrollTop(3000);
+
+        ws.send(message);
+        $('#chat').val('');
+
+    });
+
+
+    //写入聊天信息
+    function save_message(message) {
+        $.ajax({
+            type: "POST",
+            url: "{:url('index/customer/save_message')}",
+            data: {message:message},
+            async: false,
+            error: function(request) {
+                alert("其他错误,请联系客服");
+            },
+            success: function(data) {
+//                console.log(data);
+            }
+        });
+    }
+
+    //返回聊天人的头像
+    function  chat_head(fromid,toid) {
+        $.ajax({
+            type: "POST",
+            url: "{:url('index/customer/chat_head')}",
+            data: {fromid:fromid , toid:toid},
+            async: false,
+            error: function(request) {
+                alert("其他错误,请联系客服");
+            },
+            success: function(data) {
+                  console.log(data);
+                fromhead = data.fromhead;
+                tohead = data.tohead;
+                fromname = data.fromname;
+                toname = data.toname;
+                $('#to_chat').text("与"+toname+"聊天中。。。");
+            }
+        });
+    }
+
+    //查询聊天记录
+    function chat_record(fromid,toid) {
+        $.ajax({
+            type: "POST",
+            url: "{:url('index/customer/chat_record')}",
+            data: {fromid:fromid , toid:toid},
+            async: false,
+            error: function(request) {
+
+                alert("其他错误,请联系客服");
+
+            },
+            success: function(data) {
+                $.each(data,function (data_k , data_v) {
+                    if(fromid == data_v.fromid){
+
+                        if (fromhead == null){
+                            var head = "uploads/zanwutouxiang.jpg";
+                        }else{
+                            var head = "uploads/goodspic/"+fromhead+"";
+                        }
+
+                        if(data_v.status == 2){
+                            $('#chat_id').append('<li class="mt20">' +
+                                '<div class="headphoto right">' +
+                                '<img src="__STATIC__/'+head+'" />' +
+                                '</div>' +
+                                '<div class="chatlist right chatlistright">' +
+                                '<p class="col-000 chatlisttil" >'+fromname+'</p>' +
+                                '<div class="chatbox chatboxright">' +
+                                '<img width="120em" height="120em" src="__STATIC__/uploads/chat_img/'+data_v.content+'" />' +
+                                '</div>' +
+                                '<img class="rightposi" src="__IMG__/rightjt.png" />' +
+                                '</div>' +
+                                '</li>');
+                        }else {
+                            $('#chat_id').append('<li class="mt20">' +
+                                '<div class="headphoto right">' +
+                                '<img src="__STATIC__/'+head+'" />' +
+                                '</div>' +
+                                '<div class="chatlist right chatlistright">' +
+                                '<p class="col-000 chatlisttil" >'+data_v.fromname+'</p>' +
+                                '<div class="chatbox chatboxright">' +
+                                '<p>'+replace_em(data_v.content)
+                                +'</p>' +
+                                '</div>' +
+                                '<img class="rightposi" src="__IMG__/rightjt.png" />' +
+                                '</div>' +
+                                '</li>');
+                        }
+
+                    }else {
+
+                        if (tohead == null){
+                            var head = "uploads/zanwutouxiang.jpg";
+                        }else{
+                            var head = "uploads/goodspic/"+tohead+"";
+                        }
+                        //判断是图片消息还是文字消息
+                        if(data_v.status == 2){
+                            $('#chat_id').append('<li class="mt20">' +
+                                '<div class="headphoto left">' +
+                                '<img src="__STATIC__/'+head+'" />' +
+                                '</div>' +
+                                '<div class="chatlist left">' +
+                                '<p class="col-000">'+toname+'</p>' +
+                                '<div class="chatbox">' +
+                                '<div class="left textbox">' +
+                                '<img width="120em" height="120em" src="__STATIC__/uploads/chat_img/'+data_v.content+'" />' +
+                                '</div>' +
+                                '</div>' +
+                                '<img class="leftposi" src="__IMG__/leftjt.png" />' +
+                                '</div>' +
+                                '</li>');
+                        }else {
+                            $('#chat_id').append('<li class="mt20">' +
+                                '<div class="headphoto left">' +
+                                '<img src="__STATIC__/'+head+'" />' +
+                                '</div>' +
+                                '<div class="chatlist left">' +
+                                '<p class="col-000">'+toname+'</p>' +
+                                '<div class="chatbox">' +
+                                '<div class="left textbox">' +
+                                '<p>'+replace_em(data_v.content)+'</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '<img class="leftposi" src="__IMG__/leftjt.png" />' +
+                                '</div>' +
+                                '</li>');
+                        }
+                    }
+                });
+
+                $('#chat_id').scrollTop(3000);
+            }
+        });
+    }
+
+    $(".img_up").click(function () {
+
+        $("#file").click();
+
+    })
+
+    $("#file").change(function () {
+
+//			    console.log($("#file")[0]['files'][0]);
+
+        formdata = new FormData();
+        formdata.append('fromid',fromid);
+        formdata.append('toid',toid);
+        formdata.append('online',online);
+        formdata.append('file',$("#file")[0]['files'][0]);
+
+        $.ajax({
+            type: "POST",
+            url: "{:url('index/customer/img_up')}",
+            data: formdata,
+            async: false,
+            cache: false,
+            processData:false,
+            contentType:false,
+//                    error: function(request) {
+//                        alert("其他错误,请联系客服");
+//                    },
+            success: function(data) {
+                  console.log(data);
+
+                if(data.status == 'ok'){
+
+                    if (fromhead == null){
+                        var head = "uploads/zanwutouxiang.jpg";
+                    }else{
+                        var head = "uploads/goodspic/"+fromhead+"";
+                    }
+
+                    $('#chat_id').append('<li class="mt20">' +
+                        '<div class="headphoto right">' +
+                        '<img src="__STATIC__/'+head+'" />' +
+                        '</div>' +
+                        '<div class="chatlist right chatlistright">' +
+                        '<p class="col-000 chatlisttil" >'+fromname+'</p>' +
+                        '<div class="chatbox chatboxright">' +
+                        '<img width="120em" height="120em" src="__STATIC__/uploads/chat_img/'+data.img_name+'" />' +
+                        '</div>' +
+                        '<img class="rightposi" src="__IMG__/rightjt.png" />' +
+                        '</div>' +
+                        '</li>');
+
+                    $('#chat_id').scrollTop(3000);
+
+                    var message = '{"type":"img" , "data":"'+data.img_name+'","fromid":"'+fromid+'","toid":"'+toid+'"}';
+                    ws.send(message);
+
+                    $("#file").val("");
+                }
+            }
+        });
+
+    })
+
+
+    //QQ表情
+    $(function(){
+
+        $('.emotion').qqFace({
+
+//                    id : 'facebox',
+
+            assign:'chat',
+
+            path:'__STATIC__/qqFace/arclist/'	//表情存放的路径
+
+        });
+
+        $(".sub_btn").click(function(){
+
+            var str = $("#saytext").val();
+
+            $("#show").html(replace_em(str));
+
+        });
+
+    });
+
+
+    //查看结果
+
+    function replace_em(str){
+
+        str = str.replace(/\</g,'&lt;');
+
+        str = str.replace(/\>/g,'&gt;');
+
+        str = str.replace(/\n/g,'<br/>');
+
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="__STATIC__/qqFace/arclist/$1.gif" border="0" />');
+
+        return str;
+
+    }
+
+</script>
+</body>
+</html>

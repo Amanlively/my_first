@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>门店管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">门店管理</h1>
+		</header>
+		<!--头部结束-->
+		<form action="{:url('/index/shop/approvexg/mdid/' . $rowset['id'] . '/cqid/' . $cqid)}" method="post" enctype="multipart/form-data">
+		<div class="mui-content mb50">
+			<div class="mui-row certificationinfo oh">
+				<div class="storemanage-top bgfff">
+					<li>门店信息</li>
+					<li class="active">认证信息</li>
+					<li>收货信息</li>
+				</div>
+				<div class="certificationinfo-nav bgfff">
+					<li>
+						<p>门脸照</p>
+						<div class="ctinfo-nav-right">
+							<label for="file1" class='btn btn-success'>
+								<img src="__STATIC__/assets/mobile/img/u614_03.png" id="q"/>
+							</label>
+							<input type="file" name="mdimg"  id="file1" class="inputfile" onchange="qq()"/>
+						</div>
+					</li>
+				</div>
+				<div class="certificationinfo-nav bgfff">
+					<li>
+						<p>营业执照</p>
+						<div class="ctinfo-nav-right">
+							<label for="file2" class='btn btn-success'>
+								<img src="__STATIC__/assets/mobile/img/u614_03.png" id="w"/>
+							</label>
+							<input type="file" name="certificate" id="file2" class="inputfile" onchange="ww()"/>
+						</div>
+					</li>
+				</div>
+				<div class="certificationinfo-nav bgfff">
+					<li>
+						<p>其他图片</p>
+						<div class="ctinfo-nav-right">
+							<label for="file3" class='btn btn-success'>
+								<img src="__STATIC__/assets/mobile/img/u614_03.png" id="s"/>
+							</label>
+							<input type="file" name="qtimg" id="file3" class="inputfile" onchange="ss()"/>
+					</div>
+					</li>
+				</div>
+			</div>
+			
+		</div>
+		<div class="qrCode-body-footer">
+			<input type="submit" value="保存" />
+		</div>
+		</form>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+	</body>
+	<script type="text/javascript">
+		function qq (){ //门脸照
+			var r = new FileReader();
+//			alert(r);
+			f = document.getElementById('file1').files[0];
+			r.readAsDataURL(f);
+			r.onload = function(e){
+				document.getElementById('q').src=this.result;
+			}
+			
+			
+		}
+		
+		function ww (){ //营业执照
+			var r = new FileReader();
+//			alert(r);
+			f = document.getElementById('file2').files[0];
+			r.readAsDataURL(f);
+			r.onload = function(e){
+				document.getElementById('w').src=this.result;
+			}
+		}
+		
+		function ss (){ //其他
+			var r = new FileReader();
+//			alert(r);
+			f = document.getElementById('file3').files[0];
+			r.readAsDataURL(f);
+			r.onload = function(e){
+				document.getElementById('s').src=this.result;
+			}
+		}
+	</script>
+</html>
+
+<!--
+	
+		
+-->
+ 

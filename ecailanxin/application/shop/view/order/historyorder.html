@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>历史订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.picker.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<form action="{:url('/shop/order/historyorder')}" method="post">
+		<div class="historyorder-header bgfff">
+			<input type="text" placeholder="搜索订单号" name="shous"/>
+			<input type="submit" value="搜索" />
+		</div>
+		</form>
+		<div class="historyorder-top bgfff">
+			<li><a href="{:url('/shop/order/historyorder')}">全部</a></li>
+			<li><a href="{:url('/shop/order/historyorder/cx/1')}">一星期</a></li>
+			<li><a href="{:url('/shop/order/historyorder/cx/2')}">一个月</a></li>
+			<li id="dateselect">日期查询</li>
+			<input type="hidden" id="ycy1" value="" />
+		</div>
+		<div class="mui-content mb50">
+			
+			{foreach $order as $row}
+			
+			<div class="mui-row historyorder-nav oh bgfff">
+				<div class="historyorder-nav-top">
+					<p><span class="active">订单已完成</span><span class="right">已到账钱包</span></p>
+					<p class="f12"><span>配送员：{$row.true_name}，{$row.phone}</span><span class="right">{$row.delivery_time||date="Y-m-d H:i:s"}</span></p>
+				</div>
+				<div class="historyorder-nav-top">
+					<p><b class="p-black">{$row.cqname}</b> &emsp;{$row.phone}</p>
+					<p>{$row.address}</p>
+				</div>
+				<div class="historyorder-nav-top bgf2f2f2 pd5">
+					<p class="f12"><span class="p-black">备注：</span>{$row.remark}</p>
+					<p class="f12"><span class="p-black">发票：</span></p>
+				</div>
+				<div class="historyorder-nav-top pd5">
+					<p><span class="p-black">订单号:{$row.order_id}</span><span class="right"><a href="{:url('/shop/order/to/orderid/' . $row.order_id)}">查看订单 ></a></span></p>
+					<p class="p-line">
+						<span class="f12">共支付：￥<b>{$row.total}</b></span>
+						<br/><span class="f12">已退款：￥<b>{$row.refund}</b></span>
+						<span class="right">收入：<b class="active">￥{$row.total}</b></span> 
+					</p>
+				</div>
+			</div>
+			{/foreach}
+		</div>
+		{include file="layout/storefooter"}
+		<script src="__STATIC__/assets/mobile/js/mui.picker.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			mui.init();
+			var btns = mui('#dateselect');
+			btns.each(function(i,btn){
+				btn.addEventListener('tap',function(){
+					var dtPicker = new mui.DtPicker({
+					"type":"date"
+					});
+				dtPicker.show(function(items){
+					$("#ycy1").val(items.value);
+					window.location.href='/shop/order/historyorder/date/'+items.value;
+				});
+				},false);
+			});
+			
+		</script>
+		
+	</body>
+
+</html>

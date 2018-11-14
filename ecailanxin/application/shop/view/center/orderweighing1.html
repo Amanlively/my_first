@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>智能秤-订单模式</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="orderweight-header bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orderweight-top-icon"></a>
+			<div class="mui-title ordertitlebox">
+				<img class="left orderweight-header-img" src="__STATIC__/assets/mobile/img/u843_03.png" />
+				<span class="left">智能秤</span>
+			</div>
+			<a href="{:url('/shop/center/orderweighing')}" class="orderweight-header-a active">切换到零售模式 ></a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row orderweighing-body-nav4 oh bgfff">
+				<table>
+					<tr>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_02.png" />
+							<span>西红柿</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_03.png" />
+							<span>萝卜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_04.png" />
+							<span>白菜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_05.png" />
+							<span>芹菜</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_02.png" />
+							<span>西红柿</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_03.png" />
+							<span>萝卜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_04.png" />
+							<span>白菜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_05.png" />
+							<span>芹菜</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_02.png" />
+							<span>西红柿</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_03.png" />
+							<span>萝卜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_04.png" />
+							<span>白菜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_05.png" />
+							<span>芹菜</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_02.png" />
+							<span>西红柿</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_03.png" />
+							<span>萝卜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_04.png" />
+							<span>白菜</span>
+						</td>
+						<td>
+							<img src="__STATIC__/assets/mobile/img/u28_05.png" />
+							<span>芹菜</span>
+						</td>
+					</tr>
+				</table>
+				<div class="orderweighing-foot">
+					<button>列表</button>
+				</div>
+			</div>
+			<div class="mui-row orderweighing-body-nav1 oh bgfff">
+				<div class="orderweighing-body-nav-top1">
+					<div class="orbnt">
+						<img src="__STATIC__/assets/mobile/img/u28_01.png" />
+					</div>
+				</div>
+				<div class="orderweighing-body-nav-bot">
+					<form class="mui-input-group">
+					    <div class="mui-input-row">
+					        <label>品名：</label>
+					    	<select class="">
+					    		<option>白菜</option>
+					    		<option>茄子</option>
+					    	</select>
+					    	
+					    </div>
+					    <div class="mui-input-row">
+					        <label>单价：</label>
+					        <input type="text" class="" value="2.4">
+					       	<span>元/kg</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>重量：</label>
+					        <input type="text" class="" value="0.00">
+					       	<span>kg</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>总量：</label>
+					        <input type="text" class="" value="0.00">
+					       	<span>kg</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>合计：</label>
+					        <input type="text" class="" value="0.00">
+					       	<span>kg</span>
+					    </div>
+					    
+					</form>
+				</div>
+				<div class="orderweighing-foot">
+					<button>加入成件商品计算</button>
+				</div>
+				<div class="orderweighing-body-nav-bot">
+					<form class="mui-input-group">
+					    <div class="mui-input-row">
+					        <label>件数：</label>
+					    	<input type="text" class="" value="">
+					    	<span>件</span>
+					    </div>
+					    <div class="mui-input-row">
+					        <label>件价：</label>
+					        <input type="text" class="" value="">
+					       	<span>元</span>
+					    </div>
+					</form>
+				</div>
+			</div>
+			<div class="mui-row orderweighing-body-nav2 oh bgfff">
+				<div class="orderweighing-body-nav-top">
+					<img src="__STATIC__/assets/mobile/img/u843_04.png" />
+				</div>
+				<table>
+					<tr>
+						<td>7</td>
+						<td>8</td>
+						<td>9</td>
+						<td class="last-td">置零</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td class="last-td">去皮</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td class="last-td">累计</td>
+					</tr>
+					<tr>
+						<td colspan="2">0</td>
+						<td>.</td>
+						<td class="last-td">退格</td>
+					</tr>
+					<tr>
+						<td colspan="3" class="active">结账</td>
+						<td class="last-td">确定</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" >
+			mui('.mui-bar').on('tap','a',function(){document.location.href=this.href;});
+
+		</script>
+		
+	</body>
+
+</html>

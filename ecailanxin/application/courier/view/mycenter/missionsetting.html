@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>骑手设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.picker.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">骑手设置</h1>
+		</header>
+		<div class="mui-content mb50">
+			<form action="{:url('/courier/mycenter/missionsave')}" id="qscont" method="post" enctype="multipart/form-data">
+			<div class="mui-row shopsetting bgfff oh">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						骑手头像
+						<input type="file" name="image" id="file" onchange="picture()" class="inputfile">
+						<label for="file">
+							<img class="right" src="__STATIC__/uploads/missionimg/{$user.image}" id="show"/>
+						</label>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a >
+						名称设置
+						<!--<span class="right">绿色农业</span>-->
+						<input type="text" class="right" name="name" value="{$user.username}" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a >
+						联系设置
+						<input type="text" class="right" name="phone" value="{$user.phone}" />
+					</a>
+				</li>
+			</div>
+			
+		</div>
+		
+		<div class="qrCode-body-footer">
+			<input type="submit"  value="保存" />
+		</div>
+		</form>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layer/layer.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.picker.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var btns = mui('#starttime');
+			btns.each(function(i,btn){
+				btn.addEventListener('tap',function(){
+					var dtPicker = new mui.DtPicker({
+					"type":"time"
+					});
+				dtPicker.show();
+				},false);
+			});
+			var btns1 = mui('#endtime');
+			btns1.each(function(i,btn){
+				btn.addEventListener('tap',function(){
+					var dtPicker = new mui.DtPicker({
+					"type":"time"
+					});
+				
+				dtPicker.show();
+				},false);
+			});
+		</script>
+		<script type="text/javascript">
+			function picture(){
+				
+				var r = new FileReader();
+				f = document.getElementById('file').files[0];
+				
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('show').src=this.result;
+				}
+				
+			}
+		</script>
+	</body>
+</html>

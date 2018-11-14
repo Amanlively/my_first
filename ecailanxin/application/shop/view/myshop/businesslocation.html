@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商家评价</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="classifidetail-herder">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>-->
+			<h1 class="mui-title">{$rowset.shop_name}</h1>
+			<span class="yyStatus">{$kai}></span>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content busidetail-header">	
+						<div class="busidetail-header-on">
+				<div class="busidetail-header-on-left">
+					<img src="__STATIC__/uploads/shop/{$rowset.shop_img}" />
+				</div>
+				<div class="busidetail-header-on-right">
+					<p>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="bhor-span0">即时送</span>
+						<span class="bhor-span0">预约达</span>
+					</p>
+					<p>距您{$rowset.distance}km,{$rowset.delivery}元起送
+						<span class="bhor-span1">26分钟</span>
+						<span class="bhor-span1">准时送</span>
+					</p>
+					<p><span class="mui-icon mui-icon-map icona"></span>
+						{$rowset.address}</p>
+						<p style="color: #ffa508;"><img src="__STATIC__/assets/mobile/img/u41_03.png" />联系客服 >
+					
+					</p>
+				</div>
+			</div>
+				<div class="busidetail-header-under">
+				<li><a href="{:url('/shop/myshop/myshop/id/' .$shop)}">商品</a></li>
+				<li><a href="{:url('/shop/myshop/businessLocation/id/' .$shop)}">评价</a></li>
+				<li><a href="{:url('/shop/myshop/businessEvaluation/id/' .$shop)}">商家</a></li>
+			</div>
+		</div>
+		<div id="slider">
+	    <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted busilocation-top" id="segmented">
+            <a class="mui-control-item mui-active" href="#item1mobile">
+				全部({$num})
+            </a>
+            <a class="mui-control-item" href="#item2mobile">
+				晒图({$num1})
+            </a>
+            <a class="mui-control-item" href="#item3mobile">
+				低分(0)
+            </a>
+            <a class="mui-control-item" href="#item4mobile">
+              	最新
+            </a>
+	    </div>
+	</div>
+	<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content busilocation busilocation-body mui-active">
+				{foreach ($con as $con)}
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="busilocation-body-left">
+							<img src="__STATIC__/uploads/goodspic/{$con.user_img}" />
+						</div>
+						<div class="busilocation-body-right">
+							<h5>{$con.username} <span class="right">{$con.add_time|date="Y/m/d H:i"}</span></h5>
+							<p>
+								{if condition="$con.pingimg !== null"}
+								{$con.content}
+								<img src="__STATIC__/uploads/ping_img/{$con.pingimg}" height="20px" width="20px"/>
+								{else}
+								{$con.content}
+								{/if}
+							</p>
+							<h5><span>浏览1719</span><b class="right"><img src="__STATIC__/assets/mobile/img/u667_03.png" />赞</b></h5>
+						</div>
+					</div>
+				</nav>
+				{/foreach}
+			</div>
+			<div id="item2mobile" class="mui-slider-item mui-control-content busilocation busilocation-body">
+				{foreach ($img as $img)}
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="busilocation-body-left">
+							<img src="__STATIC__/uploads/goodspic/{$img.user_img}" />
+						</div>
+						<div class="busilocation-body-right">
+							<h5>{$img.username} <span class="right">{$img.add_time|date="Y/m/d H:i"}</span></h5>
+							<p>{$img.content}<img src="__STATIC__/uploads/ping_img/{$img.pingimg}" height="20px" width="20px"/></p>
+							<h5><span>浏览1719</span><b class="right"><img src="__STATIC__/assets/mobile/img/u667_03.png" />赞</b></h5>
+						</div>
+					</div>
+				</nav>
+				{/foreach}
+			</div>
+			<div id="item3mobile" class="mui-slider-item mui-control-content busilocation busilocation-body">
+				{foreach ($di as $di)}
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="busilocation-body-left">
+							<img src="__STATIC__/uploads/goodspic/{$di.user_img}" />
+						</div>
+						<div class="busilocation-body-right">
+							<h5>{$di.username} <span class="right">{$di.add_time|date="Y/m/d H:i"}</span></h5>
+							<p>{$di.content}<img src="__STATIC__/uploads/ping_img/{$di.pingimg}" height="20px" width="20px"/></p>
+							<h5><span>浏览1719</span><b class="right"><img src="__STATIC__/assets/mobile/img/u667_03.png" />赞</b></h5>
+						</div>
+					</div>
+				</nav>
+				{/foreach}
+			</div>
+			<div id="item4mobile" class="mui-slider-item mui-control-content busilocation busilocation-body">
+				{foreach ($xin as $xin)}
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="busilocation-body-left">
+							<img src="__STATIC__/uploads/goodspic/{$xin.user_img}" />
+						</div>
+						<div class="busilocation-body-right">
+							<h5>{$xin.username} <span class="right">{$xin.add_time|date="Y/m/d H:i"}</span></h5>
+							<p>
+								{if condition="$xin.pingimg !== null"}
+								{$xin.content}
+								<img src="__STATIC__/uploads/ping_img/{$xin.pingimg}" height="20px" width="20px"/>
+								{else}
+								
+								{$xin.content}
+								</p>
+								{/if}
+							<h5><span>浏览1719</span><b class="right"><img src="__STATIC__/assets/mobile/img/u667_03.png" />赞</b></h5>
+						</div>
+					</div>
+				</nav>
+				{/foreach}
+			</div>
+			
+			
+		</div>
+	
+		
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+		<script type="text/jscript">
+			$(document).ready(function(){
+				$(".classification-left-li:first-child").css({
+					"color":"#B6B6B6",
+					"background-color":"white"
+				});
+			});
+
+			$(".classification-left-li").click(function(){
+				$(this).css({
+					"background-color":"white",
+					"color":"#c6c6c6"
+				}).siblings("li").css({
+					"color":"#B6B6B6",
+					"background-color":""
+				});
+			});
+		</script>
+		
+	</body>
+</html>
+
+<!--
+	
+		
+-->
+ 

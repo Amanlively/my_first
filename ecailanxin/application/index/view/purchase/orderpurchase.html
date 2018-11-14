@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>下单采购</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">{$cgdh}</h1>
+		</header>
+		<form action="{:url('/index/purchase/confirmOrder/cgdh/' . $cgdh)}" method="post">
+		
+		<div class="mui-content">
+			<div class="mui-row orderPurchase-top oh">
+				待选购  <?php echo date("Y年-m月-d日 H:i",time()); ?>
+			</div>
+			<div class="orderPurchase-body bgfff">
+				<table border="" cellspacing="" cellpadding="">
+					<tr>
+						<th>
+							菜品
+						</th>
+						<th>
+							数量
+						</th>
+						<th>
+							单位
+						</th>
+						<th>
+							备注
+						</th>
+					</tr>
+					{foreach $rowset as $row}
+					{if condition="$row.status == 0"}
+					<tr>
+						<td>{$row.goodsname}</td>
+						<td>{$row.number}</td>
+						<td>{$row.danwei}</td>
+						<td>{$row.content}</td>
+					</tr>
+					{/if}
+					{/foreach}
+				</table>
+			</div>
+		</div>
+		<div class="qrCode-body-footer">
+			<input type="submit" name="" id="" value="进入采购" />
+		</div>
+		</form>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		
+	</body>
+
+</html>

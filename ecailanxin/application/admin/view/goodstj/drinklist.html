@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>后台</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/assets/css/bootstrap.min.css"/>
+</head>
+<body>
+{include file="layout/top-nav"}
+
+<div class="am-cf admin-main"> 
+	{include file="layout/sidebar"}
+	<div class="admin">
+
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 推荐列表</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="{:url('/admin/goodstj/drinklist')}">推荐列表</a></dl>
+      
+    </div>
+
+
+    <form class="am-form am-g">
+          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <thead>
+              <tr class="am-success">
+              	<th class="table-title">商品名称</th>
+              	<th class="table-title">商品图片</th>
+                <th class="table-title">商品价格</th>
+                <th class="table-title">商品产地</th>
+                <th class="table-type">商品销量</th>
+                <th class="table-type">添加时间</th>
+                <th class="table-type">推荐状态</th>
+                <th width="163px" class="table-set">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{foreach ($rowset as $row)}
+              <tr>
+              	<td>{$row.goodsname}</td>
+              	<td><img src="__STATIC__/uploads/goodspic/{$row.goodspic}" height="50px" width="50px"/></td>
+                <td>{$row.goodsprice}</td>
+                <td>{$row.goodsarea}</td>
+                <td class="am-hide-sm-only">{$row.sales}</td>
+                <td>{$row.addtime||date="Y-m-d H:i:s"}</td>
+                <td>
+                	{if condition="$row.is_tj == 0"}
+                		未推荐
+                	{else}
+                	已推荐
+                	{/if}
+                </td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span><a href="{:url('/admin/goodstj/deldrinklist/id/'.$row.id)}">取消推荐</a></button>
+                    </div>
+                  </div></td>
+              </tr>
+              {/foreach}
+            </tbody>
+          </table>
+       </form>
+ 
+ 
+ 
+ <div class="foods">
+  <ul>版权所有@2018 . 易菜篮</ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]--> 
+
+<!--[if (gte IE 9)|!(IE)]><!--> 
+<script src="__STATIC__/assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+
+
+
+</body>
+</html>

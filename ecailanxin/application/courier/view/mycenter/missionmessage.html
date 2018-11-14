@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>消息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">系统消息</h1>
+		</header>
+		<div id="slider" class="message-body">
+			<!--<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" id="segmented">
+				
+				<a class="mui-control-item message-body-top mui-active" href="#item1mobile">
+					最近
+				</a>
+				<a class="mui-control-item message-body-top" href="#item2mobile">
+					系统
+				</a>
+			</div>-->
+		</div>
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content message-body-nav mui-active">
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="message-nav-left left">
+							<img src="__STATIC__/assets/mobile/img/photo.png" />
+						</div>
+						<div class="message-nav-right right">
+							<h2>系统通知<span class="right">10:00</span></h2>
+							<p>恭喜xx配送员完成xx单，获得赏金xx元<span>2</span></p>
+						</div>
+					</div>
+				</nav>
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="message-nav-left left">
+							<img src="__STATIC__/assets/mobile/img/u667_04.png" />
+						</div>
+						<div class="message-nav-right right">
+							<h2>系统通知<span class="right">11-12</span></h2>
+							<p>您有一条新的系统消息<span>1</span></p>
+						</div>
+						
+					</div>
+				</nav>
+				
+			</div>
+			
+			<div id="item2mobile" class="mui-slider-item mui-control-content message-body-nav">
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="message-nav-left left">
+							<img src="__STATIC__/assets/mobile/img/photo.png" />
+						</div>
+						<div class="message-nav-right right">
+							<h2>厨师-刘诗<span class="right">10:00</span></h2>
+							<p>明天的菜已经出来了<span class="right">1</span></p>
+						</div>
+					</div>
+				</nav>
+				<nav class="mui-table-view">
+					<div class="mui-table-view-cell">
+						<div class="message-nav-left left">
+							<img src="__STATIC__/assets/mobile/img/u667_04.png" />
+						</div>
+						<div class="message-nav-right right">
+							<h2>小妹蔬菜店<span class="right">11-12</span></h2>
+							<p>麻烦尽快送货<span class="right">2</span></p>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		{include file="layout/footer"}
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

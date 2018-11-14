@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>门店管理</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">门店管理</h1>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content mb50">
+			<div class="mui-row deliveryinfo bgfff oh">
+				<div class="storemanage-top">
+					<li>门店信息</li>
+					<li>认证信息</li>
+					<li class="active">收货信息</li>
+				</div>
+				<div class="deliveryinfo-nav">
+					{foreach $rowset as $row}
+					<p>{$row.consignee}<span class="right">{$row.phone}</span></p>
+					<p>{$row.details}</p>
+					<p>
+						<a href="{:url('/index/shop/addressxg/id/' . $row.id . '/mdid/' . $mdid)}"><span class="p-span">编辑</span></a>
+						<a href="{:url('/index/shop/messagedel/id/' . $row.id . '/mdid/' . $mdid)}"><span class="p-span">删除</span></a>
+						<span class="p-span1 right">默认地址</span>
+						<div class="mui-switch mui-switch-mini mui-active right">
+							  <div class="mui-switch-handle"></div>
+						</div>
+					</p>
+					{/foreach}
+				</div>
+			</div>
+		</div>
+		<div class="qrCode-body-footer">
+			<a href="{:url('/index/shop/addaddress/mdid/' . $mdid)}"><button>添加新地址</button></a>
+		</div>
+		<script type="text/javascript" href="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" href="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" href="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+	</body>
+</html>
+
+ 

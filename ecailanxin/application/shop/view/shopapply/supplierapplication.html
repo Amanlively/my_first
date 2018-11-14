@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-07-07
+        	描述：账号密码登录页面
+        -->
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<a href="{:url('/index/login/login')}" class="right active pt10">首页&emsp;</a>
+		</header>
+		<div class="mui-content login-body ta-left">
+			<form id="supapply-form" action="{:url('/shop/shopapply/save/type/' .$type)}" class="bgfff" method="post" enctype="multipart/form-data">
+				<h1>供货商申请</h1>
+				<div class="supapply-nav">
+					<li>
+						<label class="left">姓&emsp;&emsp;名</label>
+						<input class="right" name="name" type="text" id="true_name"/>
+					</li>
+					<li>
+						<label class="left">身份证号</label>
+						<input class="right" name="number" type="text" id="number"/>
+					</li>
+					<li>
+						<label class="left">电&emsp;&emsp;话</label>
+						<input class="right" name="phone" type="text" id="phone"/>
+					</li>
+					<li>
+						<label class="left">居住地址</label>
+						<input class="right" name="address" type="text" id="dwell"/>
+					</li>
+					<li>
+						<label class="left">上班地点</label>
+						<input class="right" name="site" type="text" id="site"/>
+					</li>
+					<li>
+						<label class="left">供货所属市场</label>
+						<select name="bazaar">
+							{foreach ($row as $row)}
+							<option value="{$row.id}">{$row.baname}</option>
+							{/foreach}
+						</select>
+					</li>
+					<div class="supapply-nav-document left">
+						<p>身份证件
+							<input type="file" name="file" id="file1" class="inputfile" onchange="zzj()" />
+						</p>
+						<label for="file1"><img src="" id="zj" width="80px"/>点击上传</label>
+					</div>
+					<div class="supapply-nav-document left">
+						<p>营业执照
+							<input type="file" name="file1" id="file2" class="inputfile" onchange="yyy()" />
+						</p>
+						<label for="file2"><img src="" id="yy" width="80px"/>点击上传</label>
+					</div>
+					<div class="supapply-nav-document left">
+						<p>摊位照片
+							<input type="file" name="file3" id="file3" class="inputfile" onchange="twz()" />
+						</p>
+						<label for="file3"><img src="" id="tw"  width="80px"/>点击上传</label>
+					</div>
+				</div>
+
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<!--<div class="login-section">
+					<button id='' class="mui-btn mui-btn-block mui-btn-primary" onclick="ghs()">提交申请</button>
+
+				</div>-->
+				<div class="login-herder"></div>
+				<div class="qrCode-body-footer">
+					<input type="submit" id="send" value="提交申请"/>
+				</div>
+			</form>
+		</div>
+		
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<!--<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>-->
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<!--<script type="text/javascript">
+			function ghs() {
+
+				$.ajax({
+					type: "post",
+					url: "{:url('/shop/shopapply/save/type/' .$type)}",
+					data: $('#supapply-form').serialize(),
+					success: function(data) {
+//											alert(data);
+						if(data['code']) {
+							layer.msg(data['msg'], {
+								time: 2000
+							});
+							window.location.href = data['url'];
+						} else {
+							layer.msg(data['msg'], {
+								time: 2000
+							});
+						}
+					},
+					error: function(request) {
+						alert("其他错误,请联系客服");
+					}
+				});
+			}
+		</script>-->
+	</body>
+	<script type="text/javascript">
+		$('#send').click(function () {
+
+			    var true_name = $('#true_name').val().trim();
+			    var number1   = $('#number').val().trim();
+			    var phone     = $('#phone').val().trim();
+			    var dwell     = $('#dwell').val().trim();
+			    var site      = $('#site').val().trim();
+			    var file1    = $('#file1').val().trim();
+			    var file2    = $('#file2').val().trim();
+			    var file3    = $('#file3').val().trim();
+                  if(true_name == ''){
+                      alert("请输入姓名!");
+                      return false;
+                  }else if(number1 == ''){
+                  	alert('请输入身份证号!');
+                  	return false;
+                  }else if(phone == ''){
+                  	alert('请输入手机号!');
+                  	return false;
+                  }else if(dwell == ''){
+                  	alert('居住地址不能为空!');
+                  	return false;
+                  }else if(site == ''){
+                  	alert('上班地点不能为空!');
+                  	return false;
+                  }else if(file1 == ''){
+                  	alert('请选择身份证照片!');
+                  	return false;
+                  }else if(file2 == ''){
+                  	alert('请选择营业执照照片!');
+                  	return false;
+                  }else if(file3 == ''){
+                  	alert('请选择摊位照片!');
+                  	return false;
+                  }
+              }); 
+	</script>
+	<script type="text/javascript">
+		function zzj(){
+			var r = new FileReader();
+//			alert(r);
+				f = document.getElementById('file1').files[0];
+				
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('zj').src=this.result;
+				}
+		}
+		function yyy(){
+			var r = new FileReader();
+//			alert(r);
+				f = document.getElementById('file2').files[0];
+				
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('yy').src=this.result;
+				}
+		}
+		function twz(){
+			var r = new FileReader();
+//			alert(r);
+				f = document.getElementById('file3').files[0];
+				
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('tw').src=this.result;
+				}
+		}
+	</script>
+
+</html>

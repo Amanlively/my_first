@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>菜品选择</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">店铺列表</h1>
+		</header>
+		<section class="bestselling">
+			<ul>
+				{foreach ($jy as $row)}
+				<li class="bgfff oh mt10">
+					
+					<a href="{:url('/index/purchase/dishesDetails1/goodsid/' .$row.id .'/cgdh/' .$cgdh .'/id/'.$id .'/shopid/' .$shopid)}">
+					<div class="left cx_list_img" >
+				    	<img src="__STATIC__/assets/mobile/img/cx-1.png" />
+					</div>
+					<div class="right cx_list_right">
+						<h5>{$row.shop_name}</h5>
+						<div class="cx_list_style mt10">
+							<div class="left">
+								<img src="__STATIC__/assets/mobile/img/distance.png" />
+								<span>{$row.address}</span>
+							</div>
+						</a>
+
+							{if condition="$shopid == $row.shopid"}
+							<a href="#"  class="mybtn" style="color: #000000;">已选择</a>
+							{elseif condition="$shopid != $row.shopid"}
+							<a href="{:url('/index/purchase/affirm/goodsid/' .$row.id .'/shopid/' .$row.shopid . '/cgdh/' . $cgdh .'/id/' .$id)}"  class="mybtn">选择</a>
+							<!--<input class="mybtn" value="选择" type="submit" />-->
+							{else}
+							<a href="{:url('/index/purchase/affirm/goodsid/' .$row.id .'/shopid/' .$row.shopid . '/cgdh/' . $cgdh .'/id/' .$id)}"  class="mybtn">选择</a>
+
+							{/if}
+						</div>
+						<div class="cx_list_style mt10">
+							<div class="left">
+								<span class="col-333 f16">{$row.goodsname}</span>
+							</div>
+							<p class="right col_ff5452">￥{$row.goodsprice}/{$row.name}</p>
+						</div>
+					</div>
+					
+				</li>
+				{/foreach}
+			</ul>
+		</section>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	</body>
+</html>

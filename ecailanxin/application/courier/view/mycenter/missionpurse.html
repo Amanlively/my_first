@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的钱包</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">我的钱包</h1>
+		</header>
+		<div class="bgfff money">
+			<div class="mispurse left">
+				<img src="__STATIC__/assets/mobile/img/money.png"/>
+				<p class="col-333">我的收入</p>
+				<p>￥{$num}</p>
+			</div>
+			<div class="mispurse right">
+				<img src="__STATIC__/assets/mobile/img/money_red.png"/>
+				<p class="col-333">未结算金额</p>
+				<p>￥</p>
+			</div>
+			<a href="{:url('/courier/mycenter/putForward')}"><input class="mycommonbtn" type="button" value="申请提现" /></a>
+		</div>
+		<div class="mt10 bgfff center_list oh">
+			<div class="purchase_title_left oh bd_61bc67">
+	            <span></span>
+	            <p class="col-333">账单详情</p>
+            </div>
+
+			<ul class="oh">
+				{foreach $query as $row}
+				<li>
+					<a href="javascript:;">
+						<div class="oh">
+							<p class="left ta-left">开户行：{$row.khh} </p>
+							{if condition="$row.is_sh == 2"}
+							<p class="right col_61bc67 f16">+{$row.tx_money}</p>
+							{else}
+							<p class="right col_61bc67 f16">-{$row.tx_money}</p>
+							{/if}
+						</div>
+						<div class="oh">
+						<p class="mt10 col-999 left">{$row.add_time||date="Y-m-d H:i:s"}</p>
+							{if condition="$row.is_sh == 2"}
+						<p class="right mt10 col-999">审核失败</p>
+							{elseif condition="$row.is_sh == 1"}
+
+							<p class="right mt10 col-999">审核通过</p>
+							{else}
+
+							<p class="right mt10 col-999">审核中</p>
+							{/if}
+						</div>
+					</a>
+				</li>
+				{/foreach}
+			</ul>
+
+		</div>
+
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的尾货区</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">我的尾货区</h1>
+		</header>
+		<div class="mui-content">
+			{foreach $goods as $god}
+			<div class="choiceveg">
+				<a>
+					<div class="choiceveg-left">
+						<img src="__STATIC__/uploads/goodspic/{$god.goodspic}" />
+					</div>
+					<div class="choiceveg-right">
+						<h1>{$god.goodsname}<a href="{:url('/shop/shop/taildel/id/' . $god.id)}"><button class="right h-span f12">取消</button></a></h1>
+						<p><img src="__STATIC__/assets/mobile/img/u39_01.png" />{$rowset.shop_name}</p>
+						<p><img src="__STATIC__/assets/mobile/img/u39_02.png" />{$god.introduce}，产地{$god.goodsarea}
+						<span class="price-right">￥<b>{$god.goodsprice}</b>/{$goodsgg[$god.goodsgg]}</span>
+						</p>
+					</div>
+				</a>
+			</div>
+			{/foreach}
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		
+	</body>
+
+</html>

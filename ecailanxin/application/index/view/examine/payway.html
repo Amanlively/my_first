@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.mui-input-group .mui-input-row:after{left: 0!important;}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">支付订单</h1>
+		</header>
+       <div class="bgfff payway_money oh">
+	       	<p>支付金额</p>
+	       	<b class="col_ff5452 f16">￥{$money}</b>
+       </div>
+		<form class="mui-input-group mt10 payway_list">
+			<h5 class="col_61bc67">选择支付方式</h5>
+			<div class="mui-input-row mui-radio">
+       			<img src="__STATIC__/assets/mobile/img/zhifubao.png" />
+       			<p>支付宝</p>
+				<input name="radio1" type="radio">
+			</div>
+			<div class="mui-input-row mui-radio">
+				
+   			<img src="__STATIC__/assets/mobile/img/weixin.png" />
+   			<p>微信</p>
+				<input name="radio1" type="radio" checked="">
+			</div>
+		</form>
+        <button class="bottom_nav"><a href="{:url('/index/examine/verification/ddh/' .$ddh)}" style="color: white;">付款</a></button>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	</body>
+</html>

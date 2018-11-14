@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-07-13
+        	描述：换绑手机
+        -->
+			<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">换绑手机</h1>
+		</header>
+			<form id='login-form' class="bgfff" method="post">
+		<div class="mui-content login-body ta-left">
+				<h1>换绑手机</h1>
+				<div class="login-herder"></div>
+				
+				<div class="mui-input-row login-section">
+					<p>旧手机号：<span>{$row.phone}</span></p>
+					<label>登录密码</label>
+					<input  type="password" name="password" class="mui-input-clear mui-input" placeholder="请输入登录密码">
+				</div>
+				<div class="mui-input-row login-section">
+					<label>新手机号</label>
+					<input  type="text" name="phone" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<div class="mui-input-row login-section mt20">
+					<label>验证码</label>
+					<input id='verify' type="text" name="yzm" class="mui-input-clear mui-input verify" placeholder="请输入验证码">
+					<a class="verify-a" onclick="yzm()">点击获取验证码</a>
+				</div>
+				<div class="login-herder"></div>
+				<div class="login-herder"></div>
+				<div class="login-section">
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary" type="button" onclick="sj()">提交</button>
+				</div>
+				<div class="login-herder"></div>
+			</div>
+			</form>
+		<!--</div>-->
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script>
+			function sj() {
+            $.ajax({  
+	            type: "POST",  
+	            url:"{:url('/index/set/hbphone')}",  
+	            data:$('#login-form').serialize(),// 序列化表单值  
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	             success: function(data) {  
+	                    var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('手机号绑定成功!',{time:2000});
+	                    	window.location.href = "{:url('/index/login/logout')}";
+	                    } else if(data['status'] == -1){
+	                    	layer.msg('登录密码不能为空!',{time:2000});
+	                    } else if(data['status'] == -2){
+	                    	layer.msg('登录密码错误!',{time:2000});
+	                    } else if(data['status'] == -3){
+	                    	layer.msg('手机号不能为空!',{time:2000});
+	                    } else if(data['status'] == -5){
+	                    	layer.msg('验证码不能为空!',{time:2000});
+	                    } else if(data['status'] == -6){
+	                    	layer.msg('手机号绑定失败,请检查!',{time:2000});
+	                    } else if(data['status'] == -9){
+	                    	layer.msg('手机号,格式不正确!',{time:2000});
+	                    }
+            }  
+        });  
+    }
+		</script>
+		<script>
+			function yzm() {
+				$.ajax({
+					type: "POST",
+					url: "{:url('/index/set/send')}",
+					data: $('#login-form').serialize(), // 序列化表单值  
+					async: false,
+					error: function(request) {
+						alert("其他错误,请联系客服");
+					},
+					success: function(data) {
+						var data = JSON.parse(data);
+						console.log(data);
+						if(data['status'] == 1) {
+							layer.msg('验证码发送成功', {
+								time: 2000
+							});
+							//window.location.href = "/Mobile/Login/login";
+						} else if(data['status'] == 0) {
+							layer.msg('验证码发送失败', {
+								time: 2000
+							});
+
+						} 
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

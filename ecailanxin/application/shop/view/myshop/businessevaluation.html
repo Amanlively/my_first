@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商家信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="classifidetail-herder">
+			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>-->
+			<h1 class="mui-title">{$rowset.shop_name}</h1>
+			<span class="yyStatus">{$kai}></span>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content busidetail-header">	
+			<div class="busidetail-header-on">
+				<div class="busidetail-header-on-left">
+					<img src="__STATIC__/uploads/shop/{$rowset.shop_img}" />
+				</div>
+				<div class="busidetail-header-on-right">
+					<p>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="bhor-span0">即时送</span>
+						<span class="bhor-span0">预约达</span>
+					</p>
+					<p>距您{$rowset.distance}km,{$rowset.delivery}元起送
+						<span class="bhor-span1">26分钟</span>
+						<span class="bhor-span1">准时送</span>
+					</p>
+					<p><span class="mui-icon mui-icon-map icona"></span>
+						{$rowset.address}</p>
+						<p style="color: #ffa508;"><img src="__STATIC__/assets/mobile/img/u41_03.png" />联系客服 >
+					
+					</p>
+				</div>
+			</div>
+			<div class="busidetail-header-under">
+				<li><a href="{:url('/shop/myshop/myshop/id/' .$shop)}">商品</a></li>
+				<li><a href="{:url('/shop/myshop/businessLocation/id/' .$shop)}">评价</a></li>
+				<li><a href="{:url('/shop/myshop/businessEvaluation/id/' .$shop)}">商家</a></li>
+			</div>
+		</div>
+		<div class="mui-content">
+			<div class="mui-row busievaluation-body oh bgfff">
+				<div class="left imgplace">
+					<img src="__STATIC__/assets/mobile/img/distance.png" />
+				</div>
+				<div class="spanplace">
+					<span>{$rowset.address}</span>
+				</div>
+				<div class="right imgplace">
+					<img src="__STATIC__/assets/mobile/img/u666_03.png" />
+				</div>
+			</div>
+			<div class="mui-row busievaluation-body oh bgfff">
+				<p>
+					<img src="__STATIC__/assets/mobile/img/u666_07.png" />配送服务：提供高品质送餐服务
+					<span>预约达</span>
+					<span>即时送</span>
+				</p>
+				<p>
+					<img src="__STATIC__/assets/mobile/img/u666_10.png" />配送时间：{$rowset.open_time}-{$rowset.close_time}
+				</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+		<script type="text/jscript">
+			$(document).ready(function(){
+				$(".classification-left-li:first-child").css({
+					"color":"#B6B6B6",
+					"background-color":"white"
+				});
+			});
+
+			$(".classification-left-li").click(function(){
+				$(this).css({
+					"background-color":"white",
+					"color":"#c6c6c6"
+				}).siblings("li").css({
+					"color":"#B6B6B6",
+					"background-color":""
+				});
+			});
+		</script>
+		
+	</body>
+</html>

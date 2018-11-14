@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商家中心-底部footer</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+	
+	</head>
+
+	<body>
+		
+		<!--
+        	作者：lively001@qq.com
+        	时间：2018-07-04
+        	描述：底部footer
+        -->
+    	<footer>
+			<nav class="mui-bar mui-bar-tab footer_bg">
+			    <a class="mui-tab-item" href="{:url('/shop/order/index')}">
+			    	<img class="sy" src="__STATIC__/assets/mobile/img/footer1.png" />
+			        <p class="mui-tab-label ">订单处理</p>
+			    </a>
+			    <a class="mui-tab-item" href="{:url('/shop/order/historyorder')}">
+			    	<img src="__STATIC__/assets/mobile/img/footer2.png " />
+			        <p class="mui-tab-label ">订单查询</p>
+			    </a>
+			    
+			    <a class="mui-tab-item" href="{:url('/shop/myshop/myshop')}">
+			    	<img src="__STATIC__/assets/mobile/img/footer3.png " />
+			        <p class="mui-tab-label">我的店铺</p>
+			    </a>
+			    <a class="mui-tab-item" href="{:url('/shop/center/merchantcenter')}">
+			    	<img src="__STATIC__/assets/mobile/img/footer4.png " />
+			        <p class="mui-tab-label">商家中心</p>
+			    </a>
+			</nav>
+		</footer>
+        <script src="__STATIC__/assets/mobile/js/mui.min.js"></script>  
+        <script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js "></script> 
+        <script type="text/javascript">
+        	mui('body').on('tap','a',function(){
+			    window.top.location.href=this.href;
+			});
+        	$('.footer_bg a').click(function(event) {
+                var nodes = $('.footer_bg a img');
+                for(var i=0; i<nodes.length; i++){
+                    nodes[i].src = nodes[i].src.replace(/.png|_active.png/,'.png');
+                }
+                var ylj = '__STATIC__/assets/mobile/img/footer';
+                var afterimg = ylj + Number($(this).index()+1) +'_active.png';
+                $(this).find('img').attr('src',afterimg) ;
+                $(this).addClass('active_nav').siblings().removeClass('active_nav');
+                
+           })
+        </script> 
+	</body>
+</html>

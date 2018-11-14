@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>添加店铺</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+</head>
+<body>
+{include file="layout/top-nav"}
+
+<div class="am-cf admin-main"> 
+	{include file="layout/sidebar"}
+	<div class="admin">
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 添加店铺</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="{:url('/admin/shop/show')}">店铺列表</a></dl>
+
+      
+      
+    </div>
+	
+    <div class="fbneirong">
+      <form class="am-form" action="{:url('/admin/shop/save')}" method="post" enctype="multipart/form-data">
+      	
+      	<div class="am-form-group am-cf">
+          <div class="you">
+          	选择市场：
+          	<select name="baname" id="baname" >
+				{foreach ($rowset2 as $row)}
+						<option type="hidden" value="{$row.id}">{$row.baname}</option>
+				{/foreach}		
+			</select>
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="you">
+            	店铺名称:<input type="text" class="am-input-sm" id="doc-ipt-email-1" name="shop_name" placeholder="请输入店铺名称">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+            	起送金:<input type="text" class="am-input-sm" id="doc-ipt-email-1" name="delivery" placeholder="请输入起送金">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+          店铺地址:  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" name="address" placeholder="请输入地址">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+          	店铺图片:  <input type="file" class="am-input-sm" id="doc-ipt-pwd-1" name="img" placeholder="">
+          </div>
+        </div>
+         <div class="am-form-group am-cf">
+          <div class="you">
+          营业开始时间:  <input type="datetime" class="am-input-sm" id="doc-ipt-pwd-1" name="opentime" placeholder="请输入开始时间">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+                            打烊时间:  <input type="datetime" class="am-input-sm" id="doc-ipt-pwd-1" name="closetime" placeholder="请输入结束时间">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you">
+            	店铺介绍:<input type="text" class="am-input-sm" id="doc-ipt-email-1" name="content" placeholder="请输入介绍">
+          </div>
+        </div>
+        <button type="submit" class="am-btn am-btn-success am-radius">提交</button>
+      </form>
+    </div>
+
+  
+ 
+ <div class="foods">
+ <ul>版权所有@2018 . 易菜篮</ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+</div>
+     </div>
+</div>
+
+<script src="__STATIC__/assets/js/amazeui.min.js"></script>
+</body>
+</html>

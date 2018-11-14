@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>待付款</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">处理中的订单</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row classifidetail-body-top oh bgfff">
+				<ul>
+					<li class="classifidetail-top-li">
+						<a href="{:url('index/index/order')}">全部</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+					<li class="classifidetail-top-li active">
+						<a href="{:url('/index/index/payment')}">待付款</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+					<li class="classifidetail-top-li">
+						<a href="{:url('/index/index/inspection')}">待验货</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+					<li class="classifidetail-top-li">
+						<a href="{:url('/index/index/verification')}">待验证</a>
+						<div class="circular">
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="proOrder-body">
+				<p class="firstp bgfff">订单数量:<span><b>{$num} </b></span> 待付款金额：<span>￥<b>{$money}</b></span></p>
+				{foreach $rowset as $row}
+				<div class="payment-nav bgfff">
+					<div class="left payment-left">
+						<img class="choiceimg" src="__STATIC__/assets/mobile/img/duigou.png" />
+					</div>
+					<div class="right payment-right">
+						<p>订单编号<br/>
+						<span class="active">{$row.goods_id}</span>
+						<span class="right rightspan">￥<b>{$row.good_pirce}</b></span>
+						</p>
+					</div>
+				</div>
+				{/foreach}
+			</div>
+			<div class="pendingPayment-footer">
+				<div class="ppfooter-top">
+					<img class="choiceimgall" src="__STATIC__/assets/mobile/img/duigou.png" />
+					<span class="hspan">全选</span>
+					<span>已选择<b class="active ddcount">0</b>个订单，应付款
+						<span class="active">
+							￥<b class="now"> 0 </b>
+						</span>
+					</span>
+				</div>
+				<div class="ppfooter-bot">确认支付</div>
+			</div>
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript">
+			var count;
+			//监听选择按钮
+			$(".choiceimg").click(function(){
+				var nowimg=$(this).attr("src");//获取图片加载路径
+				var nownum = parseInt($('.now').text());//获取当前应付款总额
+				var price;//选择标签时，获取当前价格，加上
+				var soprice;//未选择标签时，获取当前价格，减去
+				
+				if(nowimg=="__STATIC__/assets/mobile/img/duigou_active.png"){
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou.png");
+					soprice = parseInt($(this).parent().siblings().find('span').find('b').text());
+					$('.now').text(nownum-soprice);
+					count = $('.ddcount').text();
+					count--;
+					$('.ddcount').text(count);
+				}else{
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou_active.png");
+					price = parseInt($(this).parent().siblings().find('span').find('b').text());
+				    var noeprice = nownum + price;
+				    $('.now').text(noeprice);
+				    
+				    count = $('.ddcount').text();
+				    count++;
+				    $('.ddcount').text(count);
+				}
+			});
+			//监听全选按钮
+			$(".choiceimgall").click(function(){
+				var allimg=$(this).attr("src");
+				var nownum = parseInt($('.now').text());
+				var price=0;
+				if(allimg=="__STATIC__/assets/mobile/img/duigou.png"){
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou_active.png");
+					$(".choiceimg").attr('src',"__STATIC__/assets/mobile/img/duigou_active.png");
+					$(".payment-right").each(function(){
+						price += parseInt($(this).find('span').find('b').text());
+						count=$(".payment-right").length;
+					});
+					$('.now').text(price);
+					$('.ddcount').text(count);
+				}else{
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou.png");
+					$(".choiceimg").attr('src',"__STATIC__/assets/mobile/img/duigou.png");
+					$('.now').text(0);
+					$('.ddcount').text(0);
+				}
+			});
+		</script>
+	</body>
+
+</html>

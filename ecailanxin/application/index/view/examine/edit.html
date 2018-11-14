@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改商品数量</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<style type="text/css">
+			.w50{width: 10%;}
+			.w168{width: 55%;}
+			.inspection_list ul li span.col_61bc67{width: 30%}
+			.inspection_list ul li span.col_61bc67 input{height: 30px;margin-bottom: 0px; }
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">修改商品数量</h1>
+		</header>
+		<!--<div class="bgfff vagetable_tab oh inspection_header">-->
+			<!--<p>验货一个商品，点亮一个对勾 已点亮：<span class="col_61bc67">2</span>/6</p>-->
+			<!--<input class="mybtnwfl allcheck" type="button" value="全选" />-->
+		<!--</div>-->
+		<form action="{:url('/index/examine/updatesum/id/'.$row.id)}" method="post">
+		<div class="order_list inspection_list">
+			<ul>
+
+
+				<li class="bgfff mt10 oh">
+					<a href="javascript:;" id="">
+
+
+						<div class="oh">
+							<h5 class="left w50">{$name}</h5>
+							<span class="left f12 w168">单价：￥{$row.good_pirce}/{$row.goodsgg} 小计：￥{$row.total}</span>
+								<span class="left col_61bc67 f16"><input type="text" value="{$row.good_num}" name="sum" id="number"></span>
+							<!--//<img class="right inspection_img" name="false" src="__STATIC__/assets/mobile/img/duigou.png" />	-->
+							<input type="hidden" name="ddh"  id="ddh"      value="{$row.order_id}" />
+							<input type="hidden" name="goods_id" class="" value="{$row.goods_id}" />
+							<input type="hidden" name="pri" class="" value="{$row.good_pirce}" />
+						</div>
+						<p></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+			<button class="bottom_nav" type="submit">确认修改</button>
+	</form>
+			
+			
+			<!--
+            	作者：594674034@qq.com
+            	时间：2018-07-04
+            	描述：下面ID去掉1，即可单击调用
+            -->
+
+			
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+            $('.bottom_nav').click(function () {
+                var num = $('#number').val().trim();
+                // alert(num);
+				// alert(num);
+				if (num == ''){
+				    alert('请输入内容!');
+				    return false;
+				}else if(isNaN(num)){
+				    alert('请输入数字!');
+                    return false;
+				}
+            })
+		</script>
+	</body>
+</html>

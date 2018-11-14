@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>店铺设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.picker.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<header class="storemanage-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">店铺设置</h1>
+		</header>
+		<form action="{:url('/shop/shopstore/edit/id/' .$row.id)}" method="post" enctype="multipart/form-data">
+			
+		
+		
+		<div class="mui-content mb50">
+			<div class="mui-row shopsetting bgfff oh">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						店铺头像
+						{if condition="$row.shop_img ==null"}
+						<input type="file" name="file" id="file" onchange="s()" class="inputfile">
+						<label for="file">
+							<!--<img src="" id="show"/>-->
+							<img class="right" src="__STATIC__/assets/mobile/img/chatphoto.png" id="show"/>
+						</label>
+						{else}
+						<input type="file" name="file" id="file" onchange="s()" class="inputfile">
+						<label for="file">
+							<!--<img src="" id="show"/>-->
+							<img class="right" src="__STATIC__/uploads/shop/{$row.shop_img}"  id="show"/>
+						</label>
+						{/if}
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a >
+						店名
+						<!--<span class="right">绿色农业</span>-->
+						<input type="text" class="right" name="shop_name" value="{$row.shop_name}" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a >
+						店铺分类
+						<input type="text" class="right" name="shoptype" value="{$row.shoptype}" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a >
+						店铺号
+						<input type="text" class="right" value="{$row.shopmark}" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a >
+						地址
+						<!--<span class="right"></span>-->
+						<input type="text" class="right" name="address" value="{$row.address}" />
+					</a>
+				</li>
+					<li class="mui-table-view-cell">
+					<a id="starttime" class="mui-navigate-right">
+						设置营业时间
+						<span class="right p-span">{$row.open_time}</span>
+						<input type="hidden" id="ycy4" value="" name="open"/>
+						<input type="hidden" id="" value="{$row.open_time}" name="open1"/>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="endtime" class="mui-navigate-right">
+						设置停业时间
+						<span class="right p-span">{$row.close_time}</span>
+						<input type="hidden" id="ycy5" value="" name="close"/>
+						<input type="hidden" id="" value="{$row.close_time}" name="close1"/>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#openshop" class="mui-navigate-right">
+						设置营业状态
+						<span id="setopen" class="right p-span">{$row.status}</span>
+						<input type="hidden" id="ycy1" name="ying" value="" />
+						<input type="hidden"  id="" value="{$row.status}" name="ying1"/>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>
+						联系电话
+						<input type="text" class="right" name="manager_phone" value="{$row.manager_phone}" />
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>
+						设置公告
+						<!--<span class="right">嘟嘟菜店只做更好！</span>-->
+						<br/>
+						<textarea name="content">{$row.content}</textarea>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#deliveryMethod" class="mui-navigate-right">
+						预约达
+						<span id="reservation" class="right p-span">{$row.make}</span>
+						<input type="hidden" id="ycy2" value="" name="make"/>
+						<input type="hidden"  value="{$row.make}" name="make1"/>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="#deliveryMethod1" class="mui-navigate-right">
+						即时送
+						<span id="rightnow" class="right p-span">{$row.deliver}</span>
+						<input type="hidden" id="ycy3" value="" name="deliver"/>
+						<input type="hidden"  value="{$row.deliver}" name="deliver1"/>
+					</a>
+				</li>
+			</div>
+		</div>
+		<div id="openshop" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="opening" name="ying">营业中</a>
+					<!--<input type="hidden" name="ying" id="ying" value="营业中" />-->
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="notopen" name="wei">未营业</a>
+					<!--<input type="hidden" name="ying" value="未营业" />-->
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#openshop" class=""><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<div id="deliveryMethod" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="standby">支持</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="notsupport">不支持</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#deliveryMethod" class=""><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+			<div id="deliveryMethod1" class="mui-popover mui-popover-action mui-popover-bottom" style="display: none;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a class="standby1">支持</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="notsupport1">不支持</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#deliveryMethod1" class=""><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<div class="qrCode-body-footer">
+			<input type="submit" name="" id="" value="保存" />
+		</div>
+		</form>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.picker.min.js"></script>
+			<script type="text/javascript">
+				mui.init();
+				var btns = mui('#starttime');
+				btns.each(function(i,btn){
+				btn.addEventListener('tap',function(){
+					var dtPicker = new mui.DtPicker({
+						"type":"time"
+					});
+					dtPicker.show(function(items){
+					var starttime=$("#starttime span").text(items.value).text();
+					$("#ycy4").val(starttime);
+				
+				});
+				},false);
+			});
+			//设置停业时间
+			var btns1 = mui('#endtime');
+			btns1.each(function(i,btn){
+				btn.addEventListener('tap',function(){
+					var dtPicker = new mui.DtPicker({
+						"type":"time"
+					});
+				dtPicker.show(function(items){
+					var endtime=$("#endtime span").text(items.value).text();
+					$("#ycy5").val(endtime);
+				});
+				},false);
+			});
+			//设置营业状态
+			$(".opening").click(function(){
+				var status=$("#setopen").text($(this).text());
+				$("#ycy1").val(status.text());
+				//alert($("#ycy1").val());
+				mui('#openshop').popover('toggle');
+			});
+			$(".notopen").click(function(){
+				$("#ycy1").val($("#setopen").text($(this).text()).text());
+//				alert($("#ycy1").val());
+				mui('#openshop').popover('toggle');
+			});
+			//设置预约达状态
+			$(".standby").click(function(){
+				$("#ycy2").val($("#reservation").text($(this).text()).text());
+				mui('#deliveryMethod').popover('toggle');
+			});
+			$(".notsupport").click(function(){
+				$("#ycy2").val($("#reservation").text($(this).text()).text());
+				mui('#deliveryMethod').popover('toggle');
+			});
+			//设置即时送状态
+			$(".standby1").click(function(){
+				$("#ycy3").val($("#rightnow").text($(this).text()).text());
+				//alert($("#ycy3").val());
+				mui('#deliveryMethod1').popover('toggle');
+			});
+			$(".notsupport1").click(function(){
+				$("#ycy3").val($("#rightnow").text($(this).text()).text());
+				//alert($("#ycy3").val());
+				mui('#deliveryMethod1').popover('toggle');
+			});
+		</script>
+		<script type="text/javascript">
+			function s(){
+				var r = new FileReader();
+				var f = document.getElementById('file').files[0];
+//				alert(f);
+				r.readAsDataURL(f);
+				r.onload = function(e){
+					document.getElementById('show').src=this.result;
+				}
+			}
+		</script>
+	</body>
+</html>

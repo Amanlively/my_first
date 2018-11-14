@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>发表评价</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"></a>
+			<h1 class="mui-title">发表评价</h1>
+		</header>
+			<form action="{:url('/index/companydata/reviewsave')}" method="post" enctype="multipart/form-data">
+		<div class="mui-content">
+			<div class="mui-row postevaluation bgfff oh">
+				<div class="postevaluation-top">
+				
+						<img src="__STATIC__/assets/mobile/img/photo.png" />
+						描述相符
+					
+					<div id="default-demo"  class="default-demo"></div>
+				</div>
+					
+				
+				
+				<div class="postevaluation-body">
+					<input type="hidden" name="id" id="id" value="{$shop}" />
+					<textarea placeholder="宝贝满足你的期待吗？说说它的优点和美中不足的地方吧" name="content"></textarea>
+					<label for="file" class='btn btn-success'>
+						<img src="__STATIC__/assets/mobile/img/u614_03.png" />
+						<p>添加图片</p>
+					</label>
+					<input type="file" name="file" id="file" class="inputfile" /> 
+				</div>
+			</div>
+		</div>
+		
+		<div class="qrCode-body-footer">
+			<input type="submit"  value="发布" />
+		</div>
+		</form>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.raty.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+			    $.fn.raty.defaults.path = '__STATIC__/assets/mobile/html/index/lib/img';
+			    $('#default-demo').raty();
+			    $('#score-demo').raty({
+			        score: 3
+			    });
+			    $('#number-demo').raty({
+			        number: 10
+			    });
+			    $('#numberMax-demo').raty({
+			        numberMax: 5,
+			        number: 500
+			    });
+			    $('#number-callback-demo').raty({
+			        number: function() {
+			            return $(this).attr('data-number')
+			        }
+			    });
+			});
+		</script>
+		
+	</body>
+</html>

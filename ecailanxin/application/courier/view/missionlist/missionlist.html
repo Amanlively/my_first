@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>任务单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="storemanage-herder bgfff">
+			<h1 class="mui-title">任务单</h1>
+			<div id="mySwitch" class="mui-switch mission-header right">
+				<div class="mui-switch-handle"></div>
+				<input type="hidden" id="ycy1" value="{$openstatus.is_kg}" />
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row mission-nav bgfff oh">
+				{foreach ($row as $row)}
+				
+				<nav>
+					<a href="{:url('/courier/Missionlist/distribution1/ddh/' .$row.order_id)}">
+					<p>预计送达时间：{$row.predict_time|date='Y-m-d H:i'}</p>
+					<p>订单数量：{$row.good_num}</p>
+					<p>商品约重：{$row.weight}</p>
+					<p>总里程约：30km</p>
+					</a>
+					<a href="javascript:if(confirm('是否接单？')) location.href='{:url('/courier/Missionlist/qishoujiedan/id/' .$row.order_id)}'" >
+						<input type="button" value="接单" />
+					</a>
+					<div class="mission-statistics">
+						倒计时<span class="active">30分钟</span>自动取消订单
+						<span class="right">本单收入： <b>￥{$row.inmong}</b></span>
+					</div>
+				</nav>
+				{/foreach}
+			</div>
+		</div>
+		<!--<div class="mission-footer-button">
+			<input type="button" value="扫一扫" />
+		</div>-->
+
+		{include file="layout/footer"}
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var aa = $('#ycy1').val();
+				if(aa==0){
+					$("#mySwitch").removeClass("mui-active");
+					$('.mission-nav').hide();
+				}else{
+					$("#mySwitch").addClass("mui-active");
+					$('.mission-nav').show();
+				}
+			});
+			$("#mySwitch").click(function(){
+				var isActive = document.getElementById("mySwitch").classList.contains("mui-active");
+				if(isActive){
+//				  console.log("打开状态");
+//				  alert("打开状态");
+					var open="1";
+					$('.mission-nav').show();
+				    $.ajax({  
+			            type: "POST",
+			            url:"{:url('/courier/Missionlist/aaa/open/1' . '/status/1')}",  
+						success: function(data) {
+//							var data = JSON.parse(data);
+////							console.log(data);
+//							var info = data['info'];
+////							if(info==1){
+////								$(this).addClass("mui-active");
+////							}
+//							alert(info);
+						} 
+        			});
+				}else{
+//				  console.log("关闭状态"); 
+//				  alert("关闭状态");
+					$('.mission-nav').hide();
+   					$.ajax({  
+		            	type: "POST",
+		            	url:"{:url('/courier/Missionlist/aaa/open/0' . '/status/1')}", 
+		            	success: function(data) {
+//							var data = JSON.parse(data);
+//							
+//							var info = data['info'];
+////							if(info==0){
+////								$(this).removeClass("mui-active");
+////							}
+//							alert(info);
+						}	
+       				});
+				}
+			});
+					
+        	$('.footer_bg a').click(function(event) {
+                var nodes = $('.footer_bg a img');
+                for(var i=0; i<nodes.length; i++){
+                    nodes[i].src = nodes[i].src.replace(/.png|_active.png/,'.png');
+                }
+                var ylj = '__STATIC__/assets/mobile/img/footer';
+                var afterimg = ylj + Number($(this).index()+1) +'_active.png';
+                $(this).find('img').attr('src',afterimg) ;
+                $(this).addClass('active_nav').siblings().removeClass('active_nav');
+	         });
+
+        </script>
+	</body>
+</html>

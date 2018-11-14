@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.swiper-container1 { width: 100%;height: 100%;}
+		    .swiper-slide2{text-align: center;font-size: 18px;background: #fff;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;}
+		    .bottom_nav_pay{border: none!important;background-color: #61bc67!important;}
+		</style>
+	</head>
+	<body>
+		<header class="login-herder bgfff oh">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">提现</h1>
+		</header>
+		<form action="" id="txcont" method="post">
+		
+		<div class="bgfff paylist">
+			<ul>
+				<li>
+					<p>账户名</p>
+					<input type="text" placeholder="请输入账户名" name="username" value="{$true_name}" readonly/>
+				</li>
+				<li>
+					<p>银行卡号</p>
+					<input type="text" placeholder="请输入开户账号"  name="yhkh"/>
+				</li>
+				<li>
+					<p>开户行</p>
+					<input type="text" placeholder="请输入开户行"  name="khh"/>
+				</li>
+				<li>
+					<p>提现金额</p>
+					<input type="text" placeholder="请输入提现金额"  name="txmoney"/>
+				</li>
+			</ul>
+		</div>
+		<button class="bottom_nav_pay" type="button" onclick="tx()">提交申请</button>
+		</form>
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script>
+			function tx() {
+				$.ajax({  
+	            type: "POST",  
+	            url:"{:url('/courier/mycenter/txaudit')}",  
+	            data:$('#txcont').serialize(),// 序列化表单值  
+	            async: false,  
+	            error: function(request) {  
+	                alert("其他错误,请联系客服");  
+	            },  
+	             success: function(data) {  
+	                    var data = JSON.parse(data);
+	                    console.log(data);
+	                    if(data['status'] == 1){
+	                    	layer.msg('提现申请成功,等待审核!',{time:2000});
+	                    	window.location.href = "{:url('/courier/mycenter/putForward')}";
+	                    } else if(data['status'] == -1){
+	                    	layer.msg('账户名不能为空!',{time:2000});
+	                    } else if(data['status'] == -2){
+	                    	layer.msg('账户名有误!',{time:2000});
+	                    } else if(data['status'] == -3){
+	                    	layer.msg('银行卡号不能为空!',{time:2000});
+	                    } else if(data['status'] == -5){
+	                    	layer.msg('开户行不能为空!',{time:2000});
+	                    } else if(data['status'] == -6){
+	                    	layer.msg('提现金额不能为空!',{time:2000});
+	                    } else if(data['status'] == -7){
+	                    	layer.msg('申请失败,请检查!',{time:2000});
+	                    } else if(data['status'] == -8){
+	                    	layer.msg('银行卡号格式有误!',{time:2000});
+	                    }  else if(data['status'] == -9){
+                            layer.msg('余额不足!',{time:2000});
+                        }
+                 }
+        		});  
+			}
+		</script>
+	</body>
+</html>

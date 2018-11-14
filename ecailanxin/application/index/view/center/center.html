@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的菜篮子</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+	</head>
+	<style>
+		.right66 {position: absolute;
+					right: 20px;
+					text-align: center;
+					width: 20px;
+					height: 20px;
+					line-height: 20px;
+					background-color: red;
+					color: white;
+					border-radius: 50%;
+		}
+
+	</style>
+	<body>
+		<div class="bgfff center_top oh">
+			<img class="left" src="__STATIC__/uploads/goodspic/{$row.image}"  width="50px" height="50px"/>
+			<div class="left">
+				<p>{:session('username')}</p>
+				<p>E菜篮号：{$row.phone}</p>
+			</div>
+			<!--<img class="right" src="__STATIC__/assets/mobile/img/my_02.jpg" />-->
+		</div>
+       <div class="mt10 bgfff center_list oh">
+       	    <ul>
+       	    	<li>
+       	    		<a href="{:url('/index/shop/mystore')}">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_03.jpg" />
+	       	    		<p class="left">我的餐厅</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    	<li>
+       	    		<a href="{:url('/index/center/money')}">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_04.jpg" />
+	       	    		<p class="left">我的钱包</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    	<li>
+       	    		<a href="{:url('/index/order/historyorder')}">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_05.jpg" />
+	       	    		<p class="left">历史订单</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    	<li>
+       	    		<a href="{:url('/index/data/data')}">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_06.jpg" />
+	       	    		<p class="left">数据统计</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    	<li>
+       	    		<a href="javascript:;">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_07.jpg" />
+	       	    		<p class="left">企业管理</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    	<li id = 'news'>
+       	    		<a href="{:url('/index/center/message')}">
+						<img class="left" src="__STATIC__/assets/mobile/img/my_08.jpg" />
+						<p class="left">消息</p>
+						<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+					</a>
+       	    	</li>
+       	    	<li>
+       	    		<a href="{:url('/index/star/star')}">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_09.jpg" />
+	       	    		<p class="left">收藏</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    	<li>
+       	    		<a href="{:url('/index/set/setting')}">
+	       	    		<img class="left" src="__STATIC__/assets/mobile/img/my_10.png" />
+	       	    		<p class="left">设置</p>
+	       	    		<img class="right" src="__STATIC__/assets/mobile/img/center_right_jt.png" />
+       	    		</a>
+       	    	</li>
+       	    </ul>
+       </div>
+		{include file="layout/footer"}
+		<script src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+	
+	</body>
+</html>
+
+<script>
+
+//    var fromid = {$fromid};
+//    weidu();
+//    // 假设服务端ip为127.0.0.1
+//    ws = new WebSocket("ws://127.0.0.1:8282");
+//    ws.onmessage = function (e) {
+//        var message = eval("("+e.data+")");
+////                console.log(message);
+//
+//        switch (message.type) {
+//            case 'init':
+//                var bild = '{"type":"bind","fromid":"' + fromid + '"}';
+//                ws.send(bild);
+//                return;
+//			case 'text':
+//			    weidu();
+//			    return;
+//        }
+//    }
+
+
+
+
+//    function weidu() {
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "{:url('index/customer/sum_isread')}",
+                async: false,
+                success: function(data) {
+
+                    if(data < 99 && data >0){
+                        $('#news').append('<span class="right66">'+data+'</span>');
+                    }else if(data > 99){
+                        $('#news').append('<span class="right66">...</span>');
+                    }else {
+                        return '';
+                    }
+                }
+            })
+        })
+//    }
+
+
+
+</script>

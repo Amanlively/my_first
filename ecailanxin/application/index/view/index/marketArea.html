@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>市场专区</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="classifidetail-herder">
+			<a class="reg-top-icon" href="{:url('/index/index/index/city/'.session('city'))}"><<返回首页</a>
+			<h1 class="mui-title">市场专区</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row market-body-top oh">
+				<ul>
+					<li class="classifidetail-top-li"><a href="{:url('/index/index/marketarea/sx/1')}">综合</a></li>
+					<li class="classifidetail-top-li"><a href="{:url('/index/index/marketarea/sx/2')}">距离最近</a></li>
+					<li class="classifidetail-top-li"><a href="{:url('/index/index/marketarea/sx/3')}">规模最大</a></li>
+				</ul>
+			</div>
+			{foreach ($bazaar as $row)}
+			<div class="choiceveg">
+				<a href="{:url('/index/index/businesslist/id/' .$row.id)}">
+					<div class="choiceveg-left">
+						<img src="__STATIC__/uploads/shic/{$row.bazaar_img}" />
+					</div>
+					<div class="choiceveg-right">
+						<h1>{$row.baname}</h1>
+						<p><img src="__STATIC__/assets/mobile/img/distance.png" />{$row.place}丨规模：{$row.scale}{$row.scalesize}</p>
+						<p>
+						<span class="dispan">距离</span>{$row.distance}{$row.parasang} <a href="{:url('/index/index/businesslist/id/' .$row.id)}">进市场逛逛></a>
+						</p>
+					</div>
+				</a>
+			</div>
+			{/foreach}
+		</div>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		
+		<script type="text/javascript">
+
+			$(".market-body-top ul li").click(function(){
+                var picTabNum = $(this).index();
+                //console.log("当前图片标题下标是："+picTabNum);
+                sessionStorage.setItem("picTabNum",picTabNum);
+            });
+            $(function(){
+                var getPicTabNum = sessionStorage.getItem("picTabNum");
+                $(".market-body-top ul li").eq(getPicTabNum).addClass("active").siblings().removeClass("active");
+            })
+		</script>
+	</body>
+
+</html>

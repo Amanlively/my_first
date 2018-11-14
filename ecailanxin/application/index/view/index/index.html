@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__STATIC__/assets/mobile/css/mui.css" />
+		<link href="__STATIC__/assets/mobile/css/swiper.min.css" rel="stylesheet" />
+		<style>
+			.swiper-slide{height:120px;overflow: hidden;}
+			.swiper-slide img{width: 100%;height: 120px;}
+			.this-topping{position: fixed; bottom: 60px; right: 10px;width: 40px;height: 40px;line-height: 40px;border-radius: 50%;
+				background-image: url('__STATIC__/assets/mobile/img/go-top.png');
+				background-repeat: no-repeat;
+				background-position: center top;
+				background-size: cover;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--头部开始-->
+		<div class="header">
+			<!--<div class="left scan">
+				<a href="javascript:;">
+					<img src="__STATIC__/assets/mobile/img/sys.jpg" />
+					<p>扫一扫</p>
+				</a>
+			</div>-->
+			<form action="{:url('/index/index/classification')}" method="post">
+				{include file="layout/storeinfoMap"}
+				<div class="left search">
+					<span id="currentRegion"><img src="__STATIC__/assets/mobile/img/jt_bottom.jpg" /></span>
+					<input placeholder="搜索菜品或商家" name="type" />
+				</div>
+			</form>
+			<div class="right news">
+				<a href="{:url('/index/center/message')}">
+					<img src="__STATIC__/assets/mobile/img/xiaoxi.jpg" />
+					<p>消息</p>
+				</a>
+			</div>
+		</div>
+		<!--头部结束-->
+		
+		<!--banner开始-->
+		<div class="swiper-container">
+		  <div class="swiper-wrapper">
+		    <div class="swiper-slide">
+		    	<img src="__STATIC__/assets/mobile/img/banner.jpg" />
+		    </div>
+		    <div class="swiper-slide">
+		    	<img src="__STATIC__/assets/mobile/img/banner.jpg" />
+		    </div>
+		    <div class="swiper-slide">
+		    	<img src="__STATIC__/assets/mobile/img/banner.jpg" />
+		    </div>
+		  </div>
+		  <div class="swiper-pagination"></div>
+		</div>
+		<!--banner结束-->
+		
+		<!--小图标导航开始-->
+		<div class="index_nav oh bgfff mui">
+			<ul>
+				<li>
+					<a href="{:url('/index/index/bestSelling')}">
+						<img src="__STATIC__/assets/mobile/img/index_nav_1.png" />
+					    <p>畅销榜</p>
+					</a>
+				</li>
+				<li>
+					<a href="{:url('/index/index/benefit')}">
+						<img src="__STATIC__/assets/mobile/img/index_nav_2.png" />
+					    <p>巨实惠</p>
+					</a>
+				</li>
+				<li>
+					<a href="{:url('/index/index/tailgoods')}">
+						<img src="__STATIC__/assets/mobile/img/index_nav_3.png" />
+					    <p>尾货区</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;">
+						<img src="__STATIC__/assets/mobile/img/index_nav_4.png" />
+					    <p>易菜宝</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--小图标导航结束-->
+		
+		<!--bgf2f2f2开始-->
+		<div class="bgf2f2f2 oh">
+			<!--市场专区开始-->
+			<div class="market oh bgfff">
+				<div class="market_title">
+					市场专区
+				</div>
+				<div class="market_top oh">
+					<div class="market_banner">
+						<a href="{:url('/index/index/marketArea')}">
+						    <img src="__STATIC__/assets/mobile/img/index_market.png" />
+						</a>
+					</div>
+					<a href="{:url('/index/index/businesslist/id/' .$shi.id)}">
+					<div class="market_top_right">
+				    	<h5>{$shi.baname}</h5>
+				    	<div class="distance oh">
+				    		<div class="oh">
+					    		<img src="__STATIC__/assets/mobile/img/distance.png" />
+					    		<span>距离：{$shi.distance}km</span>
+				    		</div>
+				    		<a href="{:url('/index/index/businesslist/id/' .$shi.id)}">去逛逛 ></a>
+				    	</div>
+				    	<div class="details">
+				    		<img src="__STATIC__/uploads/shic/{$shi.bazaar_img}" />
+				    	</div>
+					</div>
+					</a>
+				</div>
+				<div class="market_bottom">
+					<ul>
+						{foreach ($bazaar as $bazaar)}
+						<li>
+							<a href="{:url('/index/index/businesslist/id/' .$bazaar.id)}">
+								<h5>{$bazaar.baname}</h5>
+								<div class="index_market_title">
+							    	<p>{$bazaar.content}</p>
+								</div>
+								<img src="__STATIC__/uploads/shic/{$bazaar.bazaar_img}" />
+							</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+			<!--市场专区结束-->
+			
+			<!--菜品专区开始-->
+			<div class="bgfff vegetables oh">
+				<div class="vegetables_title_box oh">
+					<div class="vegetables_title">
+						菜品专区
+					</div>
+					<a class="more" href="{:url('/index/index/shop')}">更多 ></a>
+				</div>
+				<div class="vegetables_top">
+					<ul>
+						<li>
+							<a href="{:url('/index/index/benefit')}">
+								<h5>蔬菜超值购</h5>
+								<p>超热卖</p>
+								<img src="__STATIC__/assets/mobile/img/index_1.jpg" />
+							</a>
+						</li>
+						<li>
+							<a href="{:url('/index/index/meat')}">
+								<h5>肉禽最低价</h5>
+								<p>营养 新鲜</p>
+								<img src="__STATIC__/assets/mobile/img/index_4.jpg" />
+							</a>
+						</li>
+						<li>
+							<a href="{:url('/index/index/cargo')}">
+								<h5>冻货专场</h5>
+								<p>品质有保障</p>
+								<img src="__STATIC__/assets/mobile/img/index_5.jpg" />
+							</a>
+						</li>
+						<li>
+							<a href="{:url('/index/index/muddle')}">
+								<h5>调料专场</h5>
+								<p>生活必需品</p>
+								<img src="__STATIC__/assets/mobile/img/index_6.jpg" />
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="vegetables_bottom">
+                    <ul>
+                    	<li>
+                    		<a href="{:url('/index/index/drink')}">
+	                    		<h5>米面粮油酒饮</h5>
+								<p>米面粮油 酒水饮料 超值</p>
+								<div>
+								    <img src="__STATIC__/assets/mobile/img/index_7.jpg" />
+								    <img src="__STATIC__/assets/mobile/img/index_8.jpg" />
+								</div>
+							</a>
+                    	</li>
+                    	<li>
+                    		<a href="{:url('/index/index/process')}">
+	                    		<h5>预加工菜品</h5>
+								<p>款款都是必需品</p>
+								<div>
+								    <img src="__STATIC__/assets/mobile/img/index_2.jpg" />
+								    <img src="__STATIC__/assets/mobile/img/index_3.jpg" />
+								</div>
+							</a>
+                    	</li>
+                    </ul>
+
+				</div>
+			</div>
+			<!--菜品专区结束-->
+			
+			<!--商家专区开始-->
+			<div class="bgfff business oh mb50">
+				<div class="vegetables_title_box oh mt10 pb10">
+					<div class="vegetables_title">
+						商家专区
+					</div>
+					<a class="more" href="{:url('/index/index/businesslistt')}">更多 ></a>
+				</div>
+				<div class="business_list oh">
+					<ul>
+						{foreach ($shop as $shop)}
+						<li>
+							<a href="{:url('/index/companydata/businessdetail/id/' .$shop.id)}">
+								<div class="index_list_img">
+									<img src="__STATIC__/uploads/shop/{$shop.shop_img}" />
+								</div>
+								<div class="index_list_right">
+									<p class="list_title">{$shop.shop_name}</p>
+									<div class="index_list_fw oh">
+										<div class="index_list_star">
+											<div class="imgslist"> 
+												<img src="__STATIC__/assets/mobile/img/star.png" />
+												<img src="__STATIC__/assets/mobile/img/star.png" />
+												<img src="__STATIC__/assets/mobile/img/star.png" />
+												<img src="__STATIC__/assets/mobile/img/star.png" />
+												<img src="__STATIC__/assets/mobile/img/star_2.png" />
+											</div>
+											<p>距您{$shop.distance}，{$shop.delivery}元起送</p>
+										</div>
+										<div class="index_list_fwbtn">
+											<div class="fwbtn_left">
+										    	<input type="button" value="预约达" />
+										    	准时送
+											</div>
+											<div class="fwbtn_right">
+										    	<input type="button" value="即时送" />
+										    	26分钟
+											</div>
+										</div>
+									</div>
+									<div class="distance oh">
+										<img src="__STATIC__/assets/mobile/img/distance.png" />
+										<span>{$shop.address}</span>
+									</div>
+								    <div class="discount oh">
+								    	<div class="discount_left">
+								    		<input type="button" value="折扣" />
+								    		<p>{$shop.goodsname}</p>
+								    	</div>
+								    	<div class="discount_right">
+								    		<del>￥{$shop.goodsprice}</del>
+								    		<p>￥{$shop.discount}</p>
+								    	</div>
+								    </div>
+								</div>
+							</a>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+			<!--商家专区结束-->
+			<!--返回顶部-->
+			<button class="this-topping" style="display: none;" href="#"></button>
+		</div>
+		<!--bgf2f2f2结束-->
+		{include file="layout/footer"}
+		<script src="__STATIC__/assets/mobile/js/swiper.min.js"></script>
+		<script>
+			var mySwiper = new Swiper('.swiper-container', {
+				autoplay: true,//可选选项，自动滑动
+				width: window.innerWidth,
+				pagination: {
+				    el: '.swiper-pagination',
+				  },
+				})
+			//返回顶部js
+			$(document).ready(function($){
+				
+				$(window).scroll(function(event) {
+					/* Act on the event */
+					if($(this).scrollTop()==0){
+						$(".this-topping").hide(300);
+					}
+					if($(this).scrollTop()!=0){
+						$(".this-topping").show(300);
+					}
+				});	
+				$(".this-topping").click(function(event) {
+					/* Act on the event */
+					$("html,body").animate({
+						scrollTop:"0px"},
+						666
+					)
+				});
+				
+			})
+		
+		
+		
+		//回退屏蔽手机物理返回键
+			$(document).ready(function() {
+			    if (window.history && window.history.pushState) {
+		            $(window).on('popstate', function () {
+		            window.history.pushState('forward', null, '#');
+		            window.history.forward(1);
+		            });
+		        }
+	            window.history.pushState('forward', null, '#'); //在IE中必须得有这两行
+	            window.history.forward(1);
+			});
+		</script>
+		
+	</body>
+</html>
+
+
+ 

@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>下单采购</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/mui.min.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<style>
+			.loadtext{border: none!important;margin-bottom: 0!important;}
+		</style>
+	</head>
+
+	<body>
+		<header class="login-herder bgfff">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left reg-top-icon"><span>返回</span></a>
+			<h1 class="mui-title">采购单列表</h1>
+			<!--<div class="conorder-clear"><a href="{:url('/index/purchase/xzdel/cgdh/' . $cgdh)}">清空选择</a></div>-->
+		</header>
+			<form action="" method="post">
+		<div class="mui-content">
+			<div class="mui-row orderPurchase-top oh">
+				待选购 <?php echo date("Y年-m月-d日 H:i:s",time()); ?>
+			</div>
+			<div class="confirmOrder-body bgfff">
+				<table border="" cellspacing="" cellpadding="">
+					<tr>
+						<th width="15%">
+							<a class="xz">选择</a>
+						</th>
+						<th width="15%">
+							品名
+						</th>
+						<th width="15%">
+							数量
+						</th>
+						<th width="15%">
+							单价￥
+						</th>
+						<th width="15%">
+							小计￥
+						</th>
+						<th width="20%">
+							选购商家
+						</th>
+					</tr>
+					{foreach $rowset as $row}
+					{if condition="$row.status==0"}
+					<tr>
+						<td><img src="__STATIC__/assets/mobile/img/duigou_active.png"  class="choiceimg"/></td>
+						<input type="hidden" name="" id="cgdid" value="{$row.id}" />
+						<input type="hidden" name="" id="shopid" value="{$row.shop_id}" />
+						<td id="openPopover">{$row.goodsname}</td>
+						<td id="number"><input class="loadtext" type="text" id="num" value="{$row.number}" /></td>
+						<td id="goodsmoney">{$row.goodsmoney}</td>
+						<td id="money">{$row.money}</td>
+						{if condition="$row.shop_id == null"}
+						<td class="shop"><a href="{:url('/index/purchase/gmdishes/goodsname/' . $row.goodsname . '/cgdh/' . $cgdh. '/id/'. $row.id .'/goodsid/' .$row.goods_id)}" id="shopname">请选择店铺</a></td>
+						{else}
+						<td class="shop"><a href="{:url('/index/purchase/gmdishes/goodsname/' . $row.goodsname . '/cgdh/' . $cgdh. '/id/'. $row.id .'/shopid/' .$row.shop_id .'/goodsid/' .$row.goods_id)}" id="shopname">{$aa[$row.shop_id]}</a></td>
+						{/if}
+					</tr>
+					{/if}
+					{/foreach}
+				</table>
+			</div>
+		</div>
+		<div class="qrCode-body-footer">
+			<input type="button" name="" id="shop"  value="确认下单" style="color: white;"/>
+		</div>
+			</form>
+		<script src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js" ></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script>
+			var myshop = $('.shop').text();
+			if(myshop == ''){
+				$('.shop').text('选择商家');
+			}
+			$('.gettext li a').click(function(){
+				var thistext = $(this).text();
+				mui('.mui-popover').popover('hide',document.getElementById("openPopover"));
+				$('#openPopover').text(thistext);
+			})
+			//
+			$('#shop').click(function(){
+				$("input[type=button]").attr('disabled',true);
+				var $data = [];
+				var obj_all = $('.choiceimg[src="__STATIC__/assets/mobile/img/duigou_active.png"]');
+					for(var i=0;i < obj_all.length;i++) {
+						$ddid   = $(obj_all[i]).parent().siblings('#cgdid').val();
+						$shopid = $(obj_all[i]).parent().siblings('#shopid').val();
+						$num    = $(obj_all[i]).parent().siblings('#number').children('#num').val();//获取数量
+//						alert($ddid);
+						$data[i] = {
+							ddid:$ddid,
+							shopid:$shopid,
+							num:$num
+						};
+					}
+//				alert($data);
+				 $.ajax({  
+		            type: "POST",  
+		            url:"{:url('/index/purchase/ordersave/cgdh/'.$cgdh)}",  
+		            async: true,
+		            data:{
+		            	id:$data,
+//		            	shopid:$shopid
+		            },
+		            error: function(request) {  
+		                alert("其他错误,请联系客服");  
+		            },  
+		             success: function(data) {
+						if(data['code']) {
+							layer.msg(data['msg'], {
+								time: 2000
+							});
+							$("input[type=button]").attr('disabled',false);
+							window.location.href = data['url'];
+						} else {
+							layer.msg(data['msg'], {
+								time: 2000
+							});
+							$("input[type=button]").attr('disabled',false);
+						}
+					}
+	        });  
+        })
+			
+			
+	//存入订单临时商户ID		
+//	
+//	 $.ajax({
+//					type: "post",
+//					url: "{:url('index/login/logingin')}",
+//					data: $('#denglu').serialize(),
+////					console.log(data);
+//					success: function(data) {
+//						if(data['code']) {
+//							layer.msg(data['msg'], {
+//								time: 2000
+//							});
+//							window.location.href = data['url'];
+//						} else {
+//							layer.msg(data['msg'], {
+//								time: 2000
+//							});
+//						}
+//					},
+//					error: function(request) {
+//						alert("其他错误,请联系客服");
+//					}
+//				});
+		</script>
+	</body>
+<script type="text/javascript">
+				//监听选择按钮
+			$(".choiceimg").click(function(){
+				var nowimg=$(this).attr("src");//获取图片加载路径
+				
+				if(nowimg=="__STATIC__/assets/mobile/img/duigou_active.png"){
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou.png");
+				}else{
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou_active.png");
+				  
+				}
+//				alert(nownum);
+			});
+			//监听全选按钮
+			$(".xz").click(function(){
+				var allimg=$(this).attr("src");
+				var nownum = parseInt($('.now').text());
+				var price=0;
+				if(allimg=="__STATIC__/assets/mobile/img/duigou.png"){
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou_active.png");
+					$(".choiceimg").attr('src',"__STATIC__/assets/mobile/img/duigou_active.png");
+				}else{
+					$(this).attr('src',"__STATIC__/assets/mobile/img/duigou.png");
+					$(".choiceimg").attr('src',"__STATIC__/assets/mobile/img/duigou.png");
+				}
+			});
+			
+</script>
+</html>

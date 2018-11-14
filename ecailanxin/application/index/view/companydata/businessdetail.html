@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__STATIC__/assets/mobile/css/commom.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/mui.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/index.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/css/page.css" rel="stylesheet" />
+		<link href="__STATIC__/assets/mobile/js/layui/css/layui.css" rel="stylesheet" />
+		<style type="text/css">
+			.u-flyer {
+				display: block;
+				width: 50px;
+				height: 50px;
+				border-radius: 50px;
+				position: fixed;
+				z-index: 9999;
+			}
+			#msg {
+				position: fixed;
+				top: 300px;
+				right: 35px;
+				z-index: 10000;
+				width: 1px;
+				height: 52px;
+				line-height: 52px;
+				font-size: 20px;
+				text-align: center;
+				color: #fff;
+				background: #360;
+				display: none
+			}
+			.layui-tab-title li{width: 30.5%;}
+			.layui-tab-bar{width: 8.5%;}
+		</style>
+	</head>
+	<body>
+		<!--头部开始-->
+		<header class="classifidetail-herder">
+			<a class="reg-top-icon" href="{:url('/index/index/index/city/' .session('city'))}">&nbsp;<<返回</a>
+			<h1 class="mui-title">{$rowset.shop_name}</h1>
+			<span class="yyStatus">
+			
+				{$rowset.status}>
+				
+			</span>
+		</header>
+		<!--头部结束-->
+		<div class="mui-content busidetail-header">	
+			<div class="busidetail-header-on">
+				<div class="busidetail-header-on-left">
+					<img src="__STATIC__/uploads/shop/{$rowset.shop_img}" />
+				</div>
+				<div class="busidetail-header-on-right">
+					<p>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="mui-icon mui-icon-star icona"></span>
+						<span class="bhor-span0">即时送</span>
+						<span class="bhor-span0">预约达</span>
+					</p>
+					<p>距您{$rowset.distance}km,{$rowset.delivery}元起送
+						<span class="bhor-span1"></span>
+						<span class="bhor-span1"></span>
+					</p>
+					<p><span class="mui-icon mui-icon-map icona"></span>
+						{$rowset.address}</p>
+					<p style="color: #ffa508;"><img src="__STATIC__/assets/mobile/img/u41_03.png" />联系客服 >
+					{if condition="$rowset1"}
+					   
+					<span class="mui-icon mui-icon-star collection-right">已收藏</span>
+					   
+					{else}
+					 <a href="{:url('/index/companydata/shoucang/shop/'.$rowset.id)}" style="color: orange;">
+						<span class="mui-icon mui-icon-star collection-right">收藏</span>
+					</a>
+					{/if}
+					</p>
+				</div>
+			</div>
+			<div class="busidetail-header-under">
+				<li><a href="{:url('/index/companydata/businessdetail/id/' .$shop)}">商品</a></li>
+				<li><a href="{:url('/index/companydata/businessLocation/id/' .$shop)}">评价</a></li>
+				<li><a href="{:url('/index/companydata/businessEvaluation/id/' .$shop)}">商家</a></li>
+			</div>
+		</div>
+		
+		<div class="mui-content">
+			<div class="layui-tab layui-tab-card oh bgfff">
+				<ul class="layui-tab-title">
+					{foreach ($one as $one)}
+					<li class=""><a href="{:url('/index/companydata/businessdetail/id/'.$shop.'/one/' .$one.id)}">{$one.catonename}</a></li>
+					{/foreach}
+				</ul>
+			</div>
+			<div class="mui-row container oh">
+				<div id="" class="classification-left mb50">
+							<ul>
+						<!--<li class="classification-left-li"><a>全部</a></li>-->
+					{foreach ($two as $two)}
+					<li class="classification-left-li"><a href="{:url('/index/companydata/businessdetail/id/'.$shop.'/one/'.$one1.'/two/' .$two.id)}">{$two.cattwoname}</a></li>
+					{/foreach}
+					</ul>
+				</div>
+				<div class="mui-row busidetail-right mb50">
+					<p class="top-p">{$rowset.shop_name}菜店只做更好</p>
+					{foreach ($cai as $cai)}
+					<div class="busidetail-body">
+						<a href="{:url('/index/index/details/id/' .$cai.id)}" style="color: #000000;">
+							<div class="busidetail-body-left">
+								<img src="__STATIC__/uploads/goodspic/{$cai.goodspic}" />
+							</div>
+						</a>	
+							<div class="busidetail-body-right">
+								
+								<h4>{$cai.goodsname}</h4>
+								<p>{$cai.introduce}</p>
+							
+								<p>月售{$cai.sales}份 好评率100%</p>
+
+								<h5>
+									<b>￥<span>{$cai.discount}</span></b>
+									<del>￥{$cai.goodsprice}</del>
+									<div class="right">
+										{if condition="$rowset.status =='营业中'"}
+										<img class="rightimg" src="__STATIC__/assets/mobile/img/u41_04.png" />
+										<input id="" type="hidden" value="{$cai.id}">
+										<input id="" type="hidden" value="{$cai.shopid}">
+										{else}
+										<input id="" type="hidden" value="{$cai.id}">
+										<input id="" type="hidden" value="{$cai.shopid}">
+										{/if}
+									</div>
+								</h5>
+							</div>
+						
+					</div>
+					{/foreach}
+				</div>
+			</div>
+		</div>
+		<div id="popover" class="mui-popover mui-popover-action mui-popover-bottom shopmenu mb50">
+			
+		    <div class="shopmenu-nav">
+				<form id="buyGoods" action="">
+					<table>
+						<thead>
+							<tr>
+								<th colspan="3">
+									<input class="right" type="button" value="清空购物车" onclick="del(this)" />
+								</th>
+							</tr>
+						</thead>
+						<tbody id="goods">
+							
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+		<footer>
+			<nav class="mui-bar mui-bar-tab busidetail-foot">
+				<a href="#popover">
+					<img class="busidetail-foot-img" src="__STATIC__/assets/mobile/img/footer3.png" />
+				</a>
+				<b>￥<span id="total">0.00</span></b>
+				<div id="addpurorder" class="busidetail-foot-right">我淘的菜</div>
+			<!--	<input type="button" class="busidetail-foot-right" val="￥20起送" />-->
+				<div id="msg">已成功加入我淘的菜！</div>
+			</nav>
+		</footer>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery-3.3.1.min.js"></script>
+		<script src="__STATIC__/assets/mobile/js/layer/layer.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/mui.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/swiper.min.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/jquery.fly.min.js"></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/commodify.js" ></script>
+		<script type="text/javascript" src="__STATIC__/assets/mobile/js/layui/layui.all.js"></script>
+		<script type="text/javascript">
+			mui('.mui-action-back').on('tap','a',function(){
+			    window.top.location.href=this.href;
+			});
+		</script>
+		<script type="text/javascript">
+            $(".layui-tab-title li").click(function(){
+                var picTabNum = $(this).index();
+                //console.log("当前图片标题下标是："+picTabNum);
+                sessionStorage.setItem("picTabNum",picTabNum);
+            });
+            $(function(){
+                var getPicTabNum = sessionStorage.getItem("picTabNum");
+                $(".layui-tab-title li").eq(getPicTabNum).addClass("layui-this").siblings().removeClass("layui-this");
+                $(".layui-tab-content>div").eq(getPicTabNum).addClass("layui-show").siblings().removeClass("layui-show");
+//					$(".layui-tab-title").addClass("layui-tab-more");
+            })
+		</script>
+	</body>
+</html>
+<script>
+$("#addpurorder").click(function(){
+	
+	var saveall = $("#buyGoods").serialize();
+	console.log(saveall);
+//	alert(saveall);
+	$.ajax({
+		type:"post",
+		url: "{:url('/index/companydata/save9')}",///index/companydata/save9
+		data: {saveall:saveall},
+		datatype:'json',
+		async: false,
+		
+		error: function(request) {
+			alert("其他错误,请联系客服");
+		},
+		
+		success: function(data) {
+//			console.log(data);
+//			alert(data);
+			if(data['code']) {
+				layer.msg(data['msg'], {
+			
+					time: 2000
+				});
+				window.location.href = data['url'];
+			} else {
+				layer.msg(data['msg'], {
+					time: 2000
+				});
+			}
+		},
+	});
+})
+
+</script>
+
+ 
